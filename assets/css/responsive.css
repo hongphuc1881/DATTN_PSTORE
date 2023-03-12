@@ -1,0 +1,14 @@
+/* medium */
+
+@media (min-width: 768px) {
+    header .logo img {
+        max-width: 85%;
+    }
+    header .header-top {
+        height: 8rem;
+    }
+}
+
+/* large */
+@media (min-width: 992px) {
+}

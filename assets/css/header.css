@@ -1,0 +1,161 @@
+/* header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+header .header-top {
+    height: 6.4rem;
+    background-color: var(--white-color);
+}
+header .header-top img {
+    max-width: 100%;
+}
+
+header .header-top .header-search {
+    font-size: 1.6rem;
+    width: 70%;
+    background-color: #eee;
+    border: none;
+    outline: none;
+    border-radius: 3.2rem;
+    position: relative;
+}
+header .header-top .header-search input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 1.2rem 1.6rem;
+}
+header .header-top .header-search i {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.user {
+    font-size: 1.6rem;
+}
+.cart {
+    font-size: 1.6rem;
+    position: relative;
+}
+.cart a {
+    text-decoration: none;
+    color: var(----black-color);
+}
+.cart::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -8px;
+    display: block;
+    width: 1px;
+    height: 24px;
+    background: #000;
+}
+
+.header-navbar {
+    height: 5rem;
+    background-color: #333;
+}
+
+.header-navbar .menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-navbar .menu li {
+    position: relative;
+}
+.header-navbar .menu a {
+    text-decoration: none;
+    color: var(--white-color);
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    display: block;
+    line-height: 50px;
+    padding: 0 2.4rem;
+}
+
+.header-navbar .menu li:hover {
+    background-color: #ccc;
+}
+
+.header-navbar .menu ul {
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 170%;
+    max-width: 200%;
+    background-color: #eee;
+    box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+    display: none;
+}
+.header-navbar .menu ul a {
+    color: var(----black-color);
+    text-transform: unset;
+}
+.header-navbar .menu ul a:hover {
+    color: var(--white-color);
+}
+.header-navbar .menu li:hover ul {
+    display: block;
+}
+
+/* menu mobile */
+.menu-mobile {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    background-color: #000;
+    margin: 0;
+    z-index: 1;
+    list-style: none;
+    transition: 0.5s;
+    transform: translateX(100%);
+}
+
+.menu-mobile li a {
+    text-decoration: none;
+    color: #ccc;
+    display: block;
+    margin-top: 8px;
+}
+.menu-mobile li a:hover {
+    color: var(--white-color);
+}
+
+.menu-mobile label {
+    font-size: 2rem;
+    color: var(--white-color);
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    cursor: pointer;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+input#menu-mobile:checked ~ .overlay {
+    display: block;
+}
+input#menu-mobile:checked ~ .menu-mobile {
+    transform: translateX(0);
+}

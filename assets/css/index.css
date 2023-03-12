@@ -1,0 +1,110 @@
+/* banner */
+
+#banner {
+    height: 100vh;
+    background: url("../img/banner.webp") no-repeat center / cover;
+}
+
+/* product */
+#feature-products,
+#sale-products {
+    padding: 50px 0;
+}
+.feature-product__title,
+.sale-product__title {
+    font-size: 2rem;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 1.6rem;
+    display: inline-block;
+}
+.feature-product__title a,
+.sale-product__title a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.product-item {
+    position: relative;
+    text-align: center;
+    padding: 32px 0;
+    margin-top: 2.4rem;
+    transition: 0.3s;
+}
+
+.product-item:hover {
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    transform: translateY(-20px);
+    cursor: pointer;
+}
+
+.product-item__img img {
+    max-width: 100%;
+}
+
+/* img product hover */
+.product-item:hover .product-item__img img {
+    content: url("../img/pd1b.webp");
+}
+.product-item__name {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    font-weight: 500;
+    padding: 0 1.6rem;
+    margin: 24px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.product-item__price {
+    display: flex;
+    justify-content: center;
+    column-gap: 1.6rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.product-item__price--new {
+    color: red;
+}
+
+.product-item__price--old {
+    color: #ccc;
+    text-decoration: line-through;
+}
+
+.product-item--sale-flash {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px;
+    color: var(--white-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    background-color: #f44236;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.product-item--sale-flash::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    border-top: 10px solid #f44236;
+    border-left: 18px solid #f44236;
+    border-right: 18px solid #f44236;
+    border-bottom: 10px solid transparent;
+}
+
+.app-container {
+    margin-top: 12.4rem;
+}

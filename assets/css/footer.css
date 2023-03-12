@@ -1,0 +1,32 @@
+/* footer */
+footer {
+    margin-top: 5.4rem;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    font-size: 1.6rem;
+    padding: 5rem 0;
+}
+
+footer .footer__title {
+    text-transform: uppercase;
+}
+footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+footer ul li a {
+    color: #ccc;
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+}
+
+footer ul li a:hover {
+    color: var(--white-color);
+}
+
+.footer__copyright {
+    text-align: center;
+    margin-top: 16px;
+}

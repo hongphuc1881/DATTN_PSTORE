@@ -1,0 +1,62 @@
+table {
+    font-size: 1.6rem;
+    text-align: center;
+    width: 100%;
+}
+
+thead {
+    text-transform: uppercase;
+}
+
+table img {
+    max-width: 100px;
+}
+
+tr, th {
+    border :1px solid #000;
+}
+td {
+    padding: 20px;
+}
+tbody tr td:nth-child(2n + 3) {
+    font-weight: 500;
+}
+
+tbody tr td input[type="text"] {
+    /*display: inline-block;*/
+    width: 50px;
+    border: none;
+    text-align: center;
+}
+tbody tr td button {
+    padding: 0 6px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.change-quantity {
+    border: 1px solid #000;
+    padding: 4px 0;
+    display: inline-block;
+}
+
+.total-price {
+    text-align: right;
+    font-size: 1.6rem;
+    margin: 12px 0;
+}
+.total-price span{
+   font-weight: 500;
+}
+.btn-buy, .btn-order {
+    padding: 8px 24px;  
+    font-size: 1.6rem;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background-color:#ccc;
+}
+.btn-order {
+    background-color: var(--black-color);
+    color: var(--white-color);
+}
