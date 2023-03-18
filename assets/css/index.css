@@ -43,12 +43,14 @@
 }
 
 .product-item__img img {
-    max-width: 100%;
+    max-width: 80%;
+    transform: scale(0.8);
+    transition: 0.3s;
 }
 
 /* img product hover */
 .product-item:hover .product-item__img img {
-    content: url("../img/pd1b.webp");
+    transform: scale(1);
 }
 .product-item__name {
     text-transform: uppercase;

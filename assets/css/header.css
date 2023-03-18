@@ -41,6 +41,11 @@ header .header-top .header-search i {
 .user {
     font-size: 1.6rem;
 }
+.user ul li a {
+    font-size: 1.6rem;
+    padding: 8px 24px;
+}
+
 .cart {
     font-size: 1.6rem;
     position: relative;
@@ -94,7 +99,6 @@ header .header-top .header-search i {
     margin: 0;
     padding: 0;
     min-width: 170%;
-    max-width: 200%;
     background-color: #eee;
     box-shadow: 0 0 10px rgb(0 0 0 / 50%);
     display: none;

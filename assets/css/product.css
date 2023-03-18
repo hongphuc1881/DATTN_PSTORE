@@ -1,0 +1,46 @@
+.app-container {
+    margin-top: 15rem;
+    font-size: 1.6rem;
+}
+
+
+.filter-product-item {
+    margin-bottom: 2rem;
+}
+
+.filter-product-item-title {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: 1.6rem;
+    border-bottom: 2px solid var(--black-color);
+}
+.filter-ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.filter-ul li input:checked {
+    color: var(--white-color);
+    accent-color: var(--black-color);
+}
+.filter-ul li input{
+    margin-right: 0.5rem;
+}
+
+.pagination {
+    border-top: 1px solid #ccc;
+    padding-top: 4px;
+}
+.page-item {
+    margin: 4px;
+}
+.page-link:hover{
+    background: #000;
+    color: #fff;
+}
+.page-link {
+    padding: 12px 20px;
+    font-size: 1.6rem;
+    color: #000;
+}
