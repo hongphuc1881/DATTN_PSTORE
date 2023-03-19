@@ -1,7 +1,5 @@
 <?php 
-    session_start();
-    //include("./header.php");
-    include "./admin/class/user-class.php";
+    include("./header.php");
 ?>
 
 <?php 

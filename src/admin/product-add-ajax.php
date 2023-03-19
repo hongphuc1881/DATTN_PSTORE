@@ -1,4 +1,5 @@
 <?php 
+    include("./database.php");
     include("./class/product-class.php");
     $Product = new Product;
     $category_id = $_GET["category_id"];

@@ -1,6 +1,5 @@
 <?php 
     include("./header.php");
-    include "./admin/class/user-class.php";
 ?>
 <?php 
     $User = new User;

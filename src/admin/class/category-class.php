@@ -1,6 +1,3 @@
-<?php   
-    include("database.php");
-?>
 
 <?php
     class Category {

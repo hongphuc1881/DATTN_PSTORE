@@ -3,6 +3,7 @@
 ?>
 <?php
     if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
+        include("./database.php");
         include("./header.php");
         include("./menu.php");
         include("./footer.php");

@@ -1,11 +1,12 @@
 <?php 
     session_start();
+    include("./database.php");
     include("./admin/class/brand-class.php");
+    include("./admin/class/user-class.php");
 ?>
 <?php 
     $Brand = new Brand;
     $show_category = $Brand->show_category();
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
