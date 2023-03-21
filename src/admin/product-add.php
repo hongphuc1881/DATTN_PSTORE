@@ -11,7 +11,9 @@
 <?php
     $Product = new Product;
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        ///var_dump($_FILES, $_POST);
+      
+        //var_dump($_FILES["product_img_description"]);
+       
         $Product->insert_product($_POST, $_FILES);
     }
 ?>

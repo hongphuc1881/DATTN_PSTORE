@@ -35,6 +35,10 @@
     transition: 0.3s;
 }
 
+.product-item a {
+    text-decoration: none;
+}
+
 .product-item:hover {
     border: 1px solid var(--text-color);
     border-radius: 8px;
@@ -42,7 +46,12 @@
     cursor: pointer;
 }
 
+.product-item__img {
+    overflow: hidden;
+    height: 160px;
+}
 .product-item__img img {
+    object-fit: cover;
     max-width: 80%;
     transform: scale(0.8);
     transition: 0.3s;
@@ -50,7 +59,7 @@
 
 /* img product hover */
 .product-item:hover .product-item__img img {
-    transform: scale(1);
+    transform: scale(0.9);
 }
 .product-item__name {
     text-transform: uppercase;
@@ -85,6 +94,7 @@
 
 .product-item--sale-flash {
     position: absolute;
+    width: 38px;
     top: 10px;
     right: 10px;
     padding: 4px;

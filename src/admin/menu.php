@@ -21,6 +21,7 @@
                             <a class="nav-link" href="./category-add.php">Thêm danh mục</a>
                         </nav>
                     </div>
+
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1"
                         aria-expanded="false" aria-controls="collapseLayouts1">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -34,6 +35,7 @@
                             <a class="nav-link" href="./brand-add.php">Thêm loại sản phẩm</a>
                         </nav>
                     </div>
+
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2"
                         aria-expanded="false" aria-controls="collapseLayouts2">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -45,6 +47,20 @@
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="./product-list.php">Danh sách  sản phẩm</a>
                             <a class="nav-link" href="./product-add.php">Thêm sản phẩm</a>
+                        </nav>
+                    </div>
+
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3"
+                        aria-expanded="false" aria-controls="collapseLayouts3">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản trị người dùng
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="./user-list.php">Danh sách  người dùng</a>
+                            <!--<a class="nav-link" href="./admin-list.php">Thêm sản phẩm</a>-->
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"

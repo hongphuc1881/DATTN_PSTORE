@@ -11,12 +11,12 @@
     font-weight: 500;
     font-size: 2rem;
 }
-.product-info .new-price{
+.product-info .new-price {
     color: red;
     font-weight: 500;
     font-size: 2rem;
 }
-.product-info .old-price{
+.product-info .old-price {
     color: #ccc;
     font-weight: 500;
     font-size: 2rem;
@@ -37,11 +37,12 @@
     justify-content: center;
     gap: 12px;
 }
-.product-size ul li{
+.product-size ul li {
     border: 1px solid black;
     padding: 4px 8px;
+    font-size: 1.6rem;
 }
-.product-size ul li input{
+.product-size ul li input {
     display: none;
 }
 li:has(input:checked) {

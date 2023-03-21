@@ -11,23 +11,7 @@
 <?php 
     $Product = new Product;
     $show_product = $Product->show_product();
-    //$show_size = $Product->show_size();
-    //$i = 1;
-    //while($result = $show_product->fetch_assoc()) {
-    //    echo $i;
-    //    echo $result['product_id'] ;
-    //    while($rs = $show_size->fetch_assoc()) {
-    //        echo($rs['product_id']);
-    //        if($result['product_id'] == $rs['product_id']) {
-    //            echo "dung vcl";
-    //        }
-    //    }
-    //    $i++;
-    //    echo "<br>";
 
-    //}
-   
-    //var_dump($rs);
     
     // phan trang
     // 1.tong so ban ghi

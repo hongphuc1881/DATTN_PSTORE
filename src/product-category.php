@@ -1,154 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PStore</title>
-        <link rel="stylesheet" href="../assets/font/fontawesome-free-6.3.0-web/css/all.min.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-            crossorigin="anonymous"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="../assets/css/header.css" />
-        <link rel="stylesheet" href="../assets/css/responsive.css" />
-        <link rel="stylesheet" href="../assets/css/footer.css" />
-        <link rel="stylesheet" href="../assets/css/globalStyle.css" />
-        <link rel="stylesheet" href="../assets/css/index.css" />
-        <link rel="stylesheet" href="../assets/css/product.css" />
-    </head>
-    <body>
-        <div id="app">
-            <!-- header -->
-            <header>
-                <div class="header-top d-flex align-items-center">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-1 col-md-2 col-2">
-                                <div class="logo">
-                                    <a href="./index.html">
-                                        <img src="../assets/img/logo.png" alt="" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div
-                                class="col-lg-7 col-md-6 d-none d-lg-flex d-md-flex justify-content-lg-end justify-content-md-center"
-                            >
-                                <div class="header-search">
-                                    <input type="text" placeholder="Tìm kiếm" />
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-9 d-flex justify-content-end gap-4">
-                                <div class="user">
-                                    <div><i class="fa-solid fa-user"></i> Tài khoản</div>
-                                    <!--<ul>
-                                        <li><a href=""></a></li>
-                                        <li><a href=""></a></li>
-                                    </ul>-->
-                                </div>
-                                <div class="cart">
-                                    <a href="./cart.html">
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                        Giỏ hàng (<span>0</span>)
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="d-lg-none d-md-none col-1 d-flex justify-content-end h2">
-                                <label for="menu-mobile">
-                                    <i class="fa-solid fa-bars"></i>
-                                </label>
-                                <input type="checkbox" id="menu-mobile" hidden />
-                                <ul class="menu-mobile">
-                                    <label for="menu-mobile"><i class="fa-solid fa-xmark"></i></label>
-                                    <li class="mt-5"><a href="">ALL</a></li>
-                                    <li><a href="">NIKE</a></li>
-                                    <li><a href="">ADIDAS</a></li>
-                                    <li><a href="">VANS</a></li>
-                                    <li><a href="">CONVERSE</a></li>
-                                </ul>
-                                <label for="menu-mobile" class="overlay"></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <nav class="header-navbar d-none d-lg-block d-md-block">
-                    <div class="container">
-                        <ul class="menu">
-                            <li><a href="./index.html">home</a></li>
-                            <li><a href="">all</a></li>
-                            <li>
-                                <a href="">nike</a>
-                                <ul>
-                                    <li><a href="">Air Force 1</a></li>
-                                    <li><a href="">Air Jordan 1</a></li>
-                                    <li><a href="">Air Max</a></li>
-                                    <li><a href="">Blazer</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="">adidas</a>
-                                <ul>
-                                    <li><a href="">EQ21</a></li>
-                                    <li><a href="">FORUM 84</a></li>
-                                    <li><a href="">Ultra Boost</a></li>
-                                    <li><a href="">Stan Smith</a></li>
-                                    <li><a href="">SuperStar</a></li>
-                                    <li><a href="">Yezzy Boost</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="">vans</a>
-                                <ul>
-                                    <li><a href="">Era 95</a></li>
-                                    <li><a href="">Old skool</a></li>
-                                    <li><a href="">Style 36</a></li>
-                                    <li><a href="">Sk8</a></li>
-                                    <li><a href="">Slop on</a></li>
-                                    <li><a href="">Vault</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="">converse</a>
-                                <ul>
-                                    <li><a href="">1970s</a></li>
-                                    <li><a href="">Chuck 70s x CDG</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="">hãng khác</a>
-                                <ul>
-                                    <li><a href="">MLB</a></li>
-                                    <li><a href="">Gucci</a></li>
-                                    <li><a href="">MC.Queen</a></li>
-                                    <li><a href="">LV</a></li>
-                                    <li><a href="">New Balance</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
+<?php
+    include("./header.php");
+?>
+<?php 
+    $Product = new Product;
+    if(!isset($_GET["category_id"]) || $_GET["category_id"] == NULL) {
+        echo "<script>window.location.href =' index.php'</script>";
+    }else {
+        $category_id = $_GET["category_id"];
+        $show_product_by_category = $Product->show_product_by_category($category_id);
+    }
+    
+?>
+
             <div class="app-container">
-                <div class="container">
-                    <nav aria-label="breadcrumb">
+                <div class="container pt-5">
+                    <!--<nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="#"><i class="fa-solid fa-house"></i> Trang chủ</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Adidas</li>
                         </ol>
-                    </nav>
+                    </nav>-->
 
                     <div class="row">
                         <div class="col-lg-3">
@@ -225,7 +98,41 @@
                         <div class="col-lg-9">
                             <div class="list-product">
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <!-- category -->
+                                    <?php 
+                                    if($show_product_by_category) {
+                                        while($result = $show_product_by_category->fetch_assoc()) {
+
+                                     
+                                    ?>
+                                        <div class="col-lg-4">
+                                        <div class="product-item">
+                                        <a href="product-detail.php?product_id=<?php echo $result['product_id']?>">
+                                            <div class="product-item__img">
+                                                <img src="<?php echo './admin/uploads/'.$result["product_img_main"] ?>" alt="" />
+                                            </div>
+                                            <div class="product-item__name"><?php echo $result["product_name"] ?></div>
+                                            <div class="product-item__price">
+                                                <div class="product-item__price--new"><span><?php echo 
+                                                    $formatted_number = number_format( $result["product_price_new"], 0, ',', '.');
+                                            ?></span>đ</div>
+                                                <div class="product-item__price--old"><span><?php echo   $formatted_number = number_format( $result["product_price_old"], 0, ',', '.');?></span>đ</div>
+                                            </div>
+                                            <?php 
+                                              if( $result["product_price_new"] < $result["product_price_old"]) {
+                                            ?>
+                                                <div class="product-item--sale-flash">-<?php  echo round((1 - $result["product_price_new"] / $result["product_price_old"]) * 100, 3); ?>%</div>
+                                            <?php  } ?>
+                                        </a>
+                                    </div>
+                                        </div>
+                                    <?php 
+                                       }
+                                    }
+                                    
+                                    ?>
+
+                                    <!--<div class="col-lg-4">
                                         <div class="product-item">
                                             <div class="product-item__img">
                                                 <img src="../assets/img/pd1.webp" alt="" />
@@ -342,9 +249,10 @@
                                             <div class="product-item--sale-flash">-20%</div>
                                         </div>
                                     </div>
+                                -->
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-center mt-5">
+                            <!--<div class="d-flex justify-content-center mt-5">
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination">
                                         <li class="page-item">
@@ -364,72 +272,11 @@
                                         </li>
                                     </ul>
                                 </nav>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
             </div>
-            <footer>
-                <div class="container">
-                    <div class="footer-inner">
-                        <div class="row">
-                            <div class="col-lg-4 col-6">
-                                <div class="footer__contact-info">
-                                    <div class="footer__title">
-                                        <h4>thông tin liên hệ</h4>
-                                    </div>
-                                    <ul>
-                                        <li><a href="">Địa chỉ: Nghĩa Hương, Quốc Oai, Hà Nội</a></li>
-                                        <li><a href="">Điện thoại: +84 989642694</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-6">
-                                <div class="footer__info">
-                                    <h4 class="footer__title">thông tin</h4>
-                                    <ul>
-                                        <li><a href="">Trang chủ</a></li>
-                                        <li><a href="">Giới thiệu</a></li>
-                                        <li><a href="">Sản phẩm</a></li>
-                                        <li><a href="">Khuyến mãi</a></li>
-                                        <li><a href="">liên hệ</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-6">
-                                <div class="footer__polycies">
-                                    <h4 class="footer__title">Chính sách</h4>
-                                    <ul>
-                                        <li><a href="">Chính sách đổi trả & hoàn tiền</a></li>
-                                        <li><a href="">Chính sách bảo mật</a></li>
-                                        <li><a href="">Chính sách vận chuyển</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-6">
-                                <div class="footer__polycies">
-                                    <h4 class="footer__title">Theo dõi chúng tôi</h4>
-                                    <ul>
-                                        <li>
-                                            <a href=""><i class="fa-brands fa-facebook-f"></i> Facebook</a>
-                                        </li>
-                                        <li>
-                                            <a href=""><i class="fa-brands fa-twitter"></i> Twitter</a>
-                                        </li>
-                                        <li>
-                                            <a href=""><i class="fa-brands fa-pinterest-p"></i> Pinterest</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer__copyright">
-                        <i class="fa-regular fa-copyright"></i> bản quyền thuộc về PStore
-                    </div>
-                </div>
-            </footer>
-        </div>
-        <script src="../assets/js/index.js"></script>
-    </body>
-</html>
+<?php 
+    include("./footer.php");
+?>

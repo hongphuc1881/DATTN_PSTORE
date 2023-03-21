@@ -1,6 +1,13 @@
 <?php 
     include("./header.php");
 ?>
+<?php 
+    $Product = new Product;
+    $limit = 12;
+    $show_product_hot = $Product->show_product_hot($limit);
+    $show_product_new = $Product->show_product_new($limit);
+    $show_product_sale = $Product->show_product_sale($limit);
+?>
 
 <div class="app-container">
     <section id="banner"></section>
@@ -8,333 +15,98 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="feature-product__title"><a href="">Sản phẩm nổi bật</a></h2>
+                    <h2 class="feature-product__title"><a href="./product-hot.php">Sản phẩm nổi bật</a></h2>
                 </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">
-                            Yeezy slides asd asd asda asd asd asda a da ad asd asdasda asd asd 'bone' 2022
-                        </div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
+                <?php 
+                    if($show_product_hot) {
+                        while($result = $show_product_hot->fetch_assoc()) {
+                ?>
+                 <div class="col-lg-3 col-md-4 col-6">
+                 <div class="product-item">
+                        <a href="product-detail.php?product_id=<?php echo $result['product_id']?>">
+                            <div class="product-item__img">
+                                <img src="<?php echo './admin/uploads/'.$result["product_img_main"] ?>" alt="" />
+                            </div>
+                            <div class="product-item__name"><?php echo $result["product_name"] ?></div>
+                            <div class="product-item__price">
+                                <?php if($result["product_price_new"] < $result["product_price_old"]) {
+
+                                ?>
+                                    <div class="product-item__price--new"><span><?php echo $formatted_number = number_format( $result["product_price_new"], 0, ',', '.'); ?></span>đ</div>
+                                    <div class="product-item__price--old"><span><?php echo   $formatted_number = number_format( $result["product_price_old"], 0, ',', '.');?></span>đ</div>
+                                <?php
+                                    } else {
+
+                                        
+                                ?>
+                                    <div class="product-item__price--new"><span><?php echo $formatted_number = number_format( $result["product_price_new"], 0, ',', '.'); ?></span>đ</div>
+                                <?php 
+                                } 
+                                ?>
+                            </div>
+                            <?php 
+                                if( $result["product_price_new"] < $result["product_price_old"]) {
+                            ?>
+                                <div class="product-item--sale-flash">-<?php  echo round((1 - $result["product_price_new"] / $result["product_price_old"]) * 100, 3); ?>%</div>
+                            <?php  } ?>
+                        </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
+                <?php 
+                
+                        }
+                    }
+                ?>
             </div>
         </div>
     </section>
+
     <section id="sale-products">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="sale-product__title"><a href="">Sản phẩm sales</a></h2>
+                    <h2 class="sale-product__title"><a href="./product-sale.php">Sản phẩm sales</a></h2>
                 </div>
-                <div class="col-lg-3 col-md-4 col-6">
+                <?php 
+                    if($show_product_sale) {
+                        while($result = $show_product_sale->fetch_assoc()) {
+                ?>
+                 <div class="col-lg-3 col-md-4 col-6">
                     <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">
-                            Yeezy slides asd asd asda asd asd asda a da ad asd asdasda asd asd 'bone' 2022
-                        </div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
+                        <a href="product-detail.php?product_id=<?php echo $result['product_id']?>">
+                            <div class="product-item__img">
+                                <img src="<?php echo './admin/uploads/'.$result["product_img_main"] ?>" alt="" />
+                            </div>
+                            <div class="product-item__name"><?php echo $result["product_name"] ?></div>
+                            <div class="product-item__price">
+                                <?php if($result["product_price_new"] < $result["product_price_old"]) {
+
+                                ?>
+                                    <div class="product-item__price--new"><span><?php echo $formatted_number = number_format( $result["product_price_new"], 0, ',', '.'); ?></span>đ</div>
+                                    <div class="product-item__price--old"><span><?php echo   $formatted_number = number_format( $result["product_price_old"], 0, ',', '.');?></span>đ</div>
+                                <?php
+                                    } else {
+
+                                        
+                                ?>
+                                    <div class="product-item__price--new"><span><?php echo $formatted_number = number_format( $result["product_price_new"], 0, ',', '.'); ?></span>đ</div>
+                                <?php 
+                                } 
+                                ?>
+                            </div>
+                            <?php 
+                                if( $result["product_price_new"] < $result["product_price_old"]) {
+                            ?>
+                                <div class="product-item--sale-flash">-<?php  echo round((1 - $result["product_price_new"] / $result["product_price_old"]) * 100, 3); ?>%</div>
+                            <?php  } ?>
+                        </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
+                <?php 
+                
+                        }
+                    }
+                ?>
             </div>
         </div>
     </section>
@@ -342,114 +114,49 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="sale-product__title"><a href="">Sản phẩm mới</a></h2>
+                    <h2 class="sale-product__title"><a href="./product-new.php">Sản phẩm mới</a></h2>
                 </div>
-                <div class="col-lg-3 col-md-4 col-6">
+                <?php 
+                    if($show_product_new) {
+                        while($result = $show_product_new->fetch_assoc()) {
+                ?>
+                 <div class="col-lg-3 col-md-4 col-6">
                     <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">
-                            Yeezy slides asd asd asda asd asd asda a da ad asd asdasda asd asd 'bone' 2022
-                        </div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
+                        <a href="product-detail.php?product_id=<?php echo $result['product_id']?>">
+                            <div class="product-item__img">
+                                <img src="<?php echo './admin/uploads/'.$result["product_img_main"] ?>" alt="" />
+                            </div>
+                            <div class="product-item__name"><?php echo $result["product_name"] ?></div>
+                            <div class="product-item__price">
+                                <?php if($result["product_price_new"] < $result["product_price_old"]) {
+
+                                ?>
+                                    <div class="product-item__price--new"><span><?php echo $formatted_number = number_format( $result["product_price_new"], 0, ',', '.'); ?></span>đ</div>
+                                    <div class="product-item__price--old"><span><?php echo   $formatted_number = number_format( $result["product_price_old"], 0, ',', '.');?></span>đ</div>
+                                <?php
+                                    } else {
+
+                                        
+                                ?>
+                                    <div class="product-item__price--new"><span><?php echo $formatted_number = number_format( $result["product_price_new"], 0, ',', '.'); ?></span>đ</div>
+                                <?php 
+                                } 
+                                ?>
+                            </div>
+                            <?php 
+                                if( $result["product_price_new"] < $result["product_price_old"]) {
+                            ?>
+                                <div class="product-item--sale-flash">-<?php  echo round((1 - $result["product_price_new"] / $result["product_price_old"]) * 100, 3); ?>%</div>
+                            <?php  } ?>
+                        </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="product-item">
-                        <div class="product-item__img">
-                            <img src="../assets/img/pd1.webp" alt="" />
-                        </div>
-                        <div class="product-item__name">Yeezy slides 'bone' 2022</div>
-                        <div class="product-item__price">
-                            <div class="product-item__price--new"><span>720.000</span>đ</div>
-                            <div class="product-item__price--old"><span>900.000</span>đ</div>
-                        </div>
-                        <div class="product-item--sale-flash">-20%</div>
-                    </div>
-                </div>
+                <?php 
+                
+                        }
+                    }
+                ?>
+              
             </div>
         </div>
     </section>

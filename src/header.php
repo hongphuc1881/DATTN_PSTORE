@@ -2,6 +2,7 @@
     session_start();
     include("./database.php");
     include("./admin/class/brand-class.php");
+    include("./admin/class/product-class.php");
     include("./admin/class/user-class.php");
 ?>
 <?php 
@@ -36,6 +37,7 @@
         <link rel="stylesheet" href="../assets/css/footer.css" />
         <link rel="stylesheet" href="../assets/css/responsive.css" />
         <link rel="stylesheet" href="../assets/css/globalStyle.css" />
+        <link rel="stylesheet" href="../assets/css/product.css" />
         <link rel="stylesheet" href="../assets/css/product-detail.css" />
         <link rel="stylesheet" href="../assets/css/validator.css" />
         <link rel="stylesheet" href="../assets/css/cart.css" />
@@ -61,8 +63,12 @@
                                 class="col-lg-7 col-md-6 d-none d-lg-flex d-md-flex justify-content-lg-end justify-content-md-center"
                             >
                                 <div class="header-search">
-                                    <input type="text" placeholder="Tìm kiếm" />
-                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                  <form action="search.php" method="GET">
+                                        <input type="text" name="search" placeholder="Tìm kiếm" />
+                                        <button type="submit" class="border-0">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                  </form>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-9 d-flex justify-content-end gap-4">
@@ -134,18 +140,18 @@
                     <div class="container">
                         <ul class="menu">
                             <li><a href="./index.php">home</a></li>
-                            <li><a href="">all</a></li>
+                            <li><a href="./product-all.php">all</a></li>
                             <?php 
                                 while($result = $show_category->fetch_assoc()) {
                             ?>
                                 <li>
-                                    <a href="index.php?category_id=<?php  echo $result["category_id"];?>"><?php echo $result["category_name"] ?></a>
+                                    <a href="product-category.php?category_id=<?php  echo $result["category_id"];?>"><?php echo $result["category_name"] ?></a>
                                 <ul>
                                     <?php 
                                         $show_group_brand = $Brand->show_group_brand($result["category_id"]);
                                         while( $rs = $show_group_brand->fetch_assoc()) {
                                     ?>
-                                        <li><a href=""><?php echo $rs["brand_name"] ?></a></li>
+                                        <li><a href="./product-brand.php?brand_id=<?php echo $rs['brand_id'];?>"><?php echo $rs["brand_name"] ?></a></li>
                                     <?php 
                                         }
                                     ?>

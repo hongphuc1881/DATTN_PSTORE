@@ -1,9 +1,7 @@
-<?php
-    session_start();
-    ?>
+
 <?php 
+    include("./header.php");
     if(isset($_SESSION["user"])) {
-        include("./header.php");
 ?>
         <div class="app-container">
             <div class="container">
