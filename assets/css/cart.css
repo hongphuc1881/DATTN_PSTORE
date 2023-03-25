@@ -12,8 +12,9 @@ table img {
     max-width: 100px;
 }
 
-tr, th {
-    border :1px solid #000;
+tr,
+th {
+    border: 1px solid #000;
 }
 td {
     padding: 20px;
@@ -45,18 +46,25 @@ tbody tr td button {
     font-size: 1.6rem;
     margin: 12px 0;
 }
-.total-price span{
-   font-weight: 500;
+.total-price span {
+    font-weight: 500;
 }
-.btn-buy, .btn-order {
-    padding: 8px 24px;  
+.btn-buy,
+.btn-order {
+    padding: 8px 24px;
     font-size: 1.6rem;
     border: none;
     outline: none;
     border-radius: 8px;
-    background-color:#ccc;
+    background-color: #ccc;
+    text-decoration: none;
+    color: var(--black-color);
 }
-.btn-order {
+.btn-order,
+.btn-order:hover {
     background-color: var(--black-color);
     color: var(--white-color);
+}
+.btn-buy:hover {
+    color: var(--black-color);
 }

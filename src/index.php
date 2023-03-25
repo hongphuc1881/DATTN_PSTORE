@@ -4,7 +4,8 @@
 <?php 
     $Product = new Product;
     $limit = 12;
-    $show_product_hot = $Product->show_product_hot($limit);
+    $limit_hot = 8;
+    $show_product_hot = $Product->show_product_hot($limit_hot);
     $show_product_new = $Product->show_product_new($limit);
     $show_product_sale = $Product->show_product_sale($limit);
 ?>

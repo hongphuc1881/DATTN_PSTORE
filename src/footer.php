@@ -18,9 +18,8 @@
                                     <h4 class="footer__title">thông tin</h4>
                                     <ul>
                                         <li><a href="./index.php">Trang chủ</a></li>
-                                        <li><a href="">Giới thiệu</a></li>
-                                        <li><a href="">Sản phẩm</a></li>
-                                        <li><a href="">Khuyến mãi</a></li>
+                                        <li><a href="./product-all.php">Sản phẩm</a></li>
+                                        <li><a href="./product-sale.php">Khuyến mãi</a></li>
                                         <li><a href="">liên hệ</a></li>
                                     </ul>
                                 </div>

@@ -29,89 +29,7 @@
                             <li class="breadcrumb-item active" aria-current="page">Vans Vault Style 36 Orange</li>
                         </ol>
                     </nav>-->
-<!--
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="large-image">
-                                <img src="" alt="" />
-                            </div>
-                            <div class="list-image-detail">
-                                <div class="owl-carousel">
-                                    <div class="item">
-                                        <img src="../assets/img/vans.webp" alt="" />
-                                    </div>
-                                    <div class="item">
-                                        <img src="../assets/img/vans2.webp" alt="" />
-                                    </div>
-                                    <div class="item">
-                                        <img src="../assets/img/vans3.webp" alt="" />
-                                    </div>
-                                    <div class="item">
-                                        <img src="../assets/img/vans4.webp" alt="" />
-                                    </div>
-                                    <div class="item">
-                                        <img src="../assets/img/vans5.webp" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="product-info">
-                                <div class="product-title">vans vault style 36 orange</div>
-                                <div class="price">
-                                    <div class="new-price">832.000đ</div>
-                                    <div class="old-price">1.040.000đ</div>
-                                </div>
-                                <div class="product-description">
-                                    <p>- Chất lượng Rep 1:1</p>
-                                    <p>
-                                        - Đối với chân thon gọn nên đi lùi 1 size , chân bè ngang nên đi lùi 0,5 size so
-                                        với size chuẩn
-                                    </p>
-                                    <p>- Vận chuyển toàn quốc [ Kiểm Tra Hàng Trước Khi Thanh Toán ]</p>
-                                    <p>- 100% Ảnh chụp trực tiếp tại PStore</p>
-                                    <p>- Bảo Hành Trọn Đời Sản Phẩm</p>
-                                    <p>- Đổi Trả 7 Ngày Không Kể Lí Do</p>
-                                    <p>- Liên Hệ : 0967.585.135</p>
-                                </div>
-                                <div class="product-size">
-                                    <p>Kích Thước:</p>
-                                    <ul>
-                                        <li>
-                                            <input type="radio" name="product-size" id="product-size-36" />
-                                            <label for="product-size-36">36</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="product-size" id="product-size-37" />
-                                            <label for="product-size-37">37</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="product-size" id="product-size-38" />
-                                            <label for="product-size-38">38</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="product-size" id="product-size-39" />
-                                            <label for="product-size-39">39</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="product-size" id="product-size-40" />
-                                            <label for="product-size-40">40</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="product-size" id="product-size-41" />
-                                            <label for="product-size-41">41</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="product-size" id="product-size-42" />
-                                            <label for="product-size-42">42</label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="./cart.html" class="btn btn-dark add-to-cart">Thêm vào giỏ hàng</a>
-                            </div>
-                        </div>
-                    </div>
-                    -->
+
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="large-image">
@@ -147,24 +65,30 @@
                                 <div class="product-description">
                                     <?php echo $get_product["product_description"];?>
                                 </div>
-                                <div class="product-size">
-                                    <p>Kích Thước:</p>
-                                    <ul>
-                                        <?php
-                                            foreach($rs1["sizes"] as $value) {
-                                        ?>
-                                                <li>
-                                                    <input type="radio" name="product-size" value="<?php echo $value?>"   id="product-size-<?php echo $value?>" />
-                                                    <label for="product-size-<?php echo $value?>"><?php echo $value ?></label>
-                                                </li>
-                                        <?php 
-                                            }
-                                        ?>
-                                       
-                                    </ul>
-                                </div>
-                                <a href="./cart.html" class="btn btn-dark add-to-cart">Thêm vào giỏ hàng</a><br>
-                                            
+                               <form action="add-to-cart.php" method="POST">
+                                    <div class="product-size">
+                                        <p>Kích Thước:</p>
+                                        <ul>
+                                            <?php
+                                                foreach($rs1["sizes"] as $value) {
+                                            ?>
+                                                    <li>
+                                                        <input type="radio" name="product_size" value="<?php echo $value;?>"  id="product-size-<?php echo $value?>" checked/>
+                                                        <label for="product-size-<?php echo $value?>"><?php echo $value ?></label>
+                                                    </li>
+                                            <?php 
+                                                }
+                                            ?>
+                                           
+                                        </ul>
+                                    </div>
+                                    <input type="hidden" name="product_id" value="<?php echo $product_id ;?>">
+                                    <input type="hidden" name="product_img_main" value="<?php echo $get_product["product_img_main"] ;?>">
+                                    <input type="hidden" name="product_name" value="<?php echo $get_product["product_name"] ;?>">
+                                    <input type="hidden" name="price" value="<?php echo $get_product["product_price_new"] ;?>">
+                                    <!--<a href="./cart.php?product_id=<?php echo $product_id;?>" class="btn btn-dark add-to-cart">Thêm vào giỏ hàng</a><br>-->
+                                    <button type="submit" class="add-to-cart" name="add_to_cart">them vao gio hang</button>    
+                               </form>
                             </div>
                         </div>
                     </div>
@@ -177,6 +101,33 @@
         <script>
             $(document).ready(function () {
                 $(".owl-carousel").owlCarousel();
+
+                //$('.add-to-cart').click(function(e) {
+                //    e.preventDefault();
+                //    //var qty = $(this).closest(".product-data").find(".quantity").val();
+                //    var product_id = $("input[name='product_id']");
+                //    var product_img_main = $("input[name='product_img_main']");
+                //    var product_name = $("input[name='product_name']");
+                //    var product_price = $("input[name='product_price']");
+                //    var product_size = $("input[name='product_size']");
+                //    var quantity = 1;
+
+                //    $.ajax({
+                //        method: "POST",
+                //        url: "",
+                //        data:{
+                //            product_id: product_id,
+                //            product_img_main: product_img_main,
+                //            product_name: product_name,
+                //            product_price: product_price,
+                //            product_size: product_size,
+                //            quantity: quantity
+                //        },
+                //        success: function() {
+
+                //        }
+                //    })
+                //})
             });
         </script>
         <script>

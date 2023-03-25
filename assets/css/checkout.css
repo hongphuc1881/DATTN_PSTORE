@@ -24,7 +24,6 @@
     color: #fff;
 }
 
-
 .sidebar {
     margin-top: 3.2rem;
 }
@@ -32,6 +31,7 @@
 .order-summary__product-item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
     margin-top: 2.4rem;
 }
@@ -54,9 +54,16 @@
     border-radius: 4px;
     max-width: 100px;
 }
+.product-item-name {
+    flex: 1;
+}
 .product-item-name p {
     margin: 0;
     text-transform: uppercase;
+    
+}
+.product-item-size {
+    color: #aaa;
 }
 
 .total {
@@ -66,4 +73,12 @@
     margin-top: 16px;
     padding-top: 16px;
     font-weight: 500;
+}
+.logo {
+    display: flex;
+    justify-content: center;
+}
+.logo img {
+    height: 100px;
+    height: 100px;
 }

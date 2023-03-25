@@ -7,7 +7,7 @@
         }
 
         public function show_category() {
-            $sql = "SELECT * FROM tbl_category ORDER BY category_id DESC";
+            $sql = "SELECT * FROM tbl_category";
             $result = $this->db->select($sql);
             return $result;
         }

@@ -8,6 +8,13 @@
 <?php 
     $Brand = new Brand;
     $show_category = $Brand->show_category();
+    
+    // kiểm tra xem có session cart chưa, nếu chưa có thì tạo mới
+    if(!isset($_SESSION["cart"]))  $_SESSION["cart"] = array();
+
+    if(isset($_SESSION['cart'])) {
+        $cart_quantity = count($_SESSION["cart"]);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +48,6 @@
         <link rel="stylesheet" href="../assets/css/product-detail.css" />
         <link rel="stylesheet" href="../assets/css/validator.css" />
         <link rel="stylesheet" href="../assets/css/cart.css" />
-        <link rel="stylesheet" href="../assets/css/checkout.css" />
         <link rel="stylesheet" href="../assets/css/login.css">
         <link rel="stylesheet" href="../assets/css/index.css" />
     </head>
@@ -112,9 +118,10 @@
                                  
                                 </div>
                                 <div class="cart">
-                                    <a href="./cart.html">
+                                    <a href="./cart.php">
                                         <i class="fa-solid fa-cart-shopping"></i>
-                                        Giỏ hàng (<span>0</span>)
+                                        Giỏ hàng 
+                                        (<span><?php echo $cart_quantity;?></span>)
                                     </a>
                                 </div>
                             </div>
@@ -149,11 +156,14 @@
                                 <ul>
                                     <?php 
                                         $show_group_brand = $Brand->show_group_brand($result["category_id"]);
-                                        while( $rs = $show_group_brand->fetch_assoc()) {
+                                        if($show_group_brand) {
+                                            while( $rs = $show_group_brand->fetch_assoc()) {
+
                                     ?>
                                         <li><a href="./product-brand.php?brand_id=<?php echo $rs['brand_id'];?>"><?php echo $rs["brand_name"] ?></a></li>
                                     <?php 
                                         }
+                                    }
                                     ?>
                                   
                                 </ul>
