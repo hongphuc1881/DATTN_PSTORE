@@ -10,7 +10,7 @@
 
 <?php 
     $Category = new Category;
-    $show_category = $Category->show_category();
+    $show_category_lock = $Category->show_category_lock();
 ?>
 <div id="layoutSidenav_content">
     <main>
@@ -21,15 +21,15 @@
                     <tr>
                     <th scope="col" style="width: 10%">#</th>
                     <th scope="col" style="width: 10%">ID</th>
-                    <th scope="col" style="width: 65%">Danh mục</th>
-                    <th scope="col" style="width: 15%">Tuỳ chọn</th>
+                    <th scope="col" style="width: 55%">Danh mục</th>
+                    <th scope="col" style="width: 35%">Tuỳ chọn</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        if($show_category) {
+                        if($show_category_lock) {
                             $i = 0;
-                            while($result = $show_category->fetch_assoc()) { 
+                            while($result = $show_category_lock->fetch_assoc()) { 
                                 $i++; 
                     ?>
                     <tr>
@@ -37,8 +37,8 @@
                         <td><?php echo $result["category_id"] ?></td>
                         <td><?php echo $result["category_name"] ?></td>
                         <td>
-                        <a href="category-edit.php?category_id=<?php echo $result['category_id'] ?>" class="btn btn-dark">Sửa</a>
-                        <a href="category-lock.php?category_id=<?php echo $result['category_id'] ?>" class="btn btn-danger">Xoá</a>
+                        <a href="category-lock-edit.php?category_id=<?php echo $result['category_id'] ?>" class="btn btn-dark">Khôi phục</a>
+                        <a href="category-delete.php?category_id=<?php echo $result['category_id'] ?>" class="btn btn-danger">Xoá vĩnh viễn</a>
                         </td>
                     </tr>
                     <!-- Modal -->

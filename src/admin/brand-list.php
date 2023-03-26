@@ -53,7 +53,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                         <td><?php echo $result["brand_name"] ?></td>
                         <td>
                         <a href="brand-edit.php?brand_id=<?php echo $result['brand_id'] ?>" class="btn btn-dark">Sửa</a>
-                        <a href="brand-delete.php?brand_id=<?php echo $result['brand_id'] ?>" class="btn btn-danger">Xoá</a>
+                        <a href="brand-lock.php?brand_id=<?php echo $result['brand_id'] ?>" class="btn btn-danger">Xoá</a>
                         </td>
                     </tr>
                     <?php

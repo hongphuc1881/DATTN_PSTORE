@@ -36,9 +36,9 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                     <tr>
                     <th scope="col" style="width: 5%">#</th>
                     <th scope="col" style="width: 10%">Username</th>
-                    <th scope="col" style="width:20%">Full Name</th>
+                    <th scope="col" style="width: 15%">Full Name</th>
                     <th scope="col" style="width: 20%">Email</th>
-                    <th scope="col" style="width: 5%">Quyền</th>
+                    <th scope="col" style="width: 10%">Quyền</th>
                     <th scope="col" style="width: 15%">Tuỳ chọn</th>
                     </tr>
                 </thead>
@@ -80,7 +80,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                         <td><?php echo $result["role_name"] ?></td>
                         <td>
                         <a href="user-edit.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-dark">Sửa</a>
-                        <a href="user-delete.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-danger">Xoá</a>
+                        <a href="user-lock.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-danger">Khoá</a>
                         </td>
                     </tr>
                     <?php

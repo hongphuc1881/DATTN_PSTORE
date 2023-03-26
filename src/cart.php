@@ -129,7 +129,7 @@
     else if(empty($_SESSION["cart"])){
         var_dump(empty($_SESSION["cart"]))
 ?>
-    <div class="d-flex justify-content-center py-5">
+    <div class="d-flex justify-content-center" style="padding-top: 150px">
         <img src="../assets/img/empty-cart.webp" alt="" style="max-width: 50%">
     </div>
 <?php 

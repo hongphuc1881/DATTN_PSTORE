@@ -7,7 +7,7 @@
         }
 
         public function show_category() {
-            $sql = "SELECT * FROM tbl_category ORDER BY category_id DESC";
+            $sql = "SELECT * FROM tbl_category WHERE status = 1 ";
             $result = $this->db->select($sql);
             return $result;
         }
@@ -19,7 +19,7 @@
             return $result;
         }
         public function show_brand_ajax($category_id) {
-            $sql = "SELECT * FROM tbl_brand WHERE category_id = '$category_id'";
+            $sql = "SELECT * FROM tbl_brand WHERE category_id = '$category_id' AND status = 1";
             $result = $this->db->select($sql);
             return $result;
         }
@@ -80,6 +80,7 @@
             $sql = "SELECT tbl_product.*, tbl_category.category_name , tbl_brand.brand_name
             FROM tbl_brand INNER JOIN tbl_category ON tbl_brand.category_id = tbl_category.category_id
                             INNER JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id 
+            WHERE tbl_product.status = 1
             ORDER BY tbl_brand.category_id DESC";
             $result = $this->db->select($sql);
             return $result;
@@ -147,6 +148,7 @@
             $sql = "SELECT tbl_product.* , tbl_brand.brand_name, tbl_category.category_name FROM tbl_product
             INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
             INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+            WHERE tbl_product.status = 1
             ORDER BY category_id DESC LIMIT $start,$limit";
             $result = $this->db->select($sql);
             return $result;
@@ -216,6 +218,21 @@
         public function search_product($search) {
             $sql = " SELECT * FROM tbl_product WHERE product_name LIKE '%$search%'";
             $result = $this->db->select($sql);
+            return $result;
+        }
+
+        public function lock_product($product_id) {
+            $sql = "UPDATE tbl_product 
+            SET  status =  0
+            WHERE product_id = '$product_id'";
+            $result = $this->db->update($sql);
+            return $result;
+        }
+        public function unlock_brand($product_id) {
+            $sql = "UPDATE tbl_product 
+            SET  status =  1
+            WHERE product_id = '$product_id'";
+            $result = $this->db->update($sql);
             return $result;
         }
     }

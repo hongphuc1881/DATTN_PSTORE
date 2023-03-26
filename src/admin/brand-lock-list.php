@@ -5,40 +5,42 @@
         include("./header.php");
         include("./menu.php");
         include("./footer.php");
-        include("./class/category-class.php");
+        include("./class/brand-class.php");
 ?>
 
 <?php 
-    $Category = new Category;
-    $show_category = $Category->show_category();
+    $Brand = new Brand;
+    $show_brand_lock = $Brand->show_brand_lock();
 ?>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
-            <h2>Danh sách danh mục</h2>
+            <h2>Danh sách loại sản phẩm đã xoá</h2>
             <table class="table">
                 <thead>
                     <tr>
                     <th scope="col" style="width: 10%">#</th>
                     <th scope="col" style="width: 10%">ID</th>
-                    <th scope="col" style="width: 65%">Danh mục</th>
-                    <th scope="col" style="width: 15%">Tuỳ chọn</th>
+                    <th scope="col" style="width: 25%">Danh mục</th>
+                    <th scope="col" style="width: 25%">Tên loại sản phẩm</th>
+                    <th scope="col" style="width: 35%">Tuỳ chọn</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        if($show_category) {
+                        if($show_brand_lock) {
                             $i = 0;
-                            while($result = $show_category->fetch_assoc()) { 
+                            while($result = $show_brand_lock->fetch_assoc()) { 
                                 $i++; 
                     ?>
                     <tr>
                         <th scope="row"><?php echo $i?></th>
                         <td><?php echo $result["category_id"] ?></td>
                         <td><?php echo $result["category_name"] ?></td>
+                        <td><?php echo $result["brand_name"] ?></td>
                         <td>
-                        <a href="category-edit.php?category_id=<?php echo $result['category_id'] ?>" class="btn btn-dark">Sửa</a>
-                        <a href="category-lock.php?category_id=<?php echo $result['category_id'] ?>" class="btn btn-danger">Xoá</a>
+                        <a href="brand-lock-edit.php?brand_id=<?php echo $result['brand_id'] ?>" class="btn btn-dark">Khôi phục</a>
+                        <a href="brand-delete.php?brand_id=<?php echo $result['brand_id'] ?>" class="btn btn-danger">Xoá vĩnh viễn</a>
                         </td>
                     </tr>
                     <!-- Modal -->

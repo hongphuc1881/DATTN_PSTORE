@@ -91,7 +91,7 @@
                                             <i class="fa-solid fa-user"></i> <?php echo isset($_SESSION["user"]) ? $_SESSION["user"]["username"] : "Tài khoản" ;?>
                                         </button>
                                         <?php if(isset($_SESSION["user"])){
-                                            if($_SESSION["user"]["role"] == 1) {
+                                            if($_SESSION["user"]["role"] != 3) {
                                         ?>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                 <li><a class="dropdown-item" href="./admin/index.php">Trang admin</a></li>

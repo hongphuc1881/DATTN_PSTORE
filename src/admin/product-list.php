@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
+    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] != 3) {
         include("./database.php");
         include("./header.php");
         include("./menu.php");
@@ -38,7 +38,7 @@
                     <tr>
                     <th scope="col" style="max-width: 5%">#</th>
                     <th scope="col" style="max-width: 10%">Danh mục</th>
-                    <th scope="col" style="max-width: 15%">Loại sản phẩm</th>
+                    <th scope="col" style="max-width: 20%">Loại sản phẩm</th>
                     <th scope="col" style="max-width: 45%">Tên sản phẩm</th>
                     <th scope="col" style="max-width: 5%">Giá gốc</th>
                     <th scope="col" style="max-width: 5%">Giá mới</th>
@@ -46,7 +46,7 @@
                     <th scope="col" style="max-width: 20%">Tuỳ chọn</th>
                     </tr>
                 </thead>
-                <tbody >
+                <tbody style="text-transform: lowercase" >
                     <?php
                         if($product_pagination) {
                             $i = 0;
@@ -58,14 +58,14 @@
                         <td><?php echo $result["category_name"] ?></td>
                         <td><?php echo $result["brand_name"] ?></td>
                         <td><?php echo $result["product_name"] ?></td>
-                        <td><?php echo $result["product_price_old"] ?></td>
-                        <td><?php echo $result["product_price_new"] ?></td>
+                        <td><?php echo   $formatted_number = number_format( $result["product_price_old"], 0, ',', '.');?>đ</td>
+                        <td><?php echo   $formatted_number = number_format( $result["product_price_new"], 0, ',', '.');?>đ</td>
                         <td>
                             <img src="<?php echo "./uploads/".$result["product_img_main"] ?>" alt="product_img" style="max-width: 100px">
                         </td>
                         <td>
                         <a href="product-edit.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-dark">Sửa</a>
-                        <a href="product-delete.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-danger">Xoá</a>
+                        <a href="product-lock.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-danger">Xoá</a>
                         </td>
                     </tr>
                     <?php

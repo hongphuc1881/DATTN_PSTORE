@@ -10,7 +10,7 @@
             $password = md5(trim( $_POST["password"]));
             $fullname =  trim( $_POST["fullname"]);
             $email = trim($_POST["email"]);
-            $sql = "INSERT INTO tbl_user(username, password, fullname, email, role) VALUE('$username', '$password', '$fullname', '$email',2)";
+            $sql = "INSERT INTO tbl_user(username, password, fullname, email, role, status) VALUE('$username', '$password', '$fullname', '$email',3,1)";
             $result = $this->db->insert($sql);
             return $result;
         }
@@ -28,7 +28,7 @@
         }
 
         public function show_user(){
-            $sql = "SELECT tbl_user.* , tbl_role.role_name FROM tbl_user INNER JOIN tbl_role ON tbl_user.role = tbl_role.role_id ORDER BY tbl_user.role";
+            $sql = "SELECT tbl_user.* , tbl_role.role_name FROM tbl_user INNER JOIN tbl_role ON tbl_user.role = tbl_role.role_id WHERE status = 1 ORDER BY tbl_user.role";
             $result = $this->db->select($sql);
             return $result;
         }
@@ -49,7 +49,32 @@
             return $result;
         }
         public function user_pagination($limit, $start) {
-            $sql = "SELECT tbl_user.* , tbl_role.role_name FROM tbl_user INNER JOIN tbl_role ON tbl_user.role = tbl_role.role_id ORDER BY role  LIMIT $start, $limit";
+            $sql = "SELECT tbl_user.* , tbl_role.role_name FROM tbl_user INNER JOIN tbl_role ON tbl_user.role = tbl_role.role_id WHERE status = 1 ORDER BY role  LIMIT $start, $limit";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+
+        public function lock_user($user_id) {
+            $sql = "UPDATE tbl_user 
+            SET  status =  0
+            WHERE user_id = '$user_id'";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function unlock_user($user_id) {
+            $sql = "UPDATE tbl_user 
+            SET  status =  1
+            WHERE user_id = '$user_id'";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function delete_user($user_id) {
+            $sql = "DELETE FROM tbl_user WHERE user_id = '$user_id'";
+            $result = $this->db->delete($sql);
+            return $result;
+        }
+        public function show_user_lock() {
+            $sql = "SELECT tbl_user.* , tbl_role.role_name FROM tbl_user INNER JOIN tbl_role ON tbl_user.role = tbl_role.role_id WHERE status = 0 ORDER BY role ";
             $result = $this->db->select($sql);
             return $result;
         }
