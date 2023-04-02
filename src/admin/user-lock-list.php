@@ -64,49 +64,35 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                         <td><?php echo $result["role_name"] ?></td>
                         <td>
                         <a href="user-lock-edit.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-dark">khôi phục</a>
-                        <a href="user-delete.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-danger">xoá vĩnh viễn</a>
+                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#<?php echo $result["username"]?>">Xoá vĩnh viễn</a>
                         </td>
                     </tr>
+                     <!-- Modal -->
+                     <div class="modal fade" id="<?php echo $result["username"]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Xoá người dùng</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có chắc chắn muốn xoá vĩnh viễn <strong><?php echo $result["username"];?></strong>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                                    <a href="user-delete.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-danger">Xoá</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php
                             }
                         }
                      ?>
                 </tbody>
             </table>
-            <!--<div class="d-flex justify-content-center mt-5">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <?php 
-                            if($current_page - 1 > 0) {
-                         ?>
-                            <li class="page-item">
-                                <a class="page-link" href="user-lock-list.php?page=<?php  echo $current_page -1; ?>" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                        <?php } ?>
-                        <?php 
-                            for ($i=1; $i <= $page ; $i++) { 
-                        ?>
-                                <li class="page-item <?php echo $i == $current_page ? "active": ""?>"><a class="page-link" href="user-lock-list.php?page=<?php echo $i ?>"><?php echo  $i ?></a></li>
-                        <?php 
-                                }   
-                        ?>
-                        
-                        <?php
-                            if($current_page + 1 <= $page) {
-                        ?>
-                            <li class="page-item">
-                                <a class="page-link" href="user-lock-list.php?page=<?php echo $current_page + 1;?>" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        <?php } ?>
-
-                    </ul>
-                </nav>
-          
-            </div>-->
         </div>
     </main>
 </div>

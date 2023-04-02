@@ -1,6 +1,9 @@
 <?php 
     include("./header.php");
+    $Product = new Product;
+    //echo "<pre>";
     //var_dump($_SESSION['cart']);
+    //echo "</pre>";
 
 ?>
 <?php 
@@ -48,12 +51,13 @@
                                     foreach ($cart as $product_item) {
                                     $thanh_tien = $product_item[4] * $product_item[5];
                                     $total_price += $thanh_tien;
+                                    $get_product_size = $Product->get_product_size_by_size_id($product_item[3])->fetch_assoc();
                                 ?>
                                     <tr class="product-data">
                                         <td><img src="./admin/uploads/<?php echo $product_item[2]?>" alt="product" /></td>
                                         <td>
                                             <p class="text-uppercase"><?php echo $product_item[1]?></p>
-                                            <span class="text-danger">(<?php echo $product_item[3]?>)</span>
+                                            <span class="text-danger">(<?php echo $get_product_size["product_size"];?>)</span>
                                         </td>
                                         <td><span><?php echo   $formatted_number = number_format( $product_item[4], 0, ',', '.');?></span>đ</td>
                                         <td>

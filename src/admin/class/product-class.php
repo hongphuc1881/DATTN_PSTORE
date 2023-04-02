@@ -66,9 +66,9 @@
                 $sql = "SELECT * FROM tbl_product ORDER BY product_id DESC LIMIT 1";
                 $result = $this->db->select($sql)->fetch_assoc();
                 $product_id = $result["product_id"];
-                $product_size = $_POST['product_size'];
-                foreach ($product_size as $value) {
-                    $sql = "INSERT INTO tbl_product_size(product_id, product_size) VALUES('$product_id','$value')";
+                $size_id = $_POST['size_id'];
+                foreach ($size_id as $value) {
+                    $sql = "INSERT INTO tbl_product_size(product_id, size_id) VALUES('$product_id','$value')";
                     $result = $this->db->insert($sql);
                 }
             }
@@ -85,11 +85,27 @@
             $result = $this->db->select($sql);
             return $result;
         }
+        //public function get_size($product_id) {
+        //    $sql = "SELECT product_id, GROUP_CONCAT(size_id) AS sizes
+        //    FROM tbl_product_size
+        //    WHERE product_id = '$product_id'
+        //    GROUP BY product_id";
+        //    $result = $this->db->select($sql);
+        //    return $result;
+        //}
         public function get_size($product_id) {
-            $sql = "SELECT product_id, GROUP_CONCAT(product_size) AS sizes
-            FROM tbl_product_size
-            WHERE product_id = '$product_id'
-            GROUP BY product_id";
+            $sql = "SELECT tbl_product_size.product_id as product_id, GROUP_CONCAT(tbl_product_size.size_id) AS sizes_id,
+            GROUP_CONCAT(tbl_size.product_size ) AS product_sizes
+            FROM tbl_product_size INNER JOIN tbl_size
+            ON tbl_product_size.size_id = tbl_size.size_id
+            WHERE tbl_product_size.product_id = '$product_id'
+            GROUP BY tbl_product_size.product_id";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        
+        public function show_size() {
+            $sql = "SELECT * FROM tbl_size";
             $result = $this->db->select($sql);
             return $result;
         }
@@ -133,11 +149,11 @@
 
             //size san pham
             if($result) {
-                $product_size = $_POST['product_size'];
+                $size_id = $_POST['size_id'];
                 $sql = "DELETE FROM tbl_product_size WHERE product_id = '$product_id'";
                 $result = $this->db->delete($sql);
-                foreach ($product_size as $value) {
-                    $sql = "INSERT INTO tbl_product_size(product_id, product_size) VALUES('$product_id','$value')";
+                foreach ($size_id as $value) {
+                    $sql = "INSERT INTO tbl_product_size(product_id, size_id) VALUES('$product_id','$value')";
                     $result = $this->db->insert($sql);
                 }
             }
@@ -157,17 +173,18 @@
             $sql = "SELECT tbl_product.* , tbl_brand.brand_name, tbl_category.category_name FROM tbl_product
             INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
             INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+            AND tbl_product.status = 1
             ORDER BY product_id DESC LIMIT $start,$limit";
             $result = $this->db->select($sql);
             return $result;
         }
         public function product_sale_pagination($limit, $start) {
-            $sql = "SELECT * FROM tbl_product WHERE product_price_new < product_price_old ORDER BY product_id DESC LIMIT $start,$limit";
+            $sql = "SELECT * FROM tbl_product WHERE product_price_new < product_price_old AND status = 1 ORDER BY product_id DESC LIMIT $start,$limit";
             $result = $this->db->select($sql);
             return $result;
         }
         public function product_hot_pagination($limit, $start) {
-            $sql = "SELECT * FROM tbl_product WHERE is_hot = 1 ORDER BY product_id DESC LIMIT $start,$limit";
+            $sql = "SELECT * FROM tbl_product WHERE is_hot = 1 AND status = 1 ORDER BY product_id DESC LIMIT $start,$limit";
             $result = $this->db->select($sql);
             return $result;
         }
@@ -179,12 +196,12 @@
         }
 
         public function show_product_hot($limit = 9999) {
-            $sql = " SELECT * FROM tbl_product WHERE is_hot = 1 ORDER BY product_id DESC LIMIT $limit";
+            $sql = " SELECT * FROM tbl_product WHERE is_hot = 1 AND status = 1 ORDER BY product_id DESC LIMIT $limit";
             $result = $this->db->select($sql);
             return $result;
         }
         public function show_product_sale($limit = 9999) {
-            $sql = " SELECT * FROM tbl_product WHERE product_price_new < product_price_old ORDER BY product_id DESC LIMIT $limit";
+            $sql = " SELECT * FROM tbl_product WHERE product_price_new < product_price_old AND status = 1 ORDER BY product_id DESC LIMIT $limit";
             $result = $this->db->select($sql);
             return $result;
         }
@@ -194,6 +211,7 @@
             $sql = "SELECT tbl_product.*, tbl_category.category_name , tbl_brand.brand_name
             FROM tbl_brand INNER JOIN tbl_category ON tbl_brand.category_id = tbl_category.category_id
                             INNER JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id 
+            WHERE tbl_product.status = 1
             ORDER BY product_id DESC LIMIT $limit";
             $result = $this->db->select($sql);
             return $result;
@@ -205,7 +223,7 @@
             return $result;
         }
         public function show_product_by_category($category_id) {
-            $sql = " SELECT * FROM tbl_product WHERE category_id = '$category_id'";
+            $sql = " SELECT * FROM tbl_product WHERE category_id = '$category_id' AND status = 1";
             $result = $this->db->select($sql);
             return $result;
         }
@@ -214,13 +232,44 @@
             $result = $this->db->select($sql);
             return $result;
         }
-
+        public function get_product_size_by_size_id($size_id) {
+            $sql = " SELECT * FROM tbl_size WHERE size_id = '$size_id'";
+            $result = $this->db->select($sql);
+            return $result;
+        }
         public function search_product($search) {
             $sql = " SELECT * FROM tbl_product WHERE product_name LIKE '%$search%'";
             $result = $this->db->select($sql);
             return $result;
         }
-
+        public function search_product_with_pagination($search, $start, $limit) {
+            
+            $sql = " SELECT tbl_product.* , tbl_brand.brand_name, tbl_category.category_name FROM tbl_product
+            INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
+            INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+            WHERE tbl_product.status = 1 AND product_name LIKE '%$search%'
+            ORDER BY category_id DESC LIMIT $start,$limit";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function show_product_lock() {
+            $sql = "SELECT tbl_product.*, tbl_category.category_name , tbl_brand.brand_name
+            FROM tbl_brand INNER JOIN tbl_category ON tbl_brand.category_id = tbl_category.category_id
+                            INNER JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id 
+            WHERE tbl_product.status = 0
+            ORDER BY tbl_brand.category_id DESC";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function product_lock_pagination($limit, $start) {
+            $sql = "SELECT tbl_product.* , tbl_brand.brand_name, tbl_category.category_name FROM tbl_product
+            INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
+            INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+            WHERE tbl_product.status = 0
+            ORDER BY category_id DESC LIMIT $start,$limit";
+            $result = $this->db->select($sql);
+            return $result;
+        }
         public function lock_product($product_id) {
             $sql = "UPDATE tbl_product 
             SET  status =  0
@@ -228,7 +277,7 @@
             $result = $this->db->update($sql);
             return $result;
         }
-        public function unlock_brand($product_id) {
+        public function unlock_product($product_id) {
             $sql = "UPDATE tbl_product 
             SET  status =  1
             WHERE product_id = '$product_id'";

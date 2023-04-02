@@ -1,8 +1,18 @@
 <?php
     session_start();
+    ob_start();
+    include("./database.php");
+    include("./admin/class/product-class.php");
+    $Product = new Product;
     if(isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
         $cart = $_SESSION["cart"];
-    
+
+        if(isset($_SESSION["user"])) {
+            //var_dump($_SESSION["cart"]);exit();
+            //var_dump($_SESSION["user"]);exit();
+            //var_dump($_POST);exit();
+
+       
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +41,8 @@
     </head>
     <body>
         <div class="container">
+            <?php 
+            ?>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="main">
@@ -40,34 +52,35 @@
                             </a>
                         </div>
                         <div class="title">Thông tin giao hàng</div>
-                        <form action="" id="checkout-form">
+                        <form action="checkout-action.php" id="checkout-form" method="post">
                             <div class="form-group">
                                 <label for="fullname">Họ và tên</label>
                                 <input type="text" name="fullname" class="form-control" id="fullname" required />
                             </div>
                             <div class="form-group">
-                                <label for="phone_number">Số điện thoại</label>
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại</label>
                                 <input type="text" 
-                                    name="phone_number" 
+                                    name="phone" 
                                     class="form-control" 
-                                    id="phone_number" 
+                                    id="phone" 
                                     minlength="10"
-                                    maxlength="12"
+                                    maxlength="10"
                                     required 
                                     onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;"
                                 />
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" id="email" required />
-                            </div>
+                         
                              <div class="form-group">
                                 <label for="address">Địa chỉ</label>
                                 <input type="text" name="address" class="form-control" id="address" required />
                             </div>
                             <div class="form-group">
-                                <label for="not">Ghi chú</label>
-                                <textarea class="form-control" name="not" id="not" rows="3"></textarea>
+                                <label for="note">Ghi chú</label>
+                                <textarea class="form-control" name="note" id="note" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <a href="./cart.php" class="cart">Giỏ hàng</a>
@@ -85,6 +98,7 @@
                                     foreach ($cart as $product_item) {
                                     $thanh_tien = $product_item[4] * $product_item[5];
                                     $total_price += $thanh_tien;
+                                    $get_product_size = $Product->get_product_size_by_size_id($product_item[3])->fetch_assoc();
                                 ?>
                                  <!--$product = array($product_id, $product_name, $product_img_main, $product_size, $price, $quantity);-->
 
@@ -96,51 +110,14 @@
 
                                     <div class="product-item-name">
                                         <p><?php echo $product_item[1]?></p>
-                                        <span class="product-item-size "><?php echo $product_item[3]?></span>
+                                        <span class="product-item-size "><?php echo $get_product_size["product_size"]?></span>
                                     </div>
                                     <div class="product-item-total-price"><span><?php echo   $formatted_number = number_format( $thanh_tien, 0, ',', '.');?></span>đ</div>
                                 </div>
                                 <?php 
                                     }
                                 ?>
-                                <!--<div class="order-summary__product-item">
-                                    <div class="product-item-img">
-                                        <img src="../assets/img/pd1.webp" alt="" />
-                                        <div class="product-item-quantity">1</div>
-                                    </div>
-
-                                    <div class="product-item-name">
-                                        <p>air jordan 1 low 'white university red'</p>
-                                        <span class="product-item-size">42</span>
-                                    </div>
-                                    <div class="product-item-total-price"><span>1.600.000</span>đ</div>
-                                </div>
-
-                                <div class="order-summary__product-item">
-                                    <div class="product-item-img">
-                                        <img src="../assets/img/pd1.webp" alt="" />
-                                        <div class="product-item-quantity">1</div>
-                                    </div>
-
-                                    <div class="product-item-name">
-                                        <p>air jordan 1 low 'white university red'</p>
-                                        <span class="product-item-size">42</span>
-                                    </div>
-                                    <div class="product-item-total-price"><span>1.600.000</span>đ</div>
-                                </div>
-
-                                <div class="order-summary__product-item">
-                                    <div class="product-item-img">
-                                        <img src="../assets/img/pd1.webp" alt="" />
-                                        <div class="product-item-quantity">1</div>
-                                    </div>
-
-                                    <div class="product-item-name">
-                                        <p>air jordan 1 low 'white university red'</p>
-                                        <span class="product-item-size">42</span>
-                                    </div>
-                                    <div class="product-item-total-price"><span>1.600.000</span>đ</div>
-                                </div>-->
+                               
                             </div>
                             <div class="mt-4">Miễn phí vận chuyển</div>
                             <div class="total">
@@ -175,7 +152,10 @@
     </body>
 </html>
 <?php 
-} else {
+    }  else {
+        header("location: login.php?action=checkout");
+    }
+}   else {
     include("./admin/404.php");
 }
 ?>

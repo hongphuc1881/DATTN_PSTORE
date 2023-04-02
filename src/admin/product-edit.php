@@ -17,7 +17,7 @@
     }
     //$get_brand = $Brand->get_brand($brand_id);
     $get_product = $Product->get_product($product_id);
-    
+    $show_size = $Product->show_size();
     if($get_product) {
         $result = $get_product->fetch_assoc();
     }
@@ -27,16 +27,12 @@
         $rs1 = $get_size -> fetch_assoc();
     }
     // convert string to array
-    $rs1['sizes']=(explode("," ,$rs1["sizes"]));
+    $rs1['sizes_id']=(explode("," ,$rs1["sizes_id"]));
 
 
     //sửa
     if($_SERVER['REQUEST_METHOD'] == "POST") {
-        //echo "<pre>";
-        //var_dump($_POST);
-        //var_dump($_FILES);
-
-        //echo "</pre>";
+       
         $Product->update_product($product_id, $_POST, $_FILES);
         echo "<script>window.location.href = 'product-list.php'</script>";
     }
@@ -78,34 +74,17 @@
                 </div>
                 <div class="form-group mt-3">
                     <label  class="h6">Size sản phẩm:</label><br>
-                    <input name="product_size[]" type="checkbox" value="36" id="size-36" <?php echo in_array("36", $rs1['sizes']) ? "checked": "" ?> >
-                    <label class="form-check-label" for="size-36">
-                        36
-                    </label> &nbsp;
-                    <input name="product_size[]" type="checkbox" value="37" id="size-37" <?php echo in_array("37", $rs1['sizes']) ? "checked": "" ?>>
-                    <label class="form-check-label" for="size-37">
-                        37
-                    </label> &nbsp;
-                    <input name="product_size[]" type="checkbox" value="38" id="size-38" <?php echo in_array("38", $rs1['sizes']) ? "checked": "" ?>>
-                    <label class="form-check-label" for="size-38">
-                        38
-                    </label> &nbsp;
-                    <input name="product_size[]" type="checkbox" value="39" id="size-39" <?php echo in_array("39", $rs1['sizes']) ? "checked": "" ?>>
-                    <label class="form-check-label" for="size-39">
-                        39
-                    </label> &nbsp;
-                    <input name="product_size[]" type="checkbox" value="40" id="size-40" <?php echo in_array("40", $rs1['sizes']) ? "checked": "" ?>>
-                    <label class="form-check-label" for="size-40">
-                        40
-                    </label> &nbsp;
-                    <input name="product_size[]" type="checkbox" value="41" id="size-41" <?php echo in_array("41", $rs1['sizes']) ? "checked": "" ?>>
-                    <label class="form-check-label" for="size-41">
-                        41
-                    </label> &nbsp;
-                    <input name="product_size[]" type="checkbox" value="42" id="size-42" <?php echo in_array("42", $rs1['sizes']) ? "checked": "" ?>>
-                    <label class="form-check-label" for="size-42">
-                        42
-                    </label> &nbsp;
+
+                    <?php
+                        while($rs = $show_size->fetch_assoc()) {
+
+                    ?>
+                        <input name="size_id[]" type="checkbox" value="<?php echo $rs["size_id"] ?>" id="size-<?php echo $rs["product_size"];?>" <?php echo in_array($rs["size_id"], $rs1['sizes_id']) ? "checked": "" ?>>
+                        <label class="form-check-label" for="size-<?php echo $rs["product_size"];?>">
+                            <?php echo $rs["product_size"];?>
+                        </label> &nbsp;
+                    <?php  }?>
+                    
                     </div>
                 <div class=" form-group mt-3">
                     <label for="product_price_old" class="h6">Giá sản phẩm:</label>

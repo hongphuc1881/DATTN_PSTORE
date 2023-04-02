@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    ob_start();
 ?>
 <?php
     if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
@@ -16,6 +17,7 @@
     $category_id = $_POST['category_id'];
     $brand_name = $_POST['brand_name'];
     $insert_brand = $Brand->insert_brand($category_id, $brand_name);
+    header("location: brand-list.php");
   }
   
 ?>

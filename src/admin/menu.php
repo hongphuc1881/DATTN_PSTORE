@@ -6,17 +6,30 @@
                     <div class="sb-sidenav-menu-heading text-white">Xin chào <?php echo $_SESSION["user"]["username"] ?></div>
                     <?php 
                         if($_SESSION["user"]["role"] == 1) {
-
-                        
                     ?>
                     <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </a>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#hoadon"
+                        aria-expanded="false" aria-controls="hoadon">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý đơn hàng
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="hoadon" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="./order-list.php">Danh sách đơn hàng</a>
+                            <a class="nav-link" href="./order-list-pending.php">Danh sách đơn hàng chưa xử lý</a>
+                            <a class="nav-link" href="./order-list-success.php">Danh sách đơn hàng đã giao</a>
+                            <a class="nav-link" href="./order-list-cancel.php">Danh sách đơn hàng đã huỷ</a>
+                        </nav>
+                    </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                         aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Quản trị danh mục
+                        Quản lý danh mục
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
@@ -31,7 +44,7 @@
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1"
                         aria-expanded="false" aria-controls="collapseLayouts1">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Quản trị loại sản phẩm
+                        Quản lý loại sản phẩm
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne"
@@ -46,21 +59,22 @@
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2"
                         aria-expanded="false" aria-controls="collapseLayouts2">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Quản trị sản phẩm
+                        Quản lý sản phẩm
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="./product-list.php">Danh sách  sản phẩm</a>
+                            <a class="nav-link" href="./product-list.php">Danh sách sản phẩm</a>
                             <a class="nav-link" href="./product-add.php">Thêm sản phẩm</a>
+                            <a class="nav-link" href="./product-lock-list.php">Danh sách sản phẩm đã xoá</a>
                         </nav>
                     </div>
 
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3"
                         aria-expanded="false" aria-controls="collapseLayouts3">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Quản trị người dùng
+                        Quản lý người dùng
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne"
@@ -125,7 +139,7 @@
                      <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2"
                         aria-expanded="false" aria-controls="collapseLayouts2">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Quản trị sản phẩm
+                        Quản lý sản phẩm
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne"

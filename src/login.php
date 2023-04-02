@@ -1,4 +1,5 @@
 <?php 
+    ob_start();
     include("./header.php");
 ?>
 
@@ -10,7 +11,8 @@
         $username = trim($_POST["username"]);
         $password = md5(trim($_POST["password"]));
         $check_username = $User->check_username($username);
-        if($check_username) {
+        $check_user_valid = $User->check_user_valid($username);
+        if($check_username && $check_user_valid) {
             $result = $check_username->fetch_assoc();
           
             if($result["password"] != $password) {
@@ -23,6 +25,12 @@
                     echo "<script>window.location.href = 'admin/index.php'</script>";
                 } else {
                     echo "<script>window.location.href = 'index.php'</script>";
+                }
+
+                // chuyển hướng đến trang checkout.php
+                if(isset($_GET["action"])) {
+                    $action = $_GET["action"];
+                    header("location: ".$action.".php");
                 }
             }
         } else {

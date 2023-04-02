@@ -3,6 +3,7 @@
 ?>
 <?php
     $Product = new Product;
+    
     if($_GET["product_id"]) {
         $product_id = $_GET["product_id"];
         $get_product = $Product->get_product($product_id)->fetch_assoc();
@@ -10,11 +11,13 @@
         if($get_size) {
             $rs1 = $get_size->fetch_assoc();
         }
-        $rs1['sizes']=(explode("," ,$rs1["sizes"]));   
+        $rs1['product_sizes']=(explode("," ,$rs1["product_sizes"]));   // vd: 36,37,38
+        $rs1['sizes_id']=(explode("," ,$rs1["sizes_id"]));   // vd: 1,2,3
 
         $get_product_img_description = $Product->get_product_img_description($product_id);
        
     }
+   
 ?>
             <div class="app-container">
                 <div class="container pt-5">
@@ -70,14 +73,16 @@
                                         <p>Kích Thước:</p>
                                         <ul>
                                             <?php
-                                                foreach($rs1["sizes"] as $value) {
+                                                $count =count($rs1["product_sizes"]);  
+                                                for($i = 0 ; $i < $count; $i++) {
                                             ?>
                                                     <li>
-                                                        <input type="radio" name="product_size" value="<?php echo $value;?>"  id="product-size-<?php echo $value?>" checked/>
-                                                        <label for="product-size-<?php echo $value?>"><?php echo $value ?></label>
+                                                        <input type="radio" name="product_size" value="<?php echo $rs1["sizes_id"][$i];?>"  id="product-size-<?php echo $rs1["product_sizes"][$i]?>" checked/>
+                                                        <label for="product-size-<?php echo $rs1["product_sizes"][$i]?>"><?php echo $rs1["product_sizes"][$i] ?></label>
                                                     </li>
                                             <?php 
-                                                }
+                                                    
+                                                } 
                                             ?>
                                            
                                         </ul>
@@ -98,45 +103,18 @@
 <?php 
     include("./footer.php");
 ?>
-        <script>
-            $(document).ready(function () {
-                $(".owl-carousel").owlCarousel();
-
-                //$('.add-to-cart').click(function(e) {
-                //    e.preventDefault();
-                //    //var qty = $(this).closest(".product-data").find(".quantity").val();
-                //    var product_id = $("input[name='product_id']");
-                //    var product_img_main = $("input[name='product_img_main']");
-                //    var product_name = $("input[name='product_name']");
-                //    var product_price = $("input[name='product_price']");
-                //    var product_size = $("input[name='product_size']");
-                //    var quantity = 1;
-
-                //    $.ajax({
-                //        method: "POST",
-                //        url: "",
-                //        data:{
-                //            product_id: product_id,
-                //            product_img_main: product_img_main,
-                //            product_name: product_name,
-                //            product_price: product_price,
-                //            product_size: product_size,
-                //            quantity: quantity
-                //        },
-                //        success: function() {
-
-                //        }
-                //    })
-                //})
-            });
-        </script>
-        <script>
-            var img = document.querySelectorAll(".item img");
-            var largeImage = document.querySelector(".large-image img");
-            //largeImage.src = img[0].src;
-            img.forEach((item) => {
-                item.onclick = function (e) {
-                    largeImage.src = this.src;
-                };
-            });
-        </script>
+<script>
+    $(document).ready(function () {
+        $(".owl-carousel").owlCarousel();
+    });
+</script>
+<script>
+    var img = document.querySelectorAll(".item img");
+    var largeImage = document.querySelector(".large-image img");
+    //largeImage.src = img[0].src;
+    img.forEach((item) => {
+        item.onclick = function (e) {
+            largeImage.src = this.src;
+        };
+    });
+</script>

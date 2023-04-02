@@ -10,7 +10,7 @@
 
 <?php 
     $Product = new Product;
-    $show_product = $Product->show_product();
+    $show_product = $Product->show_product_lock();
 
     
     // phan trang
@@ -26,14 +26,13 @@
     //5. start
     $start = ($current_page - 1) * $limit;
     //6: query
-    $product_pagination = $Product->product_pagination($limit, $start);
-   
+    $product_pagination = $Product->product_lock_pagination($limit, $start);
    
 ?>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
-            <h2>Danh sách sản phẩm</h2>
+            <h2>Danh sách loại sản phẩm</h2>
             <table class="table">
                 <thead>
                     <tr>
@@ -65,11 +64,11 @@
                             <img src="<?php echo "./uploads/".$result["product_img_main"] ?>" alt="product_img" style="max-width: 100px">
                         </td>
                         <td>
-                        <a href="product-edit.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-dark">Sửa</a>
-                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#<?php echo $result["product_name"]?>">Xoá</a>
+                        <a href="product-lock-edit.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-dark">Khôi phục</a>
+                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#<?php echo $result["product_name"]?>">Xoá vĩnh viễn</a>
                         </td>
                     </tr>
-                     <!-- Modal -->
+                    <!-- Modal -->
                      <div class="modal fade" id="<?php echo $result["product_name"]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -80,11 +79,11 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Bạn có chắc chắn muốn xoá <strong><?php echo $result["product_name"];?></strong>
+                                    Bạn có chắc chắn muốn xoá vĩnh viễn <strong><?php echo $result["product_name"];?></strong>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>                       
-                                     <a href="product-lock.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-danger">Xoá</a>
+                                     <a href="product-delete.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-danger">Xoá</a>
                                 </div>
                                 </div>
                             </div>

@@ -20,6 +20,11 @@
             $result = $this->db->select($sql);
             return $result;
         }
+        public function check_user_valid($username) {
+            $sql = "SELECT * FROM tbl_user WHERE username = '$username' AND status = 1";
+            $result = $this->db->select($sql);
+            return $result;
+        }
 
         public function check_email($email) {
             $sql = "SELECT * FROM tbl_user WHERE email = '$email'";
@@ -49,7 +54,7 @@
             return $result;
         }
         public function user_pagination($limit, $start) {
-            $sql = "SELECT tbl_user.* , tbl_role.role_name FROM tbl_user INNER JOIN tbl_role ON tbl_user.role = tbl_role.role_id WHERE status = 1 ORDER BY role  LIMIT $start, $limit";
+            $sql = "SELECT tbl_user.* , tbl_role.role_name FROM tbl_user INNER JOIN tbl_role ON tbl_user.role = tbl_role.role_id WHERE status = 1 AND NOT tbl_user.role = 1 ORDER BY role  LIMIT $start, $limit";
             $result = $this->db->select($sql);
             return $result;
         }

@@ -44,8 +44,8 @@
         <link rel="stylesheet" href="../assets/css/footer.css" />
         <link rel="stylesheet" href="../assets/css/responsive.css" />
         <link rel="stylesheet" href="../assets/css/globalStyle.css" />
-        <link rel="stylesheet" href="../assets/css/product.css" />
         <link rel="stylesheet" href="../assets/css/product-detail.css" />
+        <link rel="stylesheet" href="../assets/css/product.css" />
         <link rel="stylesheet" href="../assets/css/validator.css" />
         <link rel="stylesheet" href="../assets/css/cart.css" />
         <link rel="stylesheet" href="../assets/css/login.css">

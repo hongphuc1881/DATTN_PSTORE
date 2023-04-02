@@ -43,27 +43,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                     </tr>
                 </thead>
                 <tbody>
-                    <!--<?php 
-                        if($show_user) {
-                            $i = 0;
-                            while($result = $show_user->fetch_assoc()) {
-                                $i++;
-                    ?>
-                      <tr>
-                        <th scope="row"><?php echo $i?></th>
-                        <td><?php echo $result["username"] ?></td>
-                        <td><?php echo $result["fullname"] ?></td>
-                        <td><?php echo $result["email"] ?></td>
-                        <td><?php echo $result["role_name"] ?></td>
-                        <td>
-                        <a href="user-edit.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-dark">Sửa</a>
-                        <a href="user-delete.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-danger">Xoá</a>
-                        </td>
-                    </tr>
-                    <?php
-                            }
-                        }
-                    ?>-->
+                  
 
 
                     <?php
@@ -80,9 +60,29 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                         <td><?php echo $result["role_name"] ?></td>
                         <td>
                         <a href="user-edit.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-dark">Sửa</a>
-                        <a href="user-lock.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-danger">Khoá</a>
+                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#<?php echo $result["username"]?>">Khoá</a>
                         </td>
                     </tr>
+                     <!-- Modal -->
+                     <div class="modal fade" id="<?php echo $result["username"]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Khoá tài khoản người dùng</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có chắc chắn muốn khoá tài khoản <strong><?php echo $result["username"];?></strong>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                                    <a href="user-lock.php?user_id=<?php echo $result['user_id'] ?>" class="btn btn-danger">Khoá</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php
                             }
                         }

@@ -10,10 +10,10 @@
 
 <?php
     $Product = new Product;
+    $show_size = $Product->show_size();
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
       
-        //var_dump($_FILES["product_img_description"]);
-       
+        //var_dump($_POST["size_id"]);exit();
         $Product->insert_product($_POST, $_FILES);
     }
 ?>
@@ -54,34 +54,15 @@
                 </div>
                 <div class="form-group mt-3">
                 <label  class="h6">Size sản phẩm:</label><br>
-                <input name="product_size[]" type="checkbox" value="36" id="size-36">
-                <label class="form-check-label" for="size-36">
-                    36
+                <?php 
+                    while($rs = $show_size->fetch_assoc()){
+                ?>
+                <input name="size_id[]" type="checkbox" value="<?php echo $rs["size_id"] ?>" id="size-<?php echo $rs["product_size"];?>">
+                <label class="form-check-label" for="size-<?php echo $rs["product_size"];?>">
+                    <?php echo $rs["product_size"];?>
                 </label> &nbsp;
-                <input name="product_size[]" type="checkbox" value="37" id="size-37">
-                <label class="form-check-label" for="size-37">
-                    37
-                </label> &nbsp;
-                <input name="product_size[]" type="checkbox" value="38" id="size-38">
-                <label class="form-check-label" for="size-38">
-                    38
-                </label> &nbsp;
-                <input name="product_size[]" type="checkbox" value="39" id="size-39">
-                <label class="form-check-label" for="size-39">
-                    39
-                </label> &nbsp;
-                 <input name="product_size[]" type="checkbox" value="40" id="size-40">
-                <label class="form-check-label" for="size-40">
-                    40
-                </label> &nbsp;
-                <input name="product_size[]" type="checkbox" value="41" id="size-41">
-                <label class="form-check-label" for="size-41">
-                    41
-                </label> &nbsp;
-                <input name="product_size[]" type="checkbox" value="42" id="size-42">
-                <label class="form-check-label" for="size-42">
-                    42
-                </label> &nbsp;
+                <?php } ?>
+                
                 </div>
                 <div class=" form-group mt-3">
                     <label for="product_price_old" class="h6">Giá sản phẩm:</label>

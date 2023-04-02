@@ -10,30 +10,34 @@
 
 <?php 
     $Product = new Product;
-    $show_product = $Product->show_product();
+    if($_GET["search"] && !empty($_GET["search"])) {
+        $search = $_GET["search"];
+    }
+    $search_product = $Product->search_product($search);
 
-    
-    // phan trang
-    // 1.tong so ban ghi
-    $total_product = $show_product->num_rows;
-    // 2. thiet lap so ban ghi tren 1 trang
-    $limit = 4;
-    // 3. tinh so trang 
-    $page = ceil($total_product/$limit);
-    // 4. lay trang hien tai
-    $current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
-
-    //5. start
-    $start = ($current_page - 1) * $limit;
-    //6: query
-    $product_pagination = $Product->product_pagination($limit, $start);
-   
    
 ?>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
             <h2>Danh sách sản phẩm</h2>
+            <?php 
+             if($search_product) {
+                // phan trang
+                // 1.tong so ban ghi
+                $total_product = $search_product->num_rows;
+                // 2. thiet lap so ban ghi tren 1 trang
+                $limit = 4;
+                // 3. tinh so trang 
+                $page = ceil($total_product/$limit);
+                // 4. lay trang hien tai
+                $current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
+            
+                //5. start
+                $start = ($current_page - 1) * $limit;
+                //6: query
+                $search_product_with_pagination= $Product->search_product_with_pagination($search, $start, $limit);
+            ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -49,9 +53,9 @@
                 </thead>
                 <tbody style="text-transform: lowercase" >
                     <?php
-                        if($product_pagination) {
+                        if($search_product_with_pagination) {
                             $i = 0;
-                            while($result = $product_pagination->fetch_assoc()) { 
+                            while($result = $search_product_with_pagination->fetch_assoc()) { 
                                 $i++; 
                     ?>
                     <tr>
@@ -66,29 +70,9 @@
                         </td>
                         <td>
                         <a href="product-edit.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-dark">Sửa</a>
-                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#<?php echo $result["product_name"]?>">Xoá</a>
+                        <a href="product-lock.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-danger">Xoá</a>
                         </td>
                     </tr>
-                     <!-- Modal -->
-                     <div class="modal fade" id="<?php echo $result["product_name"]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Xoá sản phẩm</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Bạn có chắc chắn muốn xoá <strong><?php echo $result["product_name"];?></strong>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>                       
-                                     <a href="product-lock.php?product_id=<?php echo $result['product_id'] ?>" class="btn btn-danger">Xoá</a>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
                     <?php
                             }
                         }
@@ -102,7 +86,7 @@
                             if($current_page - 1 > 0) {
                          ?>
                             <li class="page-item">
-                                <a class="page-link" href="product-list.php?page=<?php  echo $current_page -1; ?>" aria-label="Previous">
+                                <a class="page-link" href="search.php?page=<?php  echo $current_page -1; ?>&search=<?php echo $search?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -110,7 +94,7 @@
                         <?php 
                             for ($i=1; $i <= $page ; $i++) { 
                         ?>
-                                <li class="page-item <?php echo $i == $current_page ? "active": ""?>"><a class="page-link" href="product-list.php?page=<?php echo $i ?>"><?php echo  $i ?></a></li>
+                                <li class="page-item <?php echo $i == $current_page ? "active": ""?>"><a class="page-link" href="search.php?page=<?php echo $i ?>&search=<?php echo $search?>"><?php echo  $i ?></a></li>
                         <?php 
                                 }   
                         ?>
@@ -119,7 +103,7 @@
                             if($current_page + 1 <= $page) {
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="product-list.php?page=<?php echo $current_page + 1;?>" aria-label="Next">
+                                <a class="page-link" href="search.php?page=<?php echo $current_page + 1;?>&search=<?php echo $search?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -127,6 +111,16 @@
                     </ul>
                 </nav>
             </div>
+            <?php  
+                }   else {
+            ?>
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                   <img src="./uploads/no-result.png" alt="" style="width: 20%">
+                   <p class="h3">Không tìm thấy kết quả nào.</p>
+                   <p class="h4">Hãy sử dụng những từ khoá chung chung hơn.</p>
+                </div>
+            <?php   }
+            ?>
         </div>
     </main>
 </div>
