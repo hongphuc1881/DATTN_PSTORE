@@ -17,17 +17,11 @@
     }
     //$get_brand = $Brand->get_brand($brand_id);
     $get_product = $Product->get_product($product_id);
-    $show_size = $Product->show_size();
     if($get_product) {
         $result = $get_product->fetch_assoc();
     }
     $get_size = $Product->get_size($product_id);
-    
-    if($get_size) {
-        $rs1 = $get_size -> fetch_assoc();
-    }
-    // convert string to array
-    $rs1['sizes_id']=(explode("," ,$rs1["sizes_id"]));
+ 
 
 
     //sửa
@@ -72,20 +66,11 @@
                         <!-- product-add-ajax -->
                     </select>
                 </div>
-                <div class="form-group mt-3">
-                    <label  class="h6">Size sản phẩm:</label><br>
-
-                    <?php
-                        while($rs = $show_size->fetch_assoc()) {
-
-                    ?>
-                        <input name="size_id[]" type="checkbox" value="<?php echo $rs["size_id"] ?>" id="size-<?php echo $rs["product_size"];?>" <?php echo in_array($rs["size_id"], $rs1['sizes_id']) ? "checked": "" ?>>
-                        <label class="form-check-label" for="size-<?php echo $rs["product_size"];?>">
-                            <?php echo $rs["product_size"];?>
-                        </label> &nbsp;
-                    <?php  }?>
-                    
-                    </div>
+                <div class=" form-group mt-3">
+                    <label for="product_cost" class="h6">Giá nhập:</label>
+                    <input type="text" class="form-control" id="product_cost" name="product_cost" value="<?php echo $result["product_cost"] ?>"
+                        placeholder="Nhập giá mua sản phẩm" required>
+                </div>
                 <div class=" form-group mt-3">
                     <label for="product_price_old" class="h6">Giá sản phẩm:</label>
                     <input type="text" class="form-control" id="product_price_old" name="product_price_old" value="<?php echo $result["product_price_old"] ?>"

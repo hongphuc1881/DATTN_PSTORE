@@ -53,7 +53,7 @@
                     </select>
                 </div>
                 <div class="form-group mt-3">
-                <label  class="h6">Size sản phẩm:</label><br>
+                <!--<label  class="h6">Size sản phẩm:</label><br>
                 <?php 
                     while($rs = $show_size->fetch_assoc()){
                 ?>
@@ -61,13 +61,18 @@
                 <label class="form-check-label" for="size-<?php echo $rs["product_size"];?>">
                     <?php echo $rs["product_size"];?>
                 </label> &nbsp;
-                <?php } ?>
+                <?php } ?>-->
                 
+                </div>
+                <div class=" form-group mt-3">
+                    <label for="product_cost" class="h6">Giá nhập:</label>
+                    <input type="text" class="form-control" id="product_cost" name="product_cost"
+                        placeholder="Nhập giá mua sản phẩm" required>
                 </div>
                 <div class=" form-group mt-3">
                     <label for="product_price_old" class="h6">Giá sản phẩm:</label>
                     <input type="text" class="form-control" id="product_price_old" name="product_price_old"
-                        placeholder="Nhập giá sản phẩm" required>
+                        placeholder="Nhập giá bán sản phẩm" required>
                 </div>
                 <div class=" form-group mt-3">
                     <label for="product_price_new" class="h6">Giá khuyến mãi:</label>

@@ -21,17 +21,6 @@
 ?>
             <div class="app-container">
                 <div class="container pt-5">
-                    <!--<nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="#"><i class="fa-solid fa-house"></i> Trang chủ</a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="#">Vans</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Vans Vault Style 36 Orange</li>
-                        </ol>
-                    </nav>-->
 
                     <div class="row">
                         <div class="col-lg-7">

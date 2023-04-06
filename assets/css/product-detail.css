@@ -39,8 +39,11 @@
 }
 .product-size ul li {
     border: 1px solid black;
-    padding: 4px 8px;
     font-size: 1.6rem;
+}
+.product-size label {
+    padding: 4px 8px;
+    cursor: pointer;
 }
 .product-size ul li input {
     display: none;
