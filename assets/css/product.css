@@ -3,7 +3,6 @@
     font-size: 1.6rem;
 }
 
-
 .filter-product-item {
     margin-bottom: 2rem;
 }
@@ -24,7 +23,7 @@
     color: var(--white-color);
     accent-color: var(--black-color);
 }
-.filter-ul li input{
+.filter-ul li input {
     margin-right: 0.5rem;
 }
 
@@ -35,7 +34,12 @@
 .page-item {
     margin: 4px;
 }
-.page-link:hover{
+.page-item.active a {
+    border: none;
+    out-line: none;
+    background-color: #000;
+}
+.page-link:hover {
     background: #000;
     color: #fff;
 }

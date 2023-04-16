@@ -5,6 +5,7 @@ header {
     left: 0;
     right: 0;
     z-index: 1000;
+    transition: 0.4s;
 }
 header .header-top {
     height: 6.4rem;

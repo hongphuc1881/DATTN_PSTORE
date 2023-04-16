@@ -4,6 +4,7 @@
     include("./admin/class/brand-class.php");
     include("./admin/class/product-class.php");
     include("./admin/class/user-class.php");
+    include("./admin/class/order-class.php");
 ?>
 <?php 
     $Brand = new Brand;
@@ -95,14 +96,16 @@
                                         ?>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                 <li><a class="dropdown-item" href="./admin/index.php">Trang admin</a></li>
-                                                <li><a class="dropdown-item" href="logout.php">Đăng xuất</a></li>
+                                                <li><a class="dropdown-item" href="./change-password.php">Đổi mật khẩu</a></li>
+                                                <li><a class="dropdown-item" href="./logout.php">Đăng xuất</a></li>
                                             </ul>
                                         <?php  
                                             } else {
                                         ?> 
                                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item" href="account.php">Thông tin tài khoản</a></li>
-                                                <li><a class="dropdown-item" href="logout.php">Đăng xuất</a></li>
+                                                <li><a class="dropdown-item" href="./account.php">Thông tin tài khoản</a></li>
+                                                <li><a class="dropdown-item" href="./change-password.php">Đổi mật khẩu</a></li>
+                                                <li><a class="dropdown-item" href="./logout.php">Đăng xuất</a></li>
                                             </ul>
                                         <?php
                                             }
@@ -110,8 +113,8 @@
 
                                         ?>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item" href="register.php">Đăng ký</a></li>
-                                                <li><a class="dropdown-item" href="login.php">Đăng nhập</a></li>
+                                                <li><a class="dropdown-item" href="./register.php">Đăng ký</a></li>
+                                                <li><a class="dropdown-item" href="./login.php">Đăng nhập</a></li>
                                             </ul>
                                         <?php } ?>
                                     </div>
@@ -171,9 +174,6 @@
                             <?php 
                                 }
                             ?>
-
-                            
-                            
                         </ul>
                     </div>
                 </nav>

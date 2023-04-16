@@ -150,6 +150,21 @@
                         } else {
                             
                     ?>
+                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#hoadon"
+                        aria-expanded="false" aria-controls="hoadon">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý đơn hàng
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="hoadon" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="./order-list.php">Danh sách đơn hàng</a>
+                            <a class="nav-link" href="./order-list-pending.php">Danh sách đơn hàng chưa xử lý</a>
+                            <a class="nav-link" href="./order-list-success.php">Danh sách đơn hàng đã giao</a>
+                            <a class="nav-link" href="./order-list-cancel.php">Danh sách đơn hàng đã huỷ</a>
+                        </nav>
+                    </div>
                      <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2"
                         aria-expanded="false" aria-controls="collapseLayouts2">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -159,8 +174,21 @@
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="./product-list.php">Danh sách  sản phẩm</a>
+                            <a class="nav-link" href="./product-list.php">Danh sách sản phẩm</a>
                             <a class="nav-link" href="./product-add.php">Thêm sản phẩm</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3"
+                        aria-expanded="false" aria-controls="collapseLayouts3">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý kho hàng
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="./storage-list.php">Danh sách kho hàng</a>
+                            <a class="nav-link" href="./storage-add.php">Thêm kho hàng</a>
                         </nav>
                     </div>
                     <?php }

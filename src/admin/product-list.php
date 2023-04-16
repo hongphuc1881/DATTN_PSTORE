@@ -17,7 +17,7 @@
     // 1.tong so ban ghi
     $total_product = $show_product->num_rows;
     // 2. thiet lap so ban ghi tren 1 trang
-    $limit = 4;
+    $limit = 10;
     // 3. tinh so trang 
     $page = ceil($total_product/$limit);
     // 4. lay trang hien tai
@@ -39,10 +39,10 @@
                     <tr>
                     <th scope="col" style="max-width: 5%">#</th>
                     <th scope="col" style="max-width: 10%">Danh mục</th>
-                    <th scope="col" style="max-width: 20%">Loại sản phẩm</th>
+                    <th scope="col" style="max-width: 10%">Loại sản phẩm</th>
                     <th scope="col" style="max-width: 45%">Tên sản phẩm</th>
-                    <th scope="col" style="max-width: 5%">Giá gốc</th>
-                    <th scope="col" style="max-width: 5%">Giá mới</th>
+                    <!--<th scope="col" style="max-width: 5%">Giá gốc</th>
+                    <th scope="col" style="max-width: 5%">Giá mới</th>-->
                     <th scope="col" style="max-width: 5%">Ảnh</th>
                     <th scope="col" style="max-width: 20%">Tuỳ chọn</th>
                     </tr>
@@ -59,8 +59,8 @@
                         <td><?php echo $result["category_name"] ?></td>
                         <td><?php echo $result["brand_name"] ?></td>
                         <td><?php echo $result["product_name"] ?></td>
-                        <td><?php echo   $formatted_number = number_format( $result["product_price_old"], 0, ',', '.');?>đ</td>
-                        <td><?php echo   $formatted_number = number_format( $result["product_price_new"], 0, ',', '.');?>đ</td>
+                        <!--<td><?php echo   $formatted_number = number_format( $result["product_price_old"], 0, ',', '.');?>đ</td>
+                        <td><?php echo   $formatted_number = number_format( $result["product_price_new"], 0, ',', '.');?>đ</td>-->
                         <td>
                             <img src="<?php echo "./uploads/".$result["product_img_main"] ?>" alt="product_img" style="max-width: 100px">
                         </td>

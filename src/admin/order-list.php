@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
+    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] != 3) {
         include("./database.php");
         include("./header.php");
         include("./menu.php");
@@ -16,7 +16,7 @@
     if($show_order) {
         $total_order = $show_order->num_rows;
         // 2. thiet lap so ban ghi tren 1 trang
-        $limit = 6;
+        $limit = 10;
         // 3. tinh so trang 
         $page = ceil($total_order/$limit);
         // 4. lay trang hien tai
@@ -79,7 +79,14 @@
                         <?php 
                              if($result["status"] == 1) {
                         ?>
-                        <a href="#" data-toggle="modal" data-target="#<?php echo $result["order_id"]?>" class="btn btn-danger">Huỷ đơn hàng</a>
+                            <a href="#" data-toggle="modal" data-target="#<?php echo $result["order_id"]?>" class="btn btn-danger">Huỷ đơn hàng</a>
+                        <?php 
+                             }
+                        ?>
+                         <?php 
+                             if($result["status"] == 2) {
+                        ?>
+                            <a target="_blank" href="indonhang.php?order_id=<?php echo $result["order_id"]?>" class="btn btn-primary">In hoá đơn</a>
                         <?php 
                              }
                         ?>

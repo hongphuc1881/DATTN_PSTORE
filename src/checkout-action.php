@@ -21,7 +21,6 @@
             $phone = $_POST["phone"];
             $address = $_POST["address"];
             $note = $_POST["note"];
-            //echo date('d-m-y', 1680015322);
             $Order->insert_order($user_id, $fullname, $email, $phone, $address, $note, $cart);
             unset($_SESSION["cart"]);
 

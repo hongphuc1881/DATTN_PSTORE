@@ -14,7 +14,11 @@
             $result = $this->db->insert($sql);
             return $result;
         }
-
+        public function update_password($user_id, $new_password) {
+            $sql = "UPDATE tbl_user SET password = '$new_password' WHERE user_id = '$user_id'";
+            $result = $this->db->select($sql);
+            return $result;
+        }
         public function check_username($username) {
             $sql = "SELECT * FROM tbl_user WHERE username = '$username'";
             $result = $this->db->select($sql);

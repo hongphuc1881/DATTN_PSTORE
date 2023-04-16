@@ -1,7 +1,7 @@
 <?php
 session_start();
 ob_start();
-if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
+if(isset($_SESSION["user"]) &&  ($_SESSION["user"]["role"] == 1 || $_SESSION["user"]["role"] == 2)) {
     include("./database.php");
     include("./header.php");
     include("./menu.php");

@@ -1,7 +1,7 @@
 <?php
 session_start();
 ob_start();
-if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
+if(isset($_SESSION["user"]) &&  ($_SESSION["user"]["role"] == 1 || $_SESSION["user"]["role"] == 2)) {
     include("./database.php");
     include("./header.php");
     include("./menu.php");
@@ -22,7 +22,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
             $insert_storage = $Product->insert_storage($product_id, $size_id, $quantity);
             header("location: storage-list.php");
         } else {
-            echo "<script>alert('Sản phẩm đã có trong kho')</script>";
+            echo "<script>alert('Sản phẩm đã có trong kho!')</script>";
         }
     }
 ?>

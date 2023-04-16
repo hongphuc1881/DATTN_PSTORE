@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
+    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] != 3) {
         include("./database.php");
         include("./header.php");
         include("./menu.php");
@@ -11,22 +11,24 @@
 <?php 
     $Order = new Order;
     $show_order_success = $Order->show_order_success();
+    //var_dump($show_order_success);
     // phan trang
     // 1.tong so ban ghi
+    $total_order = 0;
     if($show_order_success) {
         $total_order = $show_order_success->num_rows;
         // 2. thiet lap so ban ghi tren 1 trang
-        $limit = 6;
-        // 3. tinh so trang 
-        $page = ceil($total_order/$limit);
-        // 4. lay trang hien tai
-        $current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
-    
-        //5. start
-        $start = ($current_page - 1) * $limit;
-        //6: query
-        $show_order_success_pagination = $Order->show_order_success_pagination($limit, $start);
     }
+    $limit = 10;
+    // 3. tinh so trang 
+    $page = ceil($total_order/$limit);
+    // 4. lay trang hien tai
+    $current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
+
+    //5. start
+    $start = ($current_page - 1) * $limit;
+    //6: query
+    $show_order_success_pagination = $Order->show_order_success_pagination($limit, $start);
 ?>
 <div id="layoutSidenav_content">
     <main>
@@ -120,7 +122,7 @@
                             if($current_page - 1 > 0) {
                          ?>
                             <li class="page-item">
-                                <a class="page-link" href="order-list.php?page=<?php  echo $current_page -1; ?>" aria-label="Previous">
+                                <a class="page-link" href="order-list-success.php?page=<?php  echo $current_page -1; ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -128,7 +130,7 @@
                         <?php 
                             for ($i=1; $i <= $page ; $i++) { 
                         ?>
-                                <li class="page-item <?php echo $i == $current_page ? "active": ""?>"><a class="page-link" href="order-list.php?page=<?php echo $i ?>"><?php echo  $i ?></a></li>
+                                <li class="page-item <?php echo $i == $current_page ? "active": ""?>"><a class="page-link" href="order-list-success.php?page=<?php echo $i ?>"><?php echo  $i ?></a></li>
                         <?php 
                                 }   
                         ?>
@@ -137,7 +139,7 @@
                             if($current_page + 1 <= $page) {
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="order-list.php?page=<?php echo $current_page + 1;?>" aria-label="Next">
+                                <a class="page-link" href="order-list-success.php?page=<?php echo $current_page + 1;?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>

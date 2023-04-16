@@ -20,10 +20,11 @@
                 $order_id = $result["order_id"];
                 foreach ($cart as $item) {
                     $product_id = $item[0];
+                    $size_id = $item[3];
                     $quantity = $item[5];
                     $price = $item[4];
-                    $sql = "INSERT INTO tbl_order_detail (order_id, product_id, quantity, price) 
-                    VALUES ('$order_id', '$product_id', '$quantity', '$price')";
+                    $sql = "INSERT INTO tbl_order_detail (order_id, product_id, size_id, quantity, price) 
+                    VALUES ('$order_id', '$product_id','$size_id', '$quantity', '$price')";
                     $result = $this->db->insert($sql);
                 }
             }
@@ -31,7 +32,13 @@
 
             
         }
-        
+
+        public function get_order_by_user_id($user_id) {
+            $sql = "SELECT * FROM tbl_order WHERE user_id = '$user_id' ORDER BY order_id DESC";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+      
         public function show_order() {
             $sql = "SELECT * FROM tbl_order ORDER BY order_id DESC";
             $result = $this->db->select($sql);
@@ -95,5 +102,7 @@
             $result = $this->db->select($sql);
             return $result;
         }
+
+        
     }
 ?>

@@ -108,9 +108,9 @@
                                     />
                                     <span class="form-message text-danger"><?php echo isset($error["email"]) ? $error["email"]: "" ?></span>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+                                <button type="submit" class="btn btn-dark w-100">Đăng ký</button>
                             </form>
-                            <div>Nếu đã có tài khoản <a href="./login.php">Đăng nhập</a> tại đây!</div>
+                            <div class="mt-2">Nếu đã có tài khoản <a href="./login.php">Đăng nhập</a> tại đây!</div>
                         </div>
                     </div>
                 </div>

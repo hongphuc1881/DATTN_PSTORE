@@ -1,12 +1,15 @@
 <?php
+ob_start();
     include("./header.php");
 ?>
 
 <?php 
     $Product = new Product;
-    if(isset($_GET["search"])) {
+    if(isset($_GET["search"]) && $_GET["search"] != "" ) {
         $search = $_GET["search"];
         $search_product = $Product->search_product($search);
+    } else {
+        header("location: index.php");
     }
 ?>
 

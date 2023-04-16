@@ -98,7 +98,7 @@
                             <?php 
                                 if( $result["product_price_new"] < $result["product_price_old"]) {
                             ?>
-                                <div class="product-item--sale-flash">-<?php  echo round((1 - $result["product_price_new"] / $result["product_price_old"]) * 100, 3); ?>%</div>
+                                <div class="product-item--sale-flash">-<?php  echo round((1 - $result["product_price_new"] / $result["product_price_old"]) * 100, 0); ?>%</div>
                             <?php  } ?>
                         </a>
                     </div>
@@ -111,7 +111,7 @@
             </div>
         </div>
     </section>
-    <section id="new-products">
+    <!--<section id="new-products">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -160,7 +160,8 @@
               
             </div>
         </div>
-    </section>
+    </section>-->
+
 </div>
 
 <?php

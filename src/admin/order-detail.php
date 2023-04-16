@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
+    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] != 3) {
         include("./database.php");
         include("./header.php");
         include("./menu.php");
@@ -20,6 +20,10 @@
         if($get_order_by_order_id) {
             $result1 = $get_order_by_order_id->fetch_assoc();
         }
+        if($result1["status"] == 2) {
+            $Product->subtract_product_quantity($order_id);
+        }
+        var_dump($result1["status"]);
     }
 ?>
 <div id="layoutSidenav_content">
@@ -63,11 +67,10 @@
                         <option id="<?php echo $result1["order_id"]?>" value="2">Xác nhận đơn hàng</option>
                         <option id="<?php echo $result1["order_id"]?>" value="3">Huỷ đơn hàng</option>
                     </select>
+                    <a class="btn btn-dark mt-3" href="#" onclick="window.location.reload(true);">Xác nhận</a>
                 <?php
                     } 
                 ?>
-              
-          
             </div>
             </div>
         
@@ -141,7 +144,7 @@
                 url:'order-confirmation-ajax.php',
                 data: {value: value, order_id: order_id},
                 success: function(){
-                    //alert("thay doi thanh cong");
+                    //location.reload();
                 }
             })
         }

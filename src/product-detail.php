@@ -12,7 +12,9 @@
             $rs1 = $get_size->fetch_assoc();
         }
         $rs1['product_sizes']=(explode("," ,$rs1["product_sizes"]));   // vd: 36,37,38
+        sort( $rs1['product_sizes']);
         $rs1['sizes_id']=(explode("," ,$rs1["sizes_id"]));   // vd: 1,2,3
+        sort( $rs1['sizes_id']);
 
         $get_product_img_description = $Product->get_product_img_description($product_id);
        
@@ -81,7 +83,7 @@
                                     <input type="hidden" name="product_name" value="<?php echo $get_product["product_name"] ;?>">
                                     <input type="hidden" name="price" value="<?php echo $get_product["product_price_new"] ;?>">
                                     <!--<a href="./cart.php?product_id=<?php echo $product_id;?>" class="btn btn-dark add-to-cart">Thêm vào giỏ hàng</a><br>-->
-                                    <button type="submit" class="add-to-cart" name="add_to_cart">them vao gio hang</button>    
+                                    <button type="submit" class="add-to-cart" name="add_to_cart">Thêm vào giỏ hàng</button>    
                                </form>
                             </div>
                         </div>

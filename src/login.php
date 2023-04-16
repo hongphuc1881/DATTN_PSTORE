@@ -21,7 +21,7 @@
                 // tạo session user
                 $_SESSION["user"] = $result;
 
-                if($_SESSION["user"]["role"] == 1) {
+                if($_SESSION["user"]["role"] != 3) {
                     echo "<script>window.location.href = 'admin/index.php'</script>";
                 } else {
                     echo "<script>window.location.href = 'index.php'</script>";
@@ -68,9 +68,12 @@
                                     required
                                 />
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                            <button type="submit" class="btn btn-dark w-100">Đăng nhập</button>
                         </form>
-                        <div class="mt-2">Nếu chưa có tài khoản <a href="./register.php">Đăng ký</a> tại đây!</div>
+                        <div class="mt-3 d-flex justify-content-between">
+                            <a class="text-decoration-none" href="./forgot-password.php">Quên mật khẩu?</a>
+                            <a class="text-decoration-none" href="./register.php">Đăng ký</a>
+                        </div>
                     </div>
                 </div>
             </div>

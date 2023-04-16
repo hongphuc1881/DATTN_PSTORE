@@ -66,17 +66,17 @@
                 </div>
                 <div class=" form-group mt-3">
                     <label for="product_cost" class="h6">Giá nhập:</label>
-                    <input type="text" class="form-control" id="product_cost" name="product_cost"
+                    <input type="text" class="form-control" id="product_cost" name="product_cost" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;"
                         placeholder="Nhập giá mua sản phẩm" required>
                 </div>
                 <div class=" form-group mt-3">
                     <label for="product_price_old" class="h6">Giá sản phẩm:</label>
-                    <input type="text" class="form-control" id="product_price_old" name="product_price_old"
+                    <input type="text" class="form-control" id="product_price_old" name="product_price_old" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;"
                         placeholder="Nhập giá bán sản phẩm" required>
                 </div>
                 <div class=" form-group mt-3">
                     <label for="product_price_new" class="h6">Giá khuyến mãi:</label>
-                    <input type="text" class="form-control" id="product_price_new" name="product_price_new"
+                    <input type="text" class="form-control" id="product_price_new" name="product_price_new" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;"
                         placeholder="Nhập giá khuyến mãi" required>
                 </div>
                 <div class="form-group mt-3">

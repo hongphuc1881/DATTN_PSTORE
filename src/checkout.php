@@ -8,11 +8,7 @@
         $cart = $_SESSION["cart"];
 
         if(isset($_SESSION["user"])) {
-            //var_dump($_SESSION["cart"]);exit();
-            //var_dump($_SESSION["user"]);exit();
-            //var_dump($_POST);exit();
-
-       
+         
 ?>
 
 <!DOCTYPE html>

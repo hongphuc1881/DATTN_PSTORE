@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
+    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] != 3) {
         include("./database.php");
         include("./header.php");
         include("./menu.php");
@@ -11,12 +11,14 @@
 <?php 
     $Order = new Order;
     $show_order_pending = $Order->show_order_pending();
+    //var_dump($show_order_pending);exit();
+
     // phan trang
     // 1.tong so ban ghi
     if($show_order_pending) {
         $total_order = $show_order_pending->num_rows;
         // 2. thiet lap so ban ghi tren 1 trang
-        $limit = 6;
+        $limit = 10;
         // 3. tinh so trang 
         $page = ceil($total_order/$limit);
         // 4. lay trang hien tai
@@ -26,7 +28,7 @@
         $start = ($current_page - 1) * $limit;
         //6: query
         $show_order_pending_pagination = $Order->show_order_pending_pagination($limit, $start);
-    }
+   
 ?>
 <div id="layoutSidenav_content">
     <main>
@@ -151,6 +153,21 @@
 
 </div>
 <?php 
+    } else {
+
+?>  
+  <div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid p-4">
+            <h2>Danh sách hiện tại trống</h2>
+            <h3 class="text-center mt-5">Chưa có đơn hàng nào đang chờ xử lý</h3>
+        </div>
+    </main>
+</div>
+
+</div>
+<?php
+    }
     } else {
         include("./404.php");
     }

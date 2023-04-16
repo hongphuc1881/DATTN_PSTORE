@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
+    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] != 3) {
         include("./database.php");
         include("./header.php");
         include("./menu.php");
@@ -13,20 +13,21 @@
     $show_order_cancel = $Order->show_order_cancel();
     // phan trang
     // 1.tong so ban ghi
+    $total_order = 0;
     if($show_order_cancel) {
         $total_order = $show_order_cancel->num_rows;
-        // 2. thiet lap so ban ghi tren 1 trang
-        $limit = 6;
-        // 3. tinh so trang 
-        $page = ceil($total_order/$limit);
-        // 4. lay trang hien tai
-        $current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
-    
-        //5. start
-        $start = ($current_page - 1) * $limit;
-        //6: query
-        $show_order_cancel_pagination = $Order->show_order_cancel_pagination($limit, $start);
     }
+    // 2. thiet lap so ban ghi tren 1 trang
+    $limit = 10;
+    // 3. tinh so trang 
+    $page = ceil($total_order/$limit);
+    // 4. lay trang hien tai
+    $current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
+
+    //5. start
+    $start = ($current_page - 1) * $limit;
+    //6: query
+    $show_order_cancel_pagination = $Order->show_order_cancel_pagination($limit, $start);
 ?>
 <div id="layoutSidenav_content">
     <main>
