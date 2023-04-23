@@ -35,7 +35,7 @@
         <div class="container-fluid p-4">
             <h2>Danh sách sản phẩm</h2>
             <table class="table">
-                <thead>
+                <thead style="position: sticky; top: 55px; background-color: #000; color: #fff;">
                     <tr>
                     <th scope="col" style="max-width: 5%">#</th>
                     <th scope="col" style="max-width: 10%">Danh mục</th>

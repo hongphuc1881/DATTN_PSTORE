@@ -33,7 +33,7 @@
         <div class="container-fluid p-4">
             <h2>Danh sách danh mục</h2>
             <table class="table">
-                <thead>
+                <thead >
                     <tr>
                     <th scope="col" style="width: 5%">#</th>
                     <th scope="col" style="width: 5%">ID</th>

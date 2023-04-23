@@ -9,7 +9,7 @@
 <?php 
     if(isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
         $cart = $_SESSION["cart"];
-        
+   
 ?>
 <?php 
     //if(isset($_POST["update_cart"])) {
@@ -49,7 +49,6 @@
                                 <?php 
                                 $total_price = 0;
                                     foreach ($cart as $product_item) {
-                                    
                                     $thanh_tien = $product_item[4] * $product_item[5];
                                     $total_price += $thanh_tien;
                                     $get_product_size = $Product->get_product_size_by_size_id($product_item[3])->fetch_assoc();
@@ -103,7 +102,7 @@
                                                 /><button class="updateQty increaseQty ">+</button>
                                             </div>
                                         </td>
-                                        <td><span class="total-price"><?php echo   $formatted_number = number_format( $thanh_tien, 0, ',', '.');?></span>đ</td>
+                                        <td><span class="thanhtien"><?php echo   $formatted_number = number_format( $thanh_tien, 0, ',', '.');?></span>đ</td>
                                         <td>
                                             <a href="delete-product-cart.php?product_id=<?php echo $product_item[0]?>&product_size=<?php echo $product_item[3];?>" class="text-dark">
                                                 <i class="fa-solid fa-trash-can"></i>
@@ -146,17 +145,16 @@
 ?>
 <script>
     $(document).ready(function() {
-
         $(".decreaseQty").click(function(e){
             e.preventDefault();
+            var thanhtienAll = document.querySelectorAll(".thanhtien")
             
             var qty = $(this).closest(".product-data").find(".quantity").val();
             var product_id = $(this).closest(".product-data").find(".product_id").val();
             var size_id = $(this).closest(".product-data").find(".size_id").val();
             var price = $(this).closest(".product-data").find(".price").text();
-            var thanhtien = $(this).closest(".product-data").find(".total-price").text();
-          
-
+            var thanhtien = $(this).closest(".product-data").find(".thanhtien").text();
+            var total_price = 0;
             price = price.replaceAll(".", "");
             
             var value = parseInt(qty);
@@ -168,7 +166,15 @@
                 qty = value
             }
             thanhtien = price * qty;
-            $(this).closest(".product-data").find(".total-price").text(thanhtien.toLocaleString('vi-VN'));
+            $(this).closest(".product-data").find(".thanhtien").text(thanhtien.toLocaleString('vi-VN'));
+           
+           thanhtienAll.forEach(item => {
+                var a = +item.innerText.replaceAll(".", "")
+                total_price += a;
+           })
+        //   console.log(total_price, thanhtien);
+            $(".total-price span").text(total_price.toLocaleString('vi-VN'));
+
             $.ajax({
                 method: "POST",
                 url:"cart-ajax.php",
@@ -178,11 +184,10 @@
                 qty: qty,
             },
             success: function(data) {
-        
-                //location.reload();
             }
             
         })
+        
         //console.log("price: ",price);
         //console.log("thanh tien ",thanhtien);
         //console.log("quantity",$(this).closest(".product-data").find(".quantity").val());
@@ -193,24 +198,36 @@
 
         $(".increaseQty").click(function(e){
             e.preventDefault();
+            var thanhtienAll = document.querySelectorAll(".thanhtien");
             var qty = $(this).closest(".product-data").find(".quantity").val();
             var product_id = $(this).closest(".product-data").find(".product_id").val();
             var size_id = $(this).closest(".product-data").find(".size_id").val();
             var price = $(this).closest(".product-data").find(".price").text();
-            var thanhtien = $(this).closest(".product-data").find(".total-price").text();
-             
-             var maxQuantity = $(this).closest(".product-data").find(".quantity").attr("max");
-             price = price.replaceAll(".", "");
-             var value = parseInt(qty);
-             value = isNaN(value) ? 0 : value;
-             if(value < maxQuantity) {
+            var thanhtien = $(this).closest(".product-data").find(".thanhtien").text();
+            var total_price = 0;
+
+            var maxQuantity = $(this).closest(".product-data").find(".quantity").attr("max");
+            price = price.replaceAll(".", "");
+            var value = parseInt(qty);
+            value = isNaN(value) ? 0 : value;
+            if(value < maxQuantity) {
                 value++;
                 $(this).closest(".product-data").find(".quantity").val(value);
-                console.log(  $(this).closest(".product-data").find(".quantity").val(value));
+                //console.log(  $(this).closest(".product-data").find(".quantity").val(value));
                 qty = value
-             }
-             thanhtien = price * qty;
-            $(this).closest(".product-data").find(".total-price").text(thanhtien.toLocaleString('vi-VN'));
+            }
+            thanhtien = price * qty;
+            
+            
+            $(this).closest(".product-data").find(".thanhtien").text(thanhtien.toLocaleString('vi-VN'));
+            thanhtienAll.forEach(item => {
+                var a = +item.innerText.replaceAll(".", "")
+                total_price += a;
+                console.log(a, qty, total_price);
+            })
+            //console.log(total_price, thanhtien);
+            $(".total-price span").text(total_price.toLocaleString('vi-VN'));
+
              $.ajax({
                 method: "POST",
                 url:"cart-ajax.php",
@@ -224,22 +241,22 @@
                 }
                 
             })
-            console.log("price: ",price);
-            console.log("thanh tien ",thanhtien);
-            console.log("quantity",$(this).closest(".product-data").find(".quantity").val());
-            console.log(thanhtien.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'})); 
-            console.log(product_id);
-            console.log(size_id);
+            //console.log("price: ",price);
+            //console.log("thanh tien ",thanhtien);
+            //console.log("quantity",$(this).closest(".product-data").find(".quantity").val());
+            //console.log(thanhtien.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'})); 
+            //console.log(product_id);
+            //console.log(size_id);
            
         }) 
          
        
         $(".quantity").on('change',function(event) {
-            event.stopPropagation();
+            event.preventDefault();
             var qty = $(this).closest(".product-data").find(".quantity").val();
             var product_id = $(this).closest(".product-data").find(".product_id").val();
             var size_id = $(this).closest(".product-data").find(".size_id").val();
-            //console.log(product_id, size_id, qty);
+            
             var maxQuantity = $(this).closest(".product-data").find(".quantity").attr("max");
             var value = parseInt(qty);
              value = isNaN(value) ? 0 : value;
@@ -248,6 +265,8 @@
                 $(this).closest(".product-data").find(".quantity").val(value);
                 qty = value
              }
+            
+
             $.ajax({
                 method: "POST",
                 url:"cart-ajax.php",
@@ -257,7 +276,7 @@
                     qty: qty,
                 },
                 success: function(data) {
-                    //location.reload();
+                    location.reload();
                 }
             })
             return false;

@@ -102,7 +102,25 @@
             $result = $this->db->select($sql);
             return $result;
         }
-
         
+        // tính  số tiền bán sản phẩm mỗi tháng
+        public function calculate_total_price_per_month($year) {
+            $sql = "SELECT
+            DATE_FORMAT(order_date, '%m/%Y') AS month,
+            SUM(price * quantity) AS total_price
+          FROM
+            tbl_order o
+            JOIN tbl_order_detail od ON o.order_id = od.order_id
+          WHERE
+            status = '2' AND
+            DATE_FORMAT(order_date, '%Y') = '$year'
+          GROUP BY
+            DATE_FORMAT(order_date, '%m/%Y')
+            
+            ";
+            //[month, total_price]
+            $result = $this->db->select($sql);
+            return $result;
+        }
     }
 ?>

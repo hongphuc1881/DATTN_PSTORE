@@ -77,7 +77,97 @@
             return $result;
         }
 
+        // lấy các product thỏa mãn điều kiện: có số lượng trong kho > 0
         public function show_product() {
+            //$sql = "SELECT tbl_product.*, tbl_category.category_name , tbl_brand.brand_name
+            //FROM tbl_brand INNER JOIN tbl_category ON tbl_brand.category_id = tbl_category.category_id
+            //                INNER JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id 
+            //WHERE tbl_product.status = 1
+            //ORDER BY tbl_brand.category_id DESC";
+
+            $sql = "SELECT 
+                    tbl_product.*, 
+                    tbl_brand.brand_name, 
+                    tbl_category.category_name, 
+                    SUM(tbl_storage.quantity) AS total_quantity 
+                FROM 
+                    tbl_product
+                    INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
+                    INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+                    INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE 
+                    tbl_product.status = 1
+                GROUP BY 
+                    tbl_product.product_id, 
+                    tbl_product.product_name, 
+                    tbl_product.category_id, 
+                    tbl_product.brand_id, 
+                    tbl_category.category_name, 
+                    tbl_brand.brand_name
+                HAVING total_quantity > 0
+                ORDER BY 
+                    category_id DESC, 
+                    total_quantity DESC";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+
+        public function select_product_in_storage() {
+            $sql = "SELECT 
+                    tbl_product.*, 
+                    tbl_brand.brand_name, 
+                    tbl_category.category_name, 
+                    SUM(tbl_storage.quantity) AS total_quantity 
+                FROM 
+                    tbl_product
+                    INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
+                    INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+                    INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE 
+                    tbl_product.status = 1
+                GROUP BY 
+                    tbl_product.product_id, 
+                    tbl_product.product_name, 
+                    tbl_product.category_id, 
+                    tbl_product.brand_id, 
+                    tbl_category.category_name, 
+                    tbl_brand.brand_name
+                HAVING total_quantity >= 0
+                ORDER BY 
+                    
+                    total_quantity DESC";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+
+        public function select_product_in_order_by_product_id($product_id) {
+            $sql = "SELECT 
+                    tbl_product.*, 
+                    tbl_brand.brand_name, 
+                    tbl_category.category_name, 
+                    SUM(tbl_order_detail.quantity) AS total_sell_quantity
+                FROM 
+                    tbl_product
+                    INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
+                    INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+                    INNER JOIN tbl_order_detail ON tbl_order_detail.product_id = tbl_product.product_id
+                WHERE 
+                    tbl_product.status = 1 and tbl_product.product_id = '$product_id'
+                GROUP BY 
+                    tbl_product.product_id, 
+                    tbl_product.product_name, 
+                    tbl_product.category_id, 
+                    tbl_product.brand_id, 
+                    tbl_category.category_name, 
+                    tbl_brand.brand_name
+                ORDER BY 
+                    category_id DESC 
+                    ";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        // lấy tất cả các product kể cả không có số lượng trong kho
+        public function show_all_product() {
             $sql = "SELECT tbl_product.*, tbl_category.category_name , tbl_brand.brand_name
             FROM tbl_brand INNER JOIN tbl_category ON tbl_brand.category_id = tbl_category.category_id
                             INNER JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id 
@@ -94,6 +184,8 @@
                 FROM tbl_product INNER JOIN tbl_storage ON tbl_product.product_id = tbl_storage.product_id
                 WHERE tbl_product.status = 1 AND tbl_product.$key = $value AND tbl_storage.size_id IN ('$size_id');
                 ";
+               
+            
             } else if($isSale == true) {
                 $sql = "SELECT tbl_product.*, tbl_storage.*
                 FROM tbl_product INNER JOIN tbl_storage ON tbl_product.product_id = tbl_storage.product_id
@@ -204,6 +296,24 @@
         }
 
         // quản lý kho hàng: start
+        public function storage_show_product_empty_quantity() {
+            $sql = "SELECT tbl_product.*
+            FROM tbl_product 
+            LEFT JOIN tbl_storage  ON tbl_product.product_id = tbl_storage.product_id
+            WHERE tbl_product.status = 1  AND tbl_storage.product_id IS NULL
+            ";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function storage_empty_quantity_pagination($limit, $start) {
+            $sql = "SELECT tbl_product.*
+            FROM tbl_product 
+            LEFT JOIN tbl_storage  ON tbl_product.product_id = tbl_storage.product_id
+            WHERE tbl_product.status = 1 AND tbl_storage.product_id  IS NULL LIMIT $start, $limit
+            ";
+            $result = $this->db->select($sql);
+            return $result;
+        }
        
         public function storage_show_product($product_id) {
             $sql = "SELECT tbl_product.product_name, tbl_storage.*, tbl_size.product_size
@@ -251,28 +361,113 @@
         //quản lý kho hàng : end
         public function product_pagination($limit, $start, $field = "", $sort = "") {
             if(!empty($field) && !empty($sort)) {
-                $sql = "SELECT tbl_product.* , tbl_brand.brand_name, tbl_category.category_name FROM tbl_product
-                INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
-                INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
-                WHERE tbl_product.status = 1
-                ORDER BY tbl_product.$field $sort LIMIT $start,$limit";     
+                //$sql = "SELECT tbl_product.* , tbl_brand.brand_name, tbl_category.category_name FROM tbl_product
+                //INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
+                //INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+                //WHERE tbl_product.status = 1
+                //ORDER BY tbl_product.$field $sort LIMIT $start,$limit";     
+                $sql = "SELECT 
+                        tbl_product.*, 
+                        tbl_brand.brand_name, 
+                        tbl_category.category_name, 
+                        SUM(tbl_storage.quantity) AS total_quantity 
+                    FROM 
+                        tbl_product
+                        INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
+                        INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+                        INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                    WHERE 
+                        tbl_product.status = 1
+                    GROUP BY 
+                        tbl_product.product_id, 
+                        tbl_product.product_name, 
+                        tbl_product.category_id, 
+                        tbl_product.brand_id, 
+                        tbl_category.category_name, 
+                        tbl_brand.brand_name
+                    ORDER BY tbl_product.$field $sort LIMIT $start,$limit
+                ";
             } else {
-                $sql = "SELECT tbl_product.* , tbl_brand.brand_name, tbl_category.category_name FROM tbl_product
-                INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
-                INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
-                WHERE tbl_product.status = 1
-                ORDER BY category_id DESC LIMIT $start,$limit";
+                //$sql = "SELECT tbl_product.* , tbl_brand.brand_name, tbl_category.category_name FROM tbl_product
+                //INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
+                //INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+                //WHERE tbl_product.status = 1
+                //ORDER BY category_id DESC LIMIT $start,$limit";
+
+                $sql = "SELECT 
+                        tbl_product.*, 
+                        tbl_brand.brand_name, 
+                        tbl_category.category_name, 
+                        SUM(tbl_storage.quantity) AS total_quantity 
+                    FROM 
+                        tbl_product
+                        INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.category_id
+                        INNER JOIN tbl_brand ON tbl_product.brand_id = tbl_brand.brand_id
+                        INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                    WHERE 
+                        tbl_product.status = 1
+                    GROUP BY 
+                        tbl_product.product_id, 
+                        tbl_product.product_name, 
+                        tbl_product.category_id, 
+                        tbl_product.brand_id, 
+                        tbl_category.category_name, 
+                        tbl_brand.brand_name
+                    ORDER BY 
+                        category_id DESC, 
+                        total_quantity DESC
+                        LIMIT $start,$limit
+                    ";
             }
             $result = $this->db->select($sql);
             return $result;
         }
         public function product_category_pagination($category_id, $limit, $start, $field = "", $sort = "") {
             if(!empty($field) && !empty($sort)) {
-                $sql = "SELECT * FROM tbl_product WHERE category_id = '$category_id' AND status = 1 
-                ORDER BY tbl_product.$field $sort LIMIT $start,$limit";     
+                //$sql = "SELECT * FROM tbl_product WHERE category_id = '$category_id' AND status = 1 
+                //ORDER BY tbl_product.$field $sort LIMIT $start,$limit";    
+                $sql = "SELECT  tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+                FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE tbl_product.status = 1 AND tbl_product.category_id = '$category_id'
+                GROUP by tbl_product.product_id
+                HAVING total_quantity > 0
+                ORDER BY tbl_product.$field $sort  LIMIT $start,$limit; 
+                "; 
             } else {
-                $sql = "SELECT * FROM tbl_product WHERE category_id = '$category_id' AND status = 1 
-                ORDER BY product_id DESC LIMIT $start,$limit";
+                //$sql = "SELECT * FROM tbl_product WHERE category_id = '$category_id' AND status = 1 
+                //ORDER BY product_id DESC LIMIT $start,$limit";
+                $sql = "SELECT  tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+                FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE tbl_product.status = 1 AND tbl_product.category_id = '$category_id'
+                GROUP by tbl_product.product_id
+                HAVING total_quantity > 0
+                ORDER BY tbl_product.product_id DESC LIMIT $start,$limit; 
+                ";
+            }
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function product_brand_pagination($brand_id, $limit, $start, $field = "", $sort = "") {
+            if(!empty($field) && !empty($sort)) {
+                //$sql = "SELECT * FROM tbl_product WHERE brand_id = '$brand_id' AND status = 1 
+                //ORDER BY tbl_product.$field $sort LIMIT $start,$limit";     
+                $sql = "SELECT  tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+                FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE tbl_product.status = 1 AND tbl_product.brand_id = '$brand_id'
+                GROUP by tbl_product.product_id
+                HAVING total_quantity > 0
+                ORDER BY tbl_product.$field $sort LIMIT $start,$limit; 
+                ";
+            } else {
+                //$sql = "SELECT * FROM tbl_product WHERE brand_id = '$brand_id' AND status = 1 
+                //ORDER BY product_id DESC LIMIT $start,$limit";
+                $sql = "SELECT  tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+                FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE tbl_product.status = 1 AND tbl_product.brand_id = '$brand_id'
+                GROUP by tbl_product.product_id
+                HAVING total_quantity > 0
+                ORDER BY tbl_product.product_id DESC LIMIT $start,$limit; 
+                ";
             }
             $result = $this->db->select($sql);
             return $result;
@@ -296,9 +491,21 @@
         }
         public function product_sale_pagination($limit, $start,  $field = "", $sort = "") {
             if(!empty($field) && !empty($sort)) {
-                $sql = "SELECT * FROM tbl_product WHERE product_price_new < product_price_old AND status = 1 ORDER BY $field $sort LIMIT $start,$limit";
+                //$sql = "SELECT * FROM tbl_product WHERE product_price_new < product_price_old AND status = 1 ORDER BY $field $sort LIMIT $start,$limit";
+                $sql = "SELECT   tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+                FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE tbl_product.status = 1 AND tbl_product.product_price_new < tbl_product.product_price_old
+                GROUP BY tbl_product.product_id
+                HAVING total_quantity > 0
+                ORDER BY tbl_product.$field $sort LIMIT $start,$limit"  ;
             } else {
-                $sql = "SELECT * FROM tbl_product WHERE product_price_new < product_price_old AND status = 1 ORDER BY product_id DESC LIMIT $start,$limit";
+                //$sql = "SELECT * FROM tbl_product WHERE product_price_new < product_price_old AND status = 1 ORDER BY product_id DESC LIMIT $start,$limit";
+                $sql = "SELECT   tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+                FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE tbl_product.status = 1 AND tbl_product.product_price_new < tbl_product.product_price_old
+                GROUP BY tbl_product.product_id
+                HAVING total_quantity > 0
+                ORDER BY product_id DESC LIMIT $start,$limit"  ;
             }
            
             $result = $this->db->select($sql);
@@ -306,9 +513,20 @@
         }
         public function product_hot_pagination($limit, $start, $field = "", $sort = "") {
             if(!empty($field) && !empty($sort)) {
-                $sql = "SELECT * FROM tbl_product WHERE is_hot = 1 AND status = 1 ORDER BY $field $sort LIMIT $start,$limit";     
+                //$sql = "SELECT * FROM tbl_product WHERE is_hot = 1 AND status = 1 ORDER BY $field $sort LIMIT $start,$limit";  
+                $sql = "SELECT   tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+                FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE tbl_product.status = 1 AND tbl_product.is_hot = 1
+                GROUP by tbl_product.product_id
+                ORDER BY tbl_product.$field $sort DESC LIMIT $start, $limit"  ;
             } else {
-                $sql = "SELECT * FROM tbl_product WHERE is_hot = 1 AND status = 1 ORDER BY product_id DESC LIMIT $start,$limit";
+                //$sql = "SELECT * FROM tbl_product WHERE is_hot = 1 AND status = 1 ORDER BY product_id DESC LIMIT $start,$limit";
+                $sql = " SELECT   tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+                FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+                WHERE tbl_product.status = 1 AND tbl_product.is_hot = 1
+                GROUP by tbl_product.product_id
+                ORDER BY tbl_product.product_id DESC  LIMIT $start, $limit
+                ";
             }
            
             $result = $this->db->select($sql);
@@ -322,12 +540,26 @@
         }
 
         public function show_product_hot($limit = 9999) {
-            $sql = " SELECT * FROM tbl_product WHERE is_hot = 1 AND status = 1 ORDER BY product_id DESC LIMIT $limit";
+            
+            //$sql = " SELECT * FROM tbl_product WHERE is_hot = 1 AND status = 1 ORDER BY product_id DESC LIMIT $limit";
+            $sql = "SELECT   tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+            FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+            WHERE tbl_product.status = 1 AND tbl_product.is_hot = 1
+            GROUP by tbl_product.product_id
+            HAVING total_quantity > 0
+            ORDER BY tbl_product.product_id DESC LIMIT $limit; 
+            ";
             $result = $this->db->select($sql);
             return $result;
         }
         public function show_product_sale($limit = 9999) {
-            $sql = " SELECT * FROM tbl_product WHERE product_price_new < product_price_old AND status = 1 ORDER BY product_id DESC LIMIT $limit";
+            //$sql = " SELECT * FROM tbl_product WHERE product_price_new < product_price_old AND status = 1 ORDER BY product_id DESC LIMIT $limit";
+            $sql = "SELECT   tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+            FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+            WHERE tbl_product.status = 1 AND tbl_product.product_price_new < tbl_product.product_price_old
+            GROUP BY tbl_product.product_id
+            HAVING total_quantity > 0
+            ORDER BY tbl_product.product_id DESC LIMIT $limit"  ;
             $result = $this->db->select($sql);
             return $result;
         }
@@ -349,12 +581,28 @@
             return $result;
         }
         public function show_product_by_category($category_id) {
-            $sql = " SELECT * FROM tbl_product WHERE category_id = '$category_id' AND status = 1";
+            $sql = "SELECT  tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+            FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+            WHERE tbl_product.status = 1 AND tbl_product.category_id = '$category_id'
+            GROUP by tbl_product.product_id
+            HAVING total_quantity > 0
+            ORDER BY tbl_product.product_id DESC; 
+            ";
+            //  $sql = "SELECT   tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+            //  FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+            //  WHERE tbl_product.status = 1 AND tbl_product.is_hot = 1
+            //  GROUP by tbl_product.product_id
+            //  ORDER BY tbl_product.$field $sort DESC LIMIT $start, $limit"  ;
             $result = $this->db->select($sql);
             return $result;
         }
         public function show_product_by_brand($brand_id) {
-            $sql = " SELECT * FROM tbl_product WHERE brand_id = '$brand_id' AND status = 1";
+            $sql = "SELECT  tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
+            FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
+            WHERE tbl_product.status = 1 AND tbl_product.brand_id = '$brand_id'
+            GROUP by tbl_product.product_id
+            HAVING total_quantity > 0
+            ORDER BY tbl_product.product_id DESC ";
             $result = $this->db->select($sql);
             return $result;
         }

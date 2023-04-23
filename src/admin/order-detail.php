@@ -23,7 +23,6 @@
         if($result1["status"] == 2) {
             $Product->subtract_product_quantity($order_id);
         }
-        var_dump($result1["status"]);
     }
 ?>
 <div id="layoutSidenav_content">

@@ -20,10 +20,13 @@ if(isset($_SESSION["user"]) &&  ($_SESSION["user"]["role"] == 1 || $_SESSION["us
         //var_dump($select_productId_sizeId);exit();
         if(!$select_productId_sizeId) {
             $insert_storage = $Product->insert_storage($product_id, $size_id, $quantity);
-            header("location: storage-list.php");
+            //header("location: storage-list.php");
         } else {
             echo "<script>alert('Sản phẩm đã có trong kho!')</script>";
         }
+    }
+    if(isset($_GET["product_id"])) {
+        $p_id = $_GET["product_id"];
     }
 ?>
 <div id="layoutSidenav_content">
@@ -35,11 +38,12 @@ if(isset($_SESSION["user"]) &&  ($_SESSION["user"]["role"] == 1 || $_SESSION["us
                      <label for="product_name" class="h6">Tên sản phẩm:</label>
                     <select name="product_id" id="product_name"  class="form-select">
                         <?php 
-                            $show_product = $Product->show_product();
-                            if($show_product) {
-                                while($rs = $show_product->fetch_assoc()) {
+                            $show_all_product = $Product->show_all_product();
+                            if($show_all_product) {
+                                while($rs = $show_all_product->fetch_assoc()) {
                         ?>
-                            <option value="<?php  echo $rs["product_id"] ?>"><?php echo $rs["product_name"] ?></option>
+                       
+                        <option <?php if($p_id == $rs["product_id"]){echo "SELECTED";}?> value="<?php  echo $rs["product_id"] ?>"><?php echo $rs["product_name"] ?></option>
                         <?php 
                              }
                             }

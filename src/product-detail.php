@@ -82,7 +82,6 @@
                                     <input type="hidden" name="product_img_main" value="<?php echo $get_product["product_img_main"] ;?>">
                                     <input type="hidden" name="product_name" value="<?php echo $get_product["product_name"] ;?>">
                                     <input type="hidden" name="price" value="<?php echo $get_product["product_price_new"] ;?>">
-                                    <!--<a href="./cart.php?product_id=<?php echo $product_id;?>" class="btn btn-dark add-to-cart">Thêm vào giỏ hàng</a><br>-->
                                     <button type="submit" class="add-to-cart" name="add_to_cart">Thêm vào giỏ hàng</button>    
                                </form>
                             </div>
@@ -96,7 +95,9 @@
 ?>
 <script>
     $(document).ready(function () {
-        $(".owl-carousel").owlCarousel();
+        $(".owl-carousel").owlCarousel({
+            items: 4,
+        });
     });
 </script>
 <script>

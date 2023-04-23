@@ -10,7 +10,7 @@
     // 1.tong so ban ghi
     $total_product = $show_all_product->num_rows;
     // 2. thiet lap so ban ghi tren 1 trang
-    $limit = 9;
+    $limit = 12;
     // 3. tinh so trang 
     $page = ceil($total_product/$limit);
     // 4. lay trang hien tai
@@ -77,27 +77,7 @@
                                                 <option value="?field=product_id&sort=desc">Mới nhất</option>
                                             </select>
                                         </div>
-                                    <!--<div class="filter-product-item">
-                                        <div class="filter-product-item-title">Sale</div>
-                                        <ul class="row gx-0 filter-ul">
-                                            <li class="col-6">
-                                                <input type="checkbox" id="filter-giam-10%" />
-                                                <label for="filter-giam-10%">Giảm 10%</label>
-                                            </li>
-                                            <li class="col-6">
-                                                <input type="checkbox" id="filter-giam-20%" />
-                                                <label for="filter-giam-20%">Giảm 20%</label>
-                                            </li>
-                                            <li class="col-6">
-                                                <input type="checkbox" id="filter-giam-30%" />
-                                                <label for="filter-giam-30%">Giảm 30%</label>
-                                            </li>
-                                            <li class="col-6">
-                                                <input type="checkbox" id="filter-giam-40%" />
-                                                <label for="filter-giam-40%">Giảm 40%</label>
-                                            </li>
-                                        </ul>
-                                    </div>-->
+                                  
                                 </form>
                             </div>
                         </div>
@@ -230,7 +210,7 @@
                                                         }
                                                     ?>
                                                 </li>
-                                            <?php } ?>
+                                            <?php } ?>                                          
                                             <?php 
                                                 for ($i=1; $i <= $page ; $i++) { 
                                             ?>

@@ -28,14 +28,27 @@
     $start = ($current_page - 1) * $limit;
     //6: query
     $product_pagination = $Product->product_pagination($limit, $start);
+
+     //sort
+     $field = isset($_GET["field"]) ? $_GET["field"] : "";
+     $sort = isset($_GET["sort"]) ? $_GET["sort"] : "";
+     
+     if(!empty($field) && !empty($sort)) {
+         $product_pagination = $Product->product_pagination($limit, $start, $field, $sort);
+     } else {
+         $product_pagination = $Product->product_pagination($limit, $start);
+     }
     
 ?>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
-            <h2>Danh sách kho hàng</h2>
+          <div  class="d-flex justify-content-between align-items-center">
+                <h2>Danh sách kho hàng</h2>
+               
+          </div>
             <table class="table">
-                <thead>
+                <thead  style="position: sticky; top: 55px; background-color: #000; color: #fff;">
                     <tr>
                     <th scope="col" style="width: 10%">#</th>
                     <th scope="col" style="width: 45%">Tên sản phẩm</th>

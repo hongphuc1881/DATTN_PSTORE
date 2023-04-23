@@ -7,18 +7,6 @@
     $size_id = $_POST["size_id"];
     $cart =  $_SESSION["cart"] ;
     
-    
-    
-    //foreach ($cart as $key => $item) {
-        
-    //    if($item[0] == $product_id && $item[3] == $size_id) {
-    //        $item[5] = $product_quantity;
-    //        var_dump($item[5]);
-    //        var_dump($cart);
-
-    //    }
-        
-    //}
     $count = count($cart);
     foreach ($cart as $key => $item) {
         for($i = 0; $i < $count ; $i++) {
