@@ -7,7 +7,7 @@
                     <?php 
                         if($_SESSION["user"]["role"] == 1) {
                     ?>
-                    <a class="nav-link" href="index.php">
+                    <a class="nav-link" href="doanh_thu.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Thống kê doanh thu
                     </a>

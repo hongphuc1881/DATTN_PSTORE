@@ -9,6 +9,7 @@
                                     </div>
                                     <ul>
                                         <li><a href="">Địa chỉ: Nghĩa Hương, Quốc Oai, Hà Nội</a></li>
+                                        <li><a target="_blank" href="mailto:pstorehanoi@gmail.com">Email: pstorehanoi@gmail.com</a></li>
                                         <li><a href="">Điện thoại: +84 989642694</a></li>
                                     </ul>
                                 </div>
@@ -20,7 +21,6 @@
                                         <li><a href="./index.php">Trang chủ</a></li>
                                         <li><a href="./product-all.php">Sản phẩm</a></li>
                                         <li><a href="./product-sale.php">Khuyến mãi</a></li>
-                                        <li><a href="">liên hệ</a></li>
                                     </ul>
                                 </div>
                             </div>
