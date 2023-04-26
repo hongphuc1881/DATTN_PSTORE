@@ -184,8 +184,6 @@
                 FROM tbl_product INNER JOIN tbl_storage ON tbl_product.product_id = tbl_storage.product_id
                 WHERE tbl_product.status = 1 AND tbl_product.$key = $value AND tbl_storage.size_id IN ('$size_id');
                 ";
-               
-            
             } else if($isSale == true) {
                 $sql = "SELECT tbl_product.*, tbl_storage.*
                 FROM tbl_product INNER JOIN tbl_storage ON tbl_product.product_id = tbl_storage.product_id
@@ -518,14 +516,14 @@
                 FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
                 WHERE tbl_product.status = 1 AND tbl_product.is_hot = 1
                 GROUP by tbl_product.product_id
-                ORDER BY tbl_product.$field $sort DESC LIMIT $start, $limit"  ;
+                ORDER BY tbl_product.$field $sort  LIMIT $start, $limit"  ;
             } else {
                 //$sql = "SELECT * FROM tbl_product WHERE is_hot = 1 AND status = 1 ORDER BY product_id DESC LIMIT $start,$limit";
                 $sql = " SELECT   tbl_product.*, SUM(tbl_storage.quantity) AS total_quantity 
                 FROM tbl_product INNER JOIN tbl_storage ON tbl_storage.product_id = tbl_product.product_id
                 WHERE tbl_product.status = 1 AND tbl_product.is_hot = 1
                 GROUP by tbl_product.product_id
-                ORDER BY tbl_product.product_id DESC  LIMIT $start, $limit
+                ORDER BY tbl_product.product_id   LIMIT $start, $limit
                 ";
             }
            

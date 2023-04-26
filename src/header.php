@@ -8,7 +8,8 @@
 ?>
 <?php 
     $Brand = new Brand;
-    $show_category = $Brand->show_category();
+    $show_category1 = $Brand->show_category();
+    $show_category2 = $Brand->show_category();
     
     // kiểm tra xem có session cart chưa, nếu chưa có thì tạo mới
     if(!isset($_SESSION["cart"]))  $_SESSION["cart"] = array();
@@ -133,13 +134,33 @@
                                     <i class="fa-solid fa-bars"></i>
                                 </label>
                                 <input type="checkbox" id="menu-mobile" hidden />
-                                <ul class="menu-mobile">
+                                <ul class="menu-mobile h5 text-uppercase overflow-auto">
                                     <label for="menu-mobile"><i class="fa-solid fa-xmark"></i></label>
-                                    <li class="mt-5"><a href="">ALL</a></li>
-                                    <li><a href="">NIKE</a></li>
-                                    <li><a href="">ADIDAS</a></li>
-                                    <li><a href="">VANS</a></li>
-                                    <li><a href="">CONVERSE</a></li>
+                                    <li class="mt-5"><a href="./index.php">home</a></li>
+                                    <li ><a href="./product-all.php">ALL</a></li>
+                                    <?php 
+                                        while($result = $show_category1->fetch_assoc()) {
+                                    ?>
+                                        <li>
+                                            <a href="product-category.php?category_id=<?php  echo $result["category_id"];?>"><?php echo $result["category_name"] ?></a>
+                                        <ul>
+                                            <?php 
+                                                $show_group_brand = $Brand->show_group_brand($result["category_id"]);
+                                                if($show_group_brand) {
+                                                    while( $rs = $show_group_brand->fetch_assoc()) {
+
+                                            ?>
+                                                <li><a href="./product-brand.php?brand_id=<?php echo $rs['brand_id'];?>"><?php echo $rs["brand_name"] ?></a></li>
+                                            <?php 
+                                                }
+                                            }
+                                            ?>
+                                        
+                                        </ul>
+                                    </li>
+                                    <?php 
+                                        }
+                            ?>
                                 </ul>
                                 <label for="menu-mobile" class="overlay"></label>
                             </div>
@@ -152,7 +173,7 @@
                             <li><a href="./index.php">home</a></li>
                             <li><a href="./product-all.php">all</a></li>
                             <?php 
-                                while($result = $show_category->fetch_assoc()) {
+                                while($result = $show_category2->fetch_assoc()) {
                             ?>
                                 <li>
                                     <a href="product-category.php?category_id=<?php  echo $result["category_id"];?>"><?php echo $result["category_name"] ?></a>

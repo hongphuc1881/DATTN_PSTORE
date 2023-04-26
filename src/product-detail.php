@@ -1,12 +1,16 @@
 <?php 
+    ob_start();
     include("./header.php");
-?>
-<?php
+
     $Product = new Product;
     
     if($_GET["product_id"]) {
         $product_id = $_GET["product_id"];
-        $get_product = $Product->get_product($product_id)->fetch_assoc();
+        $get_products = $Product->get_product($product_id);
+        if(!$get_products) {
+            header("location: index.php");
+        }
+        $get_product = $get_products->fetch_assoc();
         $get_size = $Product->get_size($product_id);
         if($get_size) {
             $rs1 = $get_size->fetch_assoc();
@@ -22,7 +26,7 @@
    
 ?>
             <div class="app-container">
-                <div class="container pt-5">
+                <div class="container pt-lg-5">
 
                     <div class="row">
                         <div class="col-lg-7">

@@ -33,7 +33,7 @@ ob_start();
                                 while($result = $search_product->fetch_assoc()) {
 
                         ?>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 col-md-4 col-6">
                                 <div class="product-item">
                                     <a href="product-detail.php?product_id=<?php echo $result['product_id']?>">
                                         <div class="product-item__img">

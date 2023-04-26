@@ -99,7 +99,12 @@
                             <a class="nav-link" href="./user-lock-list.php">danh sách tài khoản bị khoá</a>
                         </nav>
                     </div>
-                  
+                    <a class="nav-link collapsed" target="_blank" href="https://dashboard.tawk.to/?lang=vi#/chat"
+                        aria-expanded="false" aria-controls="collapseLayouts3">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Liên Hệ
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
                     <?php 
                         } else {
                             
@@ -146,6 +151,12 @@
                             <a class="nav-link" href="./storage-add.php">Thêm kho hàng</a>
                         </nav>
                     </div>
+                    <a class="nav-link collapsed" target="_blank" href="https://dashboard.tawk.to/?lang=vi#/chat"
+                        aria-expanded="false" aria-controls="collapseLayouts3">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Liên Hệ
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
                     <?php }
                     ?>
                 </div>

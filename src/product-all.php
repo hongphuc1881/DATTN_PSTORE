@@ -36,52 +36,54 @@
                   
                     <div class="row">
                         <div class="col-lg-3">
-                            <div class="filter-product-list">
-                                <form action="" method="GET">
-                                    
-                                    <div class="filter-product-item">
-                                            <div class="filter-product-item-title d-flex justify-content-between pb-4">
-                                                Theo size giày
-                                                <button class="btn btn-dark" style="font-size: 16px;" type="submit">Tìm giày ngay</button>
+                        <div class="filter-product-list">
+                                <form action="" method="GET" >
+                                        <div class="row align-items-md-center justify-content-sm-end">
+                                            <div class="col-12 col-lg-12  col-md-8 filter-product-item d-none d-lg-block d-sm-block d-md-block">
+                                                <div class="filter-product-item-title d-flex justify-content-between pb-4 pb-md-3">
+                                                    <div class="">Theo size giày</div>
+                                                    <div>
+                                                        <button class="btn btn-dark" style="font-size: 16px;" type="submit">Tìm giày ngay</button>
+                                                    </div>
+                                                </div>
+                                                <ul class="row gx-0 filter-ul">
+                                                    <?php 
+                                                        if($show_size) {
+                                                            while($rs = $show_size->fetch_assoc()) {   
+                                                                $checked = [];
+                                                                if(isset($_GET["sizes"]))   {
+                                                                    $checked = $_GET["sizes"];
+                                                                }   
+                                                    ?>
+                                                        <li class="col-lg-6 col">
+                                                            <input type="checkbox" id="filter-<?php echo $rs["product_size"] ?>" name="sizes[]" value="<?php echo $rs["size_id"]?>" <?php if(in_array($rs["size_id"],$checked)) {echo "checked";}?>/>
+                                                            <label for="filter-<?php echo $rs["product_size"] ?>"><?php echo $rs["product_size"] ?></label>
+                                                        </li>
+                                                    <?php 
+                                                    }
+                                                    }
+                                                    ?>
+                                                </ul>
                                             </div>
-                                            <ul class="row gx-0 filter-ul">
-                                                <?php 
-                                                    if($show_size) {
-                                                        while($rs = $show_size->fetch_assoc()) {   
-                                                            $checked = [];
-                                                            if(isset($_GET["sizes"]))   {
-                                                                $checked = $_GET["sizes"];
-                                                            }   
-                                                ?>
-                                                    <li class="col-6">
-                                                        <input type="checkbox" id="filter-<?php echo $rs["product_size"] ?>" name="sizes[]" value="<?php echo $rs["size_id"]?>" <?php if(in_array($rs["size_id"],$checked)) {echo "checked";}?>/>
-                                                        <label for="filter-<?php echo $rs["product_size"] ?>"><?php echo $rs["product_size"] ?></label>
-                                                    </li>
-                                                <?php 
-                                                }
-                                                }
-                                                ?>
-                                            </ul>
+                                            <div class="col-12 col-lg-12 col-md-4 filter-product-item">
+                                                <div class="filter-product-item-title pb-md-4">Sắp xếp</div>
+                                                <select name="sort" id="" class="w-100"
+                                                    onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+                                                >
+                                                    <option value="#">--Sắp xếp--</option>
+                                                    <option value="?field=product_price_new&sort=asc">Giá từ thấp đến cao</option>
+                                                    <option value="?field=product_price_new&sort=desc">Giá từ cao đến thấp</option>
+                                                    <option value="?field=product_name&sort=asc">Tên A - Z</option>
+                                                    <option value="?field=product_name&sort=desc">Tên Z - A</option>
+                                                    <option value="?field=product_id&sort=asc">Cũ nhất</option>
+                                                    <option value="?field=product_id&sort=desc">Mới nhất</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="filter-product-item">
-                                            <div class="filter-product-item-title">Sắp xếp</div>
-                                            <select name="sort" id="" class="w-100"
-                                                onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
-                                            >
-                                                <option value="#">--Sắp xếp--</option>
-                                                <option value="?field=product_price_new&sort=asc">Giá từ thấp đến cao</option>
-                                                <option value="?field=product_price_new&sort=desc">Giá từ cao đến thấp</option>
-                                                <option value="?field=product_name&sort=asc">Tên A - Z</option>
-                                                <option value="?field=product_name&sort=desc">Tên Z - A</option>
-                                                <option value="?field=product_id&sort=asc">Cũ nhất</option>
-                                                <option value="?field=product_id&sort=desc">Mới nhất</option>
-                                            </select>
-                                        </div>
-                                  
                                 </form>
                             </div>
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-9 col-12">
                             <div class="list-product">
                                 <div class="row">
                                     <!-- size -->
@@ -93,7 +95,7 @@
                                         if($show_product_filter) {
                                             while($result = $show_product_filter->fetch_assoc()) {
                                     ?>
-                                         <div class="col-lg-4">
+                                         <div class="col-lg-4 col-md-4 col-6">
                                             <div class="product-item">
                                                 <a href="product-detail.php?product_id=<?php echo $result['product_id']?>">
                                                     <div class="product-item__img">
@@ -140,7 +142,7 @@
                                     if($product_pagination) {
                                         while($result = $product_pagination->fetch_assoc()) {
                                     ?>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-md-4 col-6">
                                             <div class="product-item">
                                                 <a href="product-detail.php?product_id=<?php echo $result['product_id']?>">
                                                     <div class="product-item__img">

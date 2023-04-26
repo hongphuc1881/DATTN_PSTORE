@@ -1,8 +1,8 @@
 <footer>
                 <div class="container ">
                     <div class="footer-inner">
-                        <div class="row">
-                            <div class="col-lg-4 col-6">
+                        <div class="row justify-content-center ">
+                            <div class="col-lg-4 col-6 col-md-5 mt-4">
                                 <div class="footer__contact-info">
                                     <div class="footer__title">
                                         <h4>thông tin liên hệ</h4>
@@ -10,11 +10,11 @@
                                     <ul>
                                         <li><a href="">Địa chỉ: Nghĩa Hương, Quốc Oai, Hà Nội</a></li>
                                         <li><a target="_blank" href="mailto:pstorehanoi@gmail.com">Email: pstorehanoi@gmail.com</a></li>
-                                        <li><a href="">Điện thoại: +84 989642694</a></li>
+                                        <li><a href="tel:0989642694">Điện thoại: +84 989642694</a></li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-6">
+                            <div class="col-lg-2 col-6 col-md-5 mt-4">
                                 <div class="footer__info">
                                     <h4 class="footer__title">thông tin</h4>
                                     <ul>
@@ -24,17 +24,17 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-6">
+                            <div class="col-lg-3 col-6 col-md-5 mt-4 order-md-2">
                                 <div class="footer__polycies">
                                     <h4 class="footer__title">Chính sách</h4>
                                     <ul>
-                                        <li><a href="./chinh-sach-doi-tra.html">Chính sách đổi trả & hoàn tiền</a></li>
-                                        <li><a href="./chinh-sach-bao-mat.html">Chính sách bảo mật</a></li>
-                                        <li><a href="./chinh-sach-van-chuyen.html">Chính sách vận chuyển</a></li>
+                                        <li><a href="./chinh-sach-doi-tra.php">Chính sách đổi trả & hoàn tiền</a></li>
+                                        <li><a href="./chinh-sach-bao-mat.php">Chính sách bảo mật</a></li>
+                                        <li><a href="./chinh-sach-van-chuyen.php">Chính sách vận chuyển</a></li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-6">
+                            <div class="col-lg-3 col-6 col-md-5 mt-4">
                                 <div class="footer__polycies">
                                     <h4 class="footer__title">Theo dõi chúng tôi</h4>
                                     <ul>
