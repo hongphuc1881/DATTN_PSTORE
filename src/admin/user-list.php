@@ -27,11 +27,13 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
     //6: query
     $user_pagination = $User->user_pagination($limit, $start);
 ?>
+
+<link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
             <h2>Danh sách người dùng</h2>
-            <table class="table">
+            <table class="table table-striped" id="example4">
                 <thead>
                     <tr>
                     <th scope="col" style="width: 5%">#</th>
@@ -47,9 +49,9 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
 
 
                     <?php
-                        if($user_pagination) {
+                        if($show_user) {
                             $i = 0;
-                            while($result = $user_pagination->fetch_assoc()) { 
+                            while($result = $show_user->fetch_assoc()) { 
                                 $i++; 
                     ?>
                     <tr>
@@ -89,7 +91,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                      ?>
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center mt-5">
+            <!--<div class="d-flex justify-content-center mt-5">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <?php 
@@ -122,7 +124,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                     </ul>
                 </nav>
           
-            </div>
+            </div>-->
         </div>
     </main>
 </div>
@@ -135,3 +137,9 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
     }
 ?>
 
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#example4').DataTable();
+});
+</script>

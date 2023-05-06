@@ -20,7 +20,18 @@
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
             crossorigin="anonymous"
         />
-   
+   <style>
+    /* dataTables bootstrap */
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fff !important;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: #fff !important;
+    --bs-table-accent-bg: none;
+    color: #000 !important;
+}
+   </style>
 </head>
 
 <body class="sb-nav-fixed">
@@ -32,7 +43,7 @@
             <i class="fas fa-bars"></i>
         </button>
         <!-- Navbar Search-->
-        <form method="GET" action="search.php"  class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <!--<form method="GET" action="search.php"  class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
                 <input class="form-control" type="text" name="search" placeholder="Search for..." aria-label="Search for..."
                     aria-describedby="btnNavbarSearch" />
@@ -40,7 +51,7 @@
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-        </form>
+        </form>-->
         <!-- Navbar-->
         <!--<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4 ">
             <li class="nav-item dropdown">
@@ -56,8 +67,8 @@
                 </ul>
             </li>
         </ul>-->
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle ms-auto ms-md-0 me-3 me-lg-4 " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user fa-fw"></i>
             </button>
             <div class="dropdown-menu" style="position: absolute; left:-100px" aria-labelledby="dropdownMenuButton" >

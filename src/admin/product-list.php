@@ -15,27 +15,29 @@
     
     // phan trang
     // 1.tong so ban ghi
-    $total_product = $show_product->num_rows;
-    // 2. thiet lap so ban ghi tren 1 trang
-    $limit = 10;
-    // 3. tinh so trang 
-    $page = ceil($total_product/$limit);
-    // 4. lay trang hien tai
-    $current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
+    //$total_product = $show_product->num_rows;
+    //// 2. thiet lap so ban ghi tren 1 trang
+    //$limit = 10;
+    //// 3. tinh so trang 
+    //$page = ceil($total_product/$limit);
+    //// 4. lay trang hien tai
+    //$current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
 
-    //5. start
-    $start = ($current_page - 1) * $limit;
-    //6: query
-    $product_pagination = $Product->product_pagination($limit, $start);
+    ////5. start
+    //$start = ($current_page - 1) * $limit;
+    ////6: query
+    //$product_pagination = $Product->product_pagination($limit, $start);
    
    
 ?>
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
             <h2>Danh sách sản phẩm</h2>
-            <table class="table">
-                <thead style="position: sticky; top: 55px; background-color: #000; color: #fff;">
+            <table  id="example2" class="table table-striped">
+                <thead style="position: sticky; top: 55px; background-color: #333; color: #fff;">
                     <tr>
                     <th scope="col" style="max-width: 5%">#</th>
                     <th scope="col" style="max-width: 10%">Danh mục</th>
@@ -49,9 +51,9 @@
                 </thead>
                 <tbody style="text-transform: lowercase" >
                     <?php
-                        if($product_pagination) {
+                        if($show_product) {
                             $i = 0;
-                            while($result = $product_pagination->fetch_assoc()) { 
+                            while($result = $show_product->fetch_assoc()) { 
                                 $i++; 
                     ?>
                     <tr>
@@ -96,7 +98,7 @@
                      ?>
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center mt-5">
+            <!--<div class="d-flex justify-content-center mt-5">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <?php 
@@ -127,7 +129,7 @@
                         <?php } ?>
                     </ul>
                 </nav>
-            </div>
+            </div>-->
         </div>
     </main>
 </div>
@@ -144,3 +146,9 @@
         include("./404.php");
     }
 ?>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#example2').DataTable();
+});
+</script>

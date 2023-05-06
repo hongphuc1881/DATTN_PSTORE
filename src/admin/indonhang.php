@@ -203,6 +203,10 @@
 	$pdf->Ln(10);
     $pdf->Write(8,'Tên khách hàng: '.$result["fullname"]);
 	$pdf->Ln(10);
+    $pdf->Write(8,'Số điện thoại: '.$result["phone"]);
+	$pdf->Ln(10);
+    $pdf->Write(8,'Địa chỉ: '.$result["address"]);
+	$pdf->Ln(10);
     $pdf->Write(8,'Mã đơn hàng: '.$result["order_id"]);
 	$pdf->Ln(10);
     $pdf->SetFillColor(255,255,255);

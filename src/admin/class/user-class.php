@@ -37,7 +37,7 @@
         }
 
         public function show_user(){
-            $sql = "SELECT tbl_user.* , tbl_role.role_name FROM tbl_user INNER JOIN tbl_role ON tbl_user.role = tbl_role.role_id WHERE status = 1 ORDER BY tbl_user.role";
+            $sql = "SELECT tbl_user.* , tbl_role.role_name FROM tbl_user INNER JOIN tbl_role ON tbl_user.role = tbl_role.role_id WHERE status = 1 AND NOT role = 1 ORDER BY tbl_user.role";
             $result = $this->db->select($sql);
             return $result;
         }

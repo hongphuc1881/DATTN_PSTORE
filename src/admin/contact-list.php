@@ -28,11 +28,13 @@
         $show_contact_pagination = $User->show_contact_pagination($limit, $start);
     }
 ?>
+
+<link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
             <h2>Danh sách danh mục</h2>
-            <table class="table">
+            <table class="table table-striped" id="example5">
                 <thead >
                     <tr>
                     <th scope="col" style="width: 5%">#</th>
@@ -101,7 +103,7 @@
                     ?>
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center mt-5">
+            <!--<div class="d-flex justify-content-center mt-5">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <?php 
@@ -132,7 +134,7 @@
                         <?php } ?>
                     </ul>
                 </nav>
-            </div>
+            </div>-->
         </div>
     </main>
 </div>
@@ -143,3 +145,9 @@
         include("./404.php");
     }
 ?>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#example5').DataTable();
+});
+</script>

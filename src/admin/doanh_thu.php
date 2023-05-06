@@ -35,7 +35,7 @@ if (isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
 ?>
     <!--<link href="css/styles.css" rel="stylesheet" />-->
     <!--<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>-->
-
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
@@ -51,8 +51,8 @@ if (isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
 
                     
 
-                <table class="table" style="font-size: 12px">
-                    <thead style="position: sticky; top: 55px; background-color: #000; color: #fff;">
+                <table style="font-size: 12px"  id="example" class="table table-striped" style="width:100%">
+                    <thead style="position: sticky; top: 55px; background-color: #333; color: #fff;">
                         <tr>
                             <th scope="col" style="width: 5%">#</th>
                             <th scope="col" style="width: 40%">Tên sản phẩm</th>
@@ -149,7 +149,11 @@ if (isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
 https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
 "></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
 <script>
     const ctx = document.getElementById('myChart');
     const monthArray = <?= json_encode($monthArray); ?>;
@@ -174,3 +178,4 @@ https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
         }
     });
 </script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>

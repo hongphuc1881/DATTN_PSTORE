@@ -40,6 +40,8 @@
      }
     
 ?>
+
+<link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
@@ -47,8 +49,8 @@
                 <h2>Danh sách kho hàng</h2>
                
           </div>
-            <table class="table">
-                <thead  style="position: sticky; top: 55px; background-color: #000; color: #fff;">
+            <table class="table  table-striped" id="example3">
+                <thead  style="position: sticky; top: 55px; background-color: #333; color: #fff;">
                     <tr>
                     <th scope="col" style="width: 10%">#</th>
                     <th scope="col" style="width: 45%">Tên sản phẩm</th>
@@ -58,9 +60,9 @@
                 </thead>
                 <tbody>
                 <?php
-                        if($product_pagination) {
+                        if($show_product) {
                             $i = 0;
-                            while($result = $product_pagination->fetch_assoc()) { 
+                            while($result = $show_product->fetch_assoc()) { 
                                 $i++; 
                                 $total_quantity_of_product = $Product->total_quantity_of_product_id($result["product_id"])->fetch_assoc();
                                 
@@ -79,7 +81,7 @@
                     ?>
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center mt-5">
+            <!--<div class="d-flex justify-content-center mt-5">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <?php 
@@ -112,7 +114,7 @@
                     </ul>
                 </nav>
           
-            </div>
+            </div>-->
         </div>
     </main>
 </div>
@@ -123,3 +125,9 @@
         include("./404.php");
     }
 ?>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#example3').DataTable();
+});
+</script>
