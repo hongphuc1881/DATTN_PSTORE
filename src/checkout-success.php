@@ -3,7 +3,8 @@
     if(isset($_SESSION["user"])) {
    
 ?>
-        <div class="app-container">
+    <link rel="stylesheet" href="../assets//css/firework.css">
+        <div class="app-container ">
             <div class="container">
                 <div class="row justify-content-center">
                   <div class="col-6 text-center">
@@ -13,6 +14,10 @@
                         <p>Đơn hàng của bạn đã được tiếp nhận và dự kiến giao trong vòng 48h</p>
                   </div>
                 </div>
+            </div>
+            <div class="pyro">
+        <div class="before"></div>
+            <div class="after"></div>
             </div>
         </div>
 <?php 

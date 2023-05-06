@@ -63,27 +63,7 @@
                                         <td><span class="price"><?php echo   $formatted_number = number_format( $product_item[4], 0, ',', '.');?></span>đ</td>
                                         <td>
                                             <div class="change-quantity">
-                                                <!--<button class="updateQty increaseQty" onclick="
-                                                var result = this.nextSibling;
-                                                var qtyItem<?php echo $product_item[0]; ?> = result.value; 
-                                                if( !isNaN( qtyItem<?php echo $product_item[0]; ?> ) && qtyItem<?php echo $product_item[0]; ?> > 1 ) 
-                                                    result.value--;
-                                                return false;"
-                                                >-</button><input
-                                                    type="text"
-                                                    min="0"
-                                                    value=<?php echo $product_item[5]?>
-                                                    maxlength="5"
-                                                    class="quantity"
-                                                    onchange="if(this.value == 0) this.value = 1"
-                                                    onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;"
-                                                /><button class="updateQty decreaseQty" onclick="
-                                                var result = this.previousSibling; 
-                                                var qtyItem<?php echo $product_item[0]; ?> = result.value; 
-                                                if( !isNaN( qtyItem<?php echo $product_item[0]; ?> )) 
-                                                    result.value++;
-                                            return false;"
-                                                >+</button>-->
+                                                
                                                 <input type="hidden" value="<?php echo $product_item[3]; ?>" name="size_id" class="size_id">
                                                 <input type="hidden" value="<?php echo $product_item[0]; ?>" name="product_id" class="product_id">
                                                 <button class="updateQty decreaseQty">-</button>

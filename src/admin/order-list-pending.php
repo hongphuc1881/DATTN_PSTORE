@@ -33,13 +33,13 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
-            <h2>Danh sách danh mục</h2>
+            <h2>Danh sách đơn hàng chưa xử lý</h2>
             <table class="table">
                 <thead>
                     <tr>
                     <th scope="col" style="width: 5%">#</th>
                     <th scope="col" style="width: 5%">ID</th>
-                    <th scope="col" style="width: 15%">Khách hàng</th>
+                    <th scope="col" style="width: 20%">Khách hàng</th>
                     <th scope="col" style="width: 15%">Số điện thoại</th>
                     <th scope="col" style="width: 15%">Ngày đặt hàng</th>
                     <th scope="col" style="width: 15%">Trạng thái</th>

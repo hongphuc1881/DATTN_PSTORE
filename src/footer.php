@@ -21,6 +21,7 @@
                                         <li><a href="./index.php">Trang chủ</a></li>
                                         <li><a href="./product-all.php">Sản phẩm</a></li>
                                         <li><a href="./product-sale.php">Khuyến mãi</a></li>
+                                        <li><a href="./contact.php">Liên hệ</a></li>
                                     </ul>
                                 </div>
                             </div>

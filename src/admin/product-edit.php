@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
     if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] != 3) {
         include("./database.php");
         include("./header.php");
@@ -19,6 +20,8 @@
     $get_product = $Product->get_product($product_id);
     if($get_product) {
         $result = $get_product->fetch_assoc();
+    } else {
+        header("location: ./index.php");
     }
     $get_size = $Product->get_size($product_id);
  

@@ -1,5 +1,4 @@
 <?php
-ob_start();
     include("./header.php");
 ?>
 <?php 
@@ -12,9 +11,8 @@ ob_start();
         $brand_id = $_GET["brand_id"];
         $show_product_by_brand = $Product->show_product_by_brand($brand_id);
     }
-    if(!$show_product_by_brand) {
-        header("location: index.php");
-    }
+  
+    
     //$show_all_product = $Product->show_product();
     $show_size = $Product->show_size();
    
@@ -22,7 +20,7 @@ ob_start();
     // 1.tong so ban ghi
     $total_product = $show_product_by_brand->num_rows;
     // 2. thiet lap so ban ghi tren 1 trang
-    $limit = 12;
+    $limit = 9;
     // 3. tinh so trang 
     $page = ceil($total_product/$limit);
     // 4. lay trang hien tai
@@ -48,54 +46,52 @@ ob_start();
                   
                     <div class="row">
                         <div class="col-lg-3">
-                        <div class="filter-product-list">
-                                <form action="" method="GET" >
-                                        <div class="row align-items-md-center justify-content-sm-end">
-                                            <div class="col-12 col-lg-12  col-md-8 filter-product-item d-none d-lg-block d-sm-block d-md-block">
-                                                <div class="filter-product-item-title d-flex justify-content-between pb-4 pb-md-3">
-                                                    <div class="">Theo size giày</div>
-                                                    <div>
-                                                        <button class="btn btn-dark" style="font-size: 16px;" type="submit">Tìm giày ngay</button>
-                                                    </div>
-                                                </div>
-                                                <ul class="row gx-0 filter-ul">
-                                                    <?php 
-                                                        if($show_size) {
-                                                            while($rs = $show_size->fetch_assoc()) {   
-                                                                $checked = [];
-                                                                if(isset($_GET["sizes"]))   {
-                                                                    $checked = $_GET["sizes"];
-                                                                }   
-                                                    ?>
-                                                        <li class="col-lg-6 col">
-                                                            <input type="checkbox" id="filter-<?php echo $rs["product_size"] ?>" name="sizes[]" value="<?php echo $rs["size_id"]?>" <?php if(in_array($rs["size_id"],$checked)) {echo "checked";}?>/>
-                                                            <label for="filter-<?php echo $rs["product_size"] ?>"><?php echo $rs["product_size"] ?></label>
-                                                        </li>
-                                                    <?php 
-                                                    }
-                                                    }
-                                                    ?>
-                                                </ul>
+                            <div class="filter-product-list">
+                                <form action="" method="GET">
+                                    <input type="hidden" name="brand_id" value="<?php echo $brand_id?>">
+                                    <div class="filter-product-item">
+                                            <div class="filter-product-item-title d-flex justify-content-between pb-4">
+                                                Theo size giày
+                                                <button class="btn btn-dark" style="font-size: 16px;" type="submit">Tìm giày ngay</button>
                                             </div>
-                                            <div class="col-12 col-lg-12 col-md-4 filter-product-item">
-                                                <div class="filter-product-item-title pb-md-4">Sắp xếp</div>
-                                                <select name="sort" id="" class="w-100"
-                                                    onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
-                                                >
-                                                    <option value="#">--Sắp xếp--</option>
-                                                    <option value="?field=product_price_new&sort=asc">Giá từ thấp đến cao</option>
-                                                    <option value="?field=product_price_new&sort=desc">Giá từ cao đến thấp</option>
-                                                    <option value="?field=product_name&sort=asc">Tên A - Z</option>
-                                                    <option value="?field=product_name&sort=desc">Tên Z - A</option>
-                                                    <option value="?field=product_id&sort=asc">Cũ nhất</option>
-                                                    <option value="?field=product_id&sort=desc">Mới nhất</option>
-                                                </select>
-                                            </div>
+                                            <ul class="row gx-0 filter-ul">
+                                                <?php 
+                                                    if($show_size) {
+                                                        while($rs = $show_size->fetch_assoc()) {   
+                                                            $checked = [];
+                                                            if(isset($_GET["sizes"]))   {
+                                                                $checked = $_GET["sizes"];
+                                                            }   
+                                                ?>
+                                                    <li class="col-6">
+                                                        <input type="checkbox" id="filter-<?php echo $rs["product_size"] ?>" name="sizes[]" value="<?php echo $rs["size_id"]?>" <?php if(in_array($rs["size_id"],$checked)) {echo "checked";}?>/>
+                                                        <label for="filter-<?php echo $rs["product_size"] ?>"><?php echo $rs["product_size"] ?></label>
+                                                    </li>
+                                                <?php 
+                                                }
+                                                }
+                                                ?>
+                                            </ul>
                                         </div>
+                                        <div class="filter-product-item ">
+                                            <div class="filter-product-item-title pb-3">Sắp xếp sản phẩm</div>
+                                            <select name="sort" id="" class="w-100" style="height: 30px;"
+                                                onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+                                            >
+                                                <option value="#">--Mặc định--</option>
+                                                <option value="?brand_id=<?php echo  $brand_id?>&field=product_price_new&sort=asc">Giá từ thấp đến cao</option>
+                                                <option value="?brand_id=<?php echo  $brand_id?>&field=product_price_new&sort=desc">Giá từ cao đến thấp</option>
+                                                <option value="?brand_id=<?php echo  $brand_id?>&field=product_name&sort=asc">Tên A - Z</option>
+                                                <option value="?brand_id=<?php echo  $brand_id?>&field=product_name&sort=desc">Tên Z - A</option>
+                                                <option value="?brand_id=<?php echo  $brand_id?>&field=product_id&sort=asc">Cũ nhất</option>
+                                                <option value="?brand_id=<?php echo  $brand_id?>&field=product_id&sort=desc">Mới nhất</option>
+                                            </select>
+                                        </div>
+                                   
                                 </form>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-12">
+                        <div class="col-lg-9">
                             <div class="list-product">
                                 <div class="row">
                                     <!-- size -->
@@ -107,7 +103,7 @@ ob_start();
                                         if($show_product_filter) {
                                             while($result = $show_product_filter->fetch_assoc()) {
                                     ?>
-                                         <div class="col-lg-4 col-md-4 col-6">
+                                         <div class="col-lg-4">
                                             <div class="product-item">
                                                 <a href="product-detail.php?product_id=<?php echo $result['product_id']?>">
                                                     <div class="product-item__img">
@@ -154,7 +150,7 @@ ob_start();
                                     if($product_brand_pagination) {
                                         while($result = $product_brand_pagination->fetch_assoc()) {
                                     ?>
-                                        <div class="col-lg-4 col-md-4 col-6">
+                                        <div class="col-lg-4">
                                             <div class="product-item">
                                                 <a href="product-detail.php?product_id=<?php echo $result['product_id']?>">
                                                     <div class="product-item__img">

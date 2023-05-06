@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
     if(isset($_SESSION["user"]) && ($_SESSION["user"]["role"] == 1 || $_SESSION["user"]["role"] == 2)) {
         include("./database.php");
         include("./header.php");
@@ -14,6 +15,9 @@
     if(isset($_GET["product_id"])) {
         $product_id = $_GET["product_id"];
         $storage_show_product = $Product->storage_show_product($product_id);
+        if(!$storage_show_product) {
+            header("location: ./index.php");
+        }
     }
     
 ?>
@@ -64,6 +68,8 @@
                                 </div>
                                 <div class="modal-body">
                                     Bạn có chắc chắn muốn xoá <strong><?php echo $result["product_name"];?></strong> với kích thước <strong><?php echo $result["product_size"];?></strong>
+                                    <p class="text-danger">Việc này sẽ làm mất hết dữ liệu trong hệ thống và không thể khôi phục lại</p>
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>

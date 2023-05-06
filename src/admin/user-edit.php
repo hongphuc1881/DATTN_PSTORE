@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
     if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
         include("./database.php");
         include("./header.php");
@@ -19,6 +20,8 @@
     $get_user = $User->get_user($user_id);
     if($get_user) {
         $result = $get_user->fetch_assoc();
+    }else {
+        header("location: index.php");
     }
     
 

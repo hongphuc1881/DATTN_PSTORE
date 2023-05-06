@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
     if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
         include("./database.php");
         include("./header.php");
@@ -11,13 +12,15 @@
 <?php
     $Brand = new Brand;
     if(!isset($_GET["brand_id"]) || $_GET["brand_id"] == NULL) {
-        echo "<script>window.location.href = './brand-list.php'</script>";
+        header("location: brand-list.php");
     }else {
         $brand_id = $_GET["brand_id"];
     }
     $get_brand = $Brand->get_brand($brand_id);
     if($get_brand) {
         $result = $get_brand->fetch_assoc();
+    } else {
+        header("location: brand-list.php");
     }
     
 
@@ -25,7 +28,7 @@
         $category_id = $_POST["category_id"];
         $brand_name = $_POST["brand_name"];
         $Brand->update_brand($category_id, $brand_id, trim($brand_name));
-        echo "<script>window.location.href = 'brand-list.php'</script>";
+        header("location: brand-list.php");
     }
 
 ?>

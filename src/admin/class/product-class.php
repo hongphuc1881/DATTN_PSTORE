@@ -234,7 +234,33 @@
             $result = $this->db->select($sql);
             return $result;
         }
-
+        
+        public function check_size_is_already($product_size) {
+            $sql = "SELECT * FROM tbl_size where product_size = '$product_size'";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function insert_size($product_size) {
+            $sql = "INSERT INTO tbl_size(product_size ) values('$product_size')";
+            $result = $this->db->insert($sql);
+            return $result;
+        }
+        public function update_size($size_id,$product_size) {
+            $sql = "UPDATE tbl_size SET product_size = '$product_size' WHERE size_id = '$size_id'";
+            $result = $this->db->insert($sql);
+            return $result;
+        }
+        public function delete_size($size_id) {
+            $sql = "DELETE FROM tbl_size WHERE size_id = '$size_id'" ;
+            $result = $this->db->delete($sql);
+            return $result;
+        }
+        public function get_size_by_size_id($size_id) {
+            $sql = "SELECT * FROM tbl_size WHERE size_id = '$size_id'" ;
+            $result = $this->db->delete($sql);
+            return $result;
+        }
+       
         public function get_product($product_id) {
             $sql = "SELECT * FROM tbl_product WHERE product_id = '$product_id'";
             $result = $this->db->select($sql);

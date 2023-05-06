@@ -53,6 +53,8 @@
                                 </div>
                                 <div class="modal-body">
                                     Bạn có chắc chắn muốn xoá <strong><?php echo $result["category_name"];?></strong>
+                                    <p class="text-danger">Việc này sẽ làm mất hết dữ liệu trong hệ thống và không thể khôi phục lại</p>
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>

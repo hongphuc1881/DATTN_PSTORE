@@ -40,11 +40,13 @@ if (isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
         <main>
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Thống kê doanh thu</h1>
-                <a class="d-inline-block bg-info text-white text-decoration-none px-3 py-2 rounded-2" href="?year=2022">2022</a>
-                <a class="d-inline-block bg-info text-white text-decoration-none px-3 py-2 rounded-2" href="?year=2023">2023</a>
-               
+                
                 <div class="mb-5">
                     <canvas id="myChart"></canvas>
+                    <div class="mt-4 text-center">
+                        <a class="d-inline-block bg-info text-white text-decoration-none px-3 py-2 rounded-2" href="?year=2022">2022</a>
+                        <a class="d-inline-block bg-info text-white text-decoration-none px-3 py-2 rounded-2" href="?year=2023">2023</a>
+                    </div>
                 </div>
 
                     
@@ -74,7 +76,7 @@ if (isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                         ?>
                             <tr>
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $result["product_name"] ?></td>
+                                <td class="text-uppercase"><?php echo $result["product_name"] ?></td>
 
                                 <td class="gia_nhap"><?php echo $formatted_number = number_format($result["product_cost"], 0, ',', '.') ?></td>
                                 <td class="gia_ban"><?php echo $formatted_number = number_format($result["product_price_new"], 0, ',', '.') ?></td>

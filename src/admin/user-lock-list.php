@@ -31,7 +31,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
-            <h2>Danh sách người dùng</h2>
+            <h2>Danh sách người dùng đã bị khoá</h2>
             <table class="table">
                 <thead>
                     <tr>
@@ -48,13 +48,9 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                
                     <?php 
                         if($show_user_lock) {
-
-                        
-
-                        $i = 0;
-                        while($result = $show_user_lock->fetch_assoc()) {
-                            $i++; 
-                        
+                            $i = 0;
+                            while($result = $show_user_lock->fetch_assoc()) {
+                                $i++; 
                     ?>
                     <tr>
                         <th scope="row"><?php echo $i?></th>
@@ -79,6 +75,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                                 </div>
                                 <div class="modal-body">
                                     Bạn có chắc chắn muốn xoá vĩnh viễn <strong><?php echo $result["username"];?></strong>
+                                    <p class="text-danger">Việc này sẽ làm mất hết dữ liệu trong hệ thống và không thể khôi phục lại</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
@@ -89,10 +86,18 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
                         </div>
                     <?php
                             }
-                        }
-                     ?>
+                        } 
+                    ?>
                 </tbody>
             </table>
+            <?php 
+                 if(!$show_user_lock) {
+                
+            ?>
+                <h4 class="mt-5 text-center">Không có tài khoản nào bị khoá</h4>
+            <?php
+                }
+            ?>
         </div>
     </main>
 </div>

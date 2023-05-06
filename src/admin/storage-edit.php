@@ -23,7 +23,7 @@ if(isset($_SESSION["user"]) &&  ($_SESSION["user"]["role"] == 1 || $_SESSION["us
         $size_id = $_POST["size_id"];
         $quantity = $_POST["quantity"];
         $Product->storage_update($product_id, $size_id, $quantity);
-        echo "<script>window.location.href = 'storage-list.php'</script>";
+        header("location: storage-list.php");
     }
 ?>
 <div id="layoutSidenav_content">

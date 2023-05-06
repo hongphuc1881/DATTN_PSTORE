@@ -5,89 +5,75 @@
         include("./header.php");
         include("./menu.php");
         include("./footer.php");
-        include("./class/order-class.php");
+        include("./class/user-class.php");
 ?>
 
 <?php 
-    $Order = new Order;
-    $show_order_success = $Order->show_order_success();
-    //var_dump($show_order_success);
+    $User = new User;
+    $show_contact = $User->show_contact();
     // phan trang
     // 1.tong so ban ghi
-    $total_order = 0;
-    if($show_order_success) {
-        $total_order = $show_order_success->num_rows;
+    if($show_contact) {
+        $total_order = $show_contact->num_rows;
         // 2. thiet lap so ban ghi tren 1 trang
+        $limit = 10;
+        // 3. tinh so trang 
+        $page = ceil($total_order/$limit);
+        // 4. lay trang hien tai
+        $current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
+    
+        //5. start
+        $start = ($current_page - 1) * $limit;
+        //6: query
+        $show_contact_pagination = $User->show_contact_pagination($limit, $start);
     }
-    $limit = 10;
-    // 3. tinh so trang 
-    $page = ceil($total_order/$limit);
-    // 4. lay trang hien tai
-    $current_page = isset($_GET["page"]) ? $_GET["page"] : 1 ;
-
-    //5. start
-    $start = ($current_page - 1) * $limit;
-    //6: query
-    $show_order_success_pagination = $Order->show_order_success_pagination($limit, $start);
 ?>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
-            <h2>Danh sách đơn hàng đã giao</h2>
+            <h2>Danh sách danh mục</h2>
             <table class="table">
-                <thead>
+                <thead >
                     <tr>
                     <th scope="col" style="width: 5%">#</th>
-                    <th scope="col" style="width: 5%">ID</th>
-                    <th scope="col" style="width: 20%">Khách hàng</th>
+                    <th scope="col" style="width: 15%">Tên khách hàng</th>
+                    <th scope="col" style="width: 15%">Email</th>
                     <th scope="col" style="width: 15%">Số điện thoại</th>
-                    <th scope="col" style="width: 15%">Ngày đặt hàng</th>
                     <th scope="col" style="width: 15%">Trạng thái</th>
                     <th scope="col" style="width: 30%">Tuỳ chọn</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        if($show_order_success_pagination) {
+                        if($show_contact_pagination) {
                             $i = 0;
-                            while($result = $show_order_success_pagination->fetch_assoc()) { 
+                            while($result = $show_contact_pagination->fetch_assoc()) { 
                                 $i++; 
                     ?>
                     <tr>
 
                         <th scope="row"><?php echo $i?></th>
-                        <td><?php echo $result["order_id"] ?></td>
-                        <td><?php echo $result["fullname"] ?></td>
+                        <td><?php echo $result["username"] ?></td>
+                        <td><?php echo $result["email"] ?></td>
                         <td><?php echo $result["phone"] ?></td>
-                        <td><?php echo $result["order_date"]?></td>
                         <?php 
-                            if($result["status"] == 1) {
+                            if($result["status"] == 0) {
                         ?>
-                            <td class="text-info"><?php echo "Đang chờ xử lý";?></td>
+                            <td class="text-danger"><?php echo "chưa đọc";?></td>
                         <?php
-                             } else if($result["status"] == 2){
+                             } else if($result["status"] == 1){
                         ?>
-                            <td class="text-success"><?php echo "Đã giao hàng";?></td>
+                            <td class="text-success"><?php echo "Đã đọc";?></td>
                         <?php
                             }
-                            else if($result["status"] == 3){
-                        ?>
-                            <td class="text-danger"><?php echo "Đã huỷ đơn";?></td>
-                        <?php 
-                            }
+                            
                         ?>
                         <td>
-                        <a href="./order-detail.php?order_id=<?php echo $result["order_id"]?>" class="btn btn-dark">Chi tiết</a>
-                        <?php 
-                             if($result["status"] == 1) {
-                        ?>
-                        <a href="#" data-toggle="modal" data-target="#<?php echo $result["order_id"]?>" class="btn btn-danger">Huỷ đơn hàng</a>
-                        <?php 
-                             }
-                        ?>
+                        <a href="./contact-detail.php?contact_id=<?php echo $result["contact_id"]?>" class="btn btn-dark">Xem chi tiết</a>
+                        <a href="#" data-toggle="modal" data-target="#<?php echo $result["contact_id"]?>" class="btn btn-danger">Xoá</a>
                         </td>
                          <!-- Modal -->
-                         <div class="modal fade" id="<?php echo $result["order_id"]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                         <div class="modal fade" id="<?php echo $result["contact_id"]?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                 <div class="modal-header">
@@ -97,13 +83,13 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Bạn có chắc chắn muốn huỷ đơn hàng mã <strong><?php echo $result["order_id"];?></strong> của<strong> <?php echo $result["fullname"];?></strong>
+                                    Bạn có chắc chắn muốn xoá liên hệ của <strong> <?php echo $result["username"];?></strong>.
+                                    <p class="text-danger">Việc làm này sẽ không thể khôi phục lại</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
-                                    <a href="./order-cancel.php?order_id=<?php echo $result["order_id"]?>" class="btn btn-danger">Huỷ đơn hàng</a>
+                                    <a href="./contact-delete.php?contact_id=<?php echo $result["contact_id"]?>" class="btn btn-danger">Xác nhận</a>
 
-                                    <!--<button type="button" class="btn btn-primary">Xoá</button>-->
                                 </div>
                                 </div>
                             </div>
@@ -122,7 +108,7 @@
                             if($current_page - 1 > 0) {
                          ?>
                             <li class="page-item">
-                                <a class="page-link" href="order-list-success.php?page=<?php  echo $current_page -1; ?>" aria-label="Previous">
+                                <a class="page-link" href="order-list.php?page=<?php  echo $current_page -1; ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -130,7 +116,7 @@
                         <?php 
                             for ($i=1; $i <= $page ; $i++) { 
                         ?>
-                                <li class="page-item <?php echo $i == $current_page ? "active": ""?>"><a class="page-link" href="order-list-success.php?page=<?php echo $i ?>"><?php echo  $i ?></a></li>
+                                <li class="page-item <?php echo $i == $current_page ? "active": ""?>"><a class="page-link" href="order-list.php?page=<?php echo $i ?>"><?php echo  $i ?></a></li>
                         <?php 
                                 }   
                         ?>
@@ -139,7 +125,7 @@
                             if($current_page + 1 <= $page) {
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="order-list-success.php?page=<?php echo $current_page + 1;?>" aria-label="Next">
+                                <a class="page-link" href="order-list.php?page=<?php echo $current_page + 1;?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>

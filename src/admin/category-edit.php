@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
     include("./database.php");
     include("./header.php");
@@ -12,7 +13,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
 <?php
     $Category = new Category;
     if(!isset($_GET["category_id"]) || $_GET["category_id"] == NULL) {
-        echo "<script>window.location.href = 'category-list.php'</script>";
+       header("location: category-list.php");
     } else {
         $category_id = $_GET["category_id"];
     }
@@ -20,6 +21,8 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
     $get_category = $Category->get_category($category_id);
     if($get_category) {
         $result = $get_category->fetch_assoc();
+    } else {
+        header("location: category-list.php");
     }
 ?>
 
@@ -27,7 +30,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
     if($_SERVER['REQUEST_METHOD'] == "POST") {
         $category_name = $_POST["category_name"];
         $Category->update_category($category_id, trim($category_name));
-        echo "<script>window.location.href = 'category-list.php'</script>";
+        header("location: category-list.php");
     }
 ?>
 

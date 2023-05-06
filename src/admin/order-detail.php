@@ -1,4 +1,5 @@
 <?php
+    ob_start();
     session_start();
     if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] != 3) {
         include("./database.php");
@@ -15,6 +16,9 @@
         $Order = new Order;
         $Product = new Product;
         $get_order_by_order_id = $Order->get_order_by_order_id($order_id);
+        if(!$get_order_by_order_id) {
+            header("location: ./index.php");
+        }
         $get_order_detail = $Order->get_order_detail($order_id);
 
         if($get_order_by_order_id) {

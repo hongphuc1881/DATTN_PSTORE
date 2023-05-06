@@ -54,7 +54,7 @@
                         <th scope="row"><?php echo $i?></th>
                         <td style=" text-transform: uppercase;"><?php echo $result["product_name"] ?></td>
                         <td>
-                            <a href="./storage-add.php?product_id=<?php echo $result['product_id']?>" class="btn btn-dark">thêm</a>
+                            <a href="./storage-add.php?product_id=<?php echo $result['product_id']?>" class="btn btn-dark">Thêm</a>
                         </td>
                     </tr>
                     <?php 
@@ -70,7 +70,7 @@
                             if($current_page - 1 > 0) {
                          ?>
                             <li class="page-item">
-                                <a class="page-link" href="storage-list.php?page=<?php  echo $current_page -1; ?>" aria-label="Previous">
+                                <a class="page-link" href="storage-list-empty.php?page=<?php  echo $current_page -1; ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -78,7 +78,7 @@
                         <?php 
                             for ($i=1; $i <= $page ; $i++) { 
                         ?>
-                                <li class="page-item <?php echo $i == $current_page ? "active": ""?>"><a class="page-link" href="storage-list.php?page=<?php echo $i ?>"><?php echo  $i ?></a></li>
+                                <li class="page-item <?php echo $i == $current_page ? "active": ""?>"><a class="page-link" href="storage-list-empty.php?page=<?php echo $i ?>"><?php echo  $i ?></a></li>
                         <?php 
                                 }   
                         ?>
@@ -87,7 +87,7 @@
                             if($current_page + 1 <= $page) {
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="storage-list.php?page=<?php echo $current_page + 1;?>" aria-label="Next">
+                                <a class="page-link" href="storage-list-empty.php?page=<?php echo $current_page + 1;?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>

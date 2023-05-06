@@ -43,7 +43,18 @@ if(isset($_SESSION["user"]) &&  ($_SESSION["user"]["role"] == 1 || $_SESSION["us
                                 while($rs = $show_all_product->fetch_assoc()) {
                         ?>
                        
-                        <option <?php if($p_id == $rs["product_id"]){echo "SELECTED";}?> value="<?php  echo $rs["product_id"] ?>"><?php echo $rs["product_name"] ?></option>
+                        <option 
+                            <?php
+                                if(isset($p_id)) {
+                                    if($p_id == $rs["product_id"]){
+                                        echo "SELECTED";
+                                    }
+                                }
+                            ?> 
+                            value="<?php  echo $rs["product_id"] ?>"
+                        >
+                            <?php echo $rs["product_name"] ?>
+                        </option>
                         <?php 
                              }
                             }

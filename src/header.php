@@ -72,7 +72,7 @@
                             >
                                 <div class="header-search">
                                   <form action="search.php" method="GET">
-                                        <input type="text" name="search" placeholder="Tìm kiếm" />
+                                        <input type="text" name="search" style="width: 90%" placeholder="Tìm kiếm" />
                                         <button type="submit" class="border-0">
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </button>

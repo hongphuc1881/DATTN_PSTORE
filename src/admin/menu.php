@@ -95,16 +95,30 @@
                     <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="./user-list.php">Danh sách  người dùng</a>
+                            <a class="nav-link" href="./user-list.php">Danh sách người dùng</a>
                             <a class="nav-link" href="./user-lock-list.php">danh sách tài khoản bị khoá</a>
                         </nav>
                     </div>
-                    <a class="nav-link collapsed" target="_blank" href="https://dashboard.tawk.to/?lang=vi#/chat"
-                        aria-expanded="false" aria-controls="collapseLayouts3">
+                    <a class="nav-link collapsed" href="./size-list.php"
+                        aria-expanded="false" aria-controls="collapseLayouts5">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Liên Hệ
+                        Quản lý kích cỡ
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6"
+                        aria-expanded="false" aria-controls="collapseLayouts6">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý liên hệ
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="./contact-list.php">Danh sách liên hệ</a>
+                            <a class="nav-link" target="_blank" href="https://dashboard.tawk.to/?lang=vi#/chat">Trả lời trực tuyến</a>
+                        </nav>
+                    </div>
+                   
                     <?php 
                         } else {
                             
@@ -151,12 +165,19 @@
                             <a class="nav-link" href="./storage-add.php">Thêm kho hàng</a>
                         </nav>
                     </div>
-                    <a class="nav-link collapsed" target="_blank" href="https://dashboard.tawk.to/?lang=vi#/chat"
-                        aria-expanded="false" aria-controls="collapseLayouts3">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6"
+                        aria-expanded="false" aria-controls="collapseLayouts6">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Liên Hệ
+                        Quản lý liên hệ
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
+                    <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="./contact-list.php">Danh sách liên hệ</a>
+                            <a class="nav-link" target="_blank" href="https://dashboard.tawk.to/?lang=vi#/chat">Trả lời trực tuyến</a>
+                        </nav>
+                    </div>
                     <?php }
                     ?>
                 </div>

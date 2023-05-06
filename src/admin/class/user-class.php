@@ -31,7 +31,7 @@
         }
 
         public function check_email($email) {
-            $sql = "SELECT * FROM tbl_user WHERE email = '$email'";
+            $sql = "SELECT * FROM tbl_user WHERE email = '$email' and status = 1";
             $result = $this->db->select($sql);
             return $result;
         }
@@ -87,6 +87,39 @@
             $result = $this->db->select($sql);
             return $result;
         }
+
+        public function insert_contact($username, $email, $phone, $content) {
+            $sql = "INSERT INTO tbl_contact(username, email,phone, content, status) VALUES('$username',' $email', '$phone', '$content', 0)";
+            $result = $this->db->insert($sql);
+            return $result;
+        }
+
+        public function show_contact() {
+            $sql = "SELECT * FROM tbl_contact";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function show_contact_pagination($limit, $start) {
+            $sql = "SELECT * FROM `tbl_contact` ORDER BY tbl_contact.status ASC ,contact_id DESC LIMIT $start,$limit";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function get_contact_by_id($contact_id) {
+            $sql = "SELECT * FROM `tbl_contact` WHERE contact_id = '$contact_id'";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function update_status_contact($contact_id) {
+            $sql = "UPDATE tbl_contact SET tbl_contact.status = 1 WHERE contact_id = '$contact_id'";
+            $result = $this->db->select($sql);
+            return $result;
+        }
+        public function delete_contact($contact_id) {
+            $sql = "DELETE FROM tbl_contact WHERE contact_id = '$contact_id'";
+            $result = $this->db->delete($sql);
+            return $result;
+        }
+        
     }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] != 3) {
+    if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == 1) {
         include("./database.php");
         include("./header.php");
         include("./menu.php");
@@ -32,13 +32,13 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-4">
-            <h2>Danh sách loại sản phẩm</h2>
+            <h2>Danh sách sản phẩm đã xoá</h2>
             <table class="table">
                 <thead>
                     <tr>
                     <th scope="col" style="max-width: 5%">#</th>
                     <th scope="col" style="max-width: 10%">Danh mục</th>
-                    <th scope="col" style="max-width: 20%">Loại sản phẩm</th>
+                    <th scope="col" style="max-width: 10%">Loại sản phẩm</th>
                     <th scope="col" style="max-width: 45%">Tên sản phẩm</th>
                     <th scope="col" style="max-width: 5%">Giá gốc</th>
                     <th scope="col" style="max-width: 5%">Giá mới</th>
